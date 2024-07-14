@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dugf6kp0bxj8q"]
+
+[ext_resource type="Texture2D" uid="uid://gi2xbnaxx1op" path="res://Images/Bober.png" id="1_eeo73"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tp6a"]
+atlas = ExtResource("1_eeo73")
+region = Rect2(0, 0, 70, 113)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7orfc"]
+atlas = ExtResource("1_eeo73")
+region = Rect2(70, 0, 70, 113)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wft4w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tp6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7orfc")
+}],
+"loop": true,
+"name": &"BoberIdle",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65xtc"]
+size = Vector2(55, 104)
+
+[node name="Bober" type="AnimatedSprite2D"]
+z_index = -1
+position = Vector2(321, 527)
+sprite_frames = SubResource("SpriteFrames_wft4w")
+animation = &"BoberIdle"
+autoplay = "BoberIdle"
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(1.5, 4)
+shape = SubResource("RectangleShape2D_65xtc")

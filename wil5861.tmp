@@ -1,0 +1,121 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfm28x0d43shk"]
+
+[ext_resource type="Texture2D" uid="uid://cbmghjgxspxfm" path="res://Images/dzik_grzepnica.png" id="1_pwiq6"]
+[ext_resource type="Script" path="res://wild_boar.gd" id="2_ywjbd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jybcw"]
+size = Vector2(310, 216)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnpn2"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(0, 0, 442, 253)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7l6h"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(442, 0, 442, 253)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvhqa"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(0, 253, 442, 253)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjev8"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(442, 253, 442, 253)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31km4"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(884, 253, 442, 253)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xsp3"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(1326, 253, 442, 253)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihnp5"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(0, 506, 442, 253)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta1pn"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(442, 506, 442, 253)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xeer"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(884, 506, 442, 253)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vth5i"]
+atlas = ExtResource("1_pwiq6")
+region = Rect2(1326, 506, 442, 253)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7qb3m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnpn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7l6h")
+}],
+"loop": true,
+"name": &"BoarIdle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvhqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjev8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31km4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xsp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihnp5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta1pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xeer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vth5i")
+}],
+"loop": true,
+"name": &"BoarWalk",
+"speed": 5.0
+}]
+
+[node name="Wild Boar" type="RigidBody2D"]
+collision_layer = 4
+script = ExtResource("2_ywjbd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.75, -0.375)
+scale = Vector2(0.25, 0.25)
+shape = SubResource("RectangleShape2D_jybcw")
+
+[node name="animator" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(-1.75, -4.375)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_7qb3m")
+animation = &"BoarIdle"
+autoplay = "BoarIdle"
+frame_progress = 0.207829
+
+[node name="RayCastFront" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(-110, 0)
+collision_mask = 3
+
+[node name="RayCastBack" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(69, -1)
+
+[node name="RayCastGround" type="RayCast2D" parent="."]
+position = Vector2(0, 1)
+target_position = Vector2(-61, 34)

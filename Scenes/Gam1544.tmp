@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://b232mspaehrfk"]
+
+[ext_resource type="PackedScene" uid="uid://cly0k6aynga6o" path="res://Scenes/Player.tscn" id="2_ak363"]
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_6coef"]
+[ext_resource type="Script" path="res://Scripts/HealthSystem.gd" id="6_mdbda"]
+[ext_resource type="Script" path="res://Scenes/LineGenerator.gd" id="7_qwvaq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oh5qs"]
+font_size = 31
+font_color = Color(1, 0.439216, 0, 1)
+
+[node name="Game" type="Node2D"]
+position = Vector2(1, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_ak363")]
+
+[node name="HealthSystem" type="Node" parent="Player"]
+script = ExtResource("6_mdbda")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(587, 525)
+script = ExtResource("3_6coef")
+target = NodePath("../Player")
+max_distance = Vector2(100, 50)
+
+[node name="UI" type="Node" parent="Camera2D"]
+
+[node name="HPBar" type="Label" parent="Camera2D/UI"]
+offset_left = 136.0
+offset_top = 251.0
+offset_right = 359.0
+offset_bottom = 317.0
+text = "sdfsdklfsldjflsd"
+label_settings = SubResource("LabelSettings_oh5qs")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(-175, 467)
+script = ExtResource("7_qwvaq")
+points_amount = 100
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Line2D"]

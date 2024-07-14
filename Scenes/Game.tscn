@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://b232mspaehrfk"]
+
+[ext_resource type="PackedScene" uid="uid://cly0k6aynga6o" path="res://Scenes/Player.tscn" id="2_ak363"]
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_6coef"]
+[ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="4_tcox1"]
+[ext_resource type="PackedScene" uid="uid://dou4shwlwq4ya" path="res://Scenes/grasss.tscn" id="5_dvx3f"]
+[ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
+[ext_resource type="Script" path="res://Scripts/HealthSystem.gd" id="6_mdbda"]
+[ext_resource type="Script" path="res://Scripts/LineGenerator.gd" id="7_qwvaq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oh5qs"]
+font_size = 31
+font_color = Color(1, 0.439216, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
+shader = ExtResource("4_tcox1")
+
+[node name="Game" type="Node2D"]
+position = Vector2(1, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_ak363")]
+z_as_relative = false
+position = Vector2(285, 346)
+
+[node name="HealthSystem" type="Node" parent="Player"]
+script = ExtResource("6_mdbda")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(2, 259)
+script = ExtResource("3_6coef")
+target = NodePath("../Player")
+max_distance = Vector2(100, 50)
+
+[node name="HPBar" type="Label" parent="Camera2D"]
+offset_left = -1106.0
+offset_top = -452.0
+offset_right = -883.0
+offset_bottom = -386.0
+text = "sdfsdklfsldjflsd"
+label_settings = SubResource("LabelSettings_oh5qs")
+
+[node name="Line2D" type="Line2D" parent="." node_paths=PackedStringArray("player")]
+z_index = 11
+material = SubResource("ShaderMaterial_q1l2d")
+position = Vector2(-611, 584)
+default_color = Color(0, 0.501961, 0.501961, 1)
+script = ExtResource("7_qwvaq")
+points_amount = 100
+grass_prefab = ExtResource("5_dvx3f")
+temp_tower_prefab = ExtResource("6_4j0ad")
+player = NodePath("../Player")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Line2D"]
