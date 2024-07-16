@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=13 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="PackedScene" uid="uid://cly0k6aynga6o" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_6coef"]
+[ext_resource type="PackedScene" uid="uid://bd8akof5a011b" path="res://Scenes/Main House Menu/main_house_popup.tscn" id="4_tbdrp"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="4_tcox1"]
 [ext_resource type="PackedScene" uid="uid://dou4shwlwq4ya" path="res://Scenes/grasss.tscn" id="5_dvx3f"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
@@ -29,6 +30,8 @@ script = ExtResource("6_mdbda")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(2, 259)
+process_callback = 0
+position_smoothing_enabled = true
 script = ExtResource("3_6coef")
 target = NodePath("../Player")
 max_distance = Vector2(100, 50)
@@ -40,6 +43,21 @@ offset_right = -883.0
 offset_bottom = -386.0
 text = "sdfsdklfsldjflsd"
 label_settings = SubResource("LabelSettings_oh5qs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Menu" parent="Camera2D/CanvasLayer" instance=ExtResource("4_tbdrp")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -143.0
+offset_right = 1.0
+offset_bottom = -143.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Line2D" type="Line2D" parent="." node_paths=PackedStringArray("rs", "player")]
 z_index = 11
@@ -53,7 +71,7 @@ tower_prefab = ExtResource("6_4j0ad")
 main_house_prefab = ExtResource("8_us4v6")
 player = NodePath("../Player")
 village_start = 5
-village_end = 15
+village_end = 5
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Line2D"]
 

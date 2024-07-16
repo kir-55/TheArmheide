@@ -1,0 +1,11 @@
+CanvasLayer
+VBoxContainer
+TabBar
+TabContainer
+Button
+HBoxContainer
+Label
+Popup
+TextEdit
+CollisionShape2D
+Area2D
