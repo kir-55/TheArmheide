@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmf8sf2rn0k64"]
+
+[ext_resource type="Texture2D" uid="uid://b4fxafmak3svm" path="res://Images/Rectangle 4.png" id="1_qvh4k"]
+
+[node name="MainHouse" type="Sprite2D"]
+z_index = -1
+z_as_relative = false
+position = Vector2(303, 374)
+texture = ExtResource("1_qvh4k")
+offset = Vector2(0, -118)
