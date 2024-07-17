@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=12 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="PackedScene" uid="uid://cly0k6aynga6o" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_6coef"]
@@ -10,10 +10,6 @@
 [ext_resource type="Script" path="res://Scripts/random_system.gd" id="7_5clvn"]
 [ext_resource type="Script" path="res://Scripts/LineGenerator.gd" id="7_qwvaq"]
 [ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_oh5qs"]
-font_size = 31
-font_color = Color(1, 0.439216, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
 shader = ExtResource("4_tcox1")
@@ -35,14 +31,6 @@ position_smoothing_enabled = true
 script = ExtResource("3_6coef")
 target = NodePath("../Player")
 max_distance = Vector2(100, 50)
-
-[node name="HPBar" type="Label" parent="Camera2D"]
-offset_left = -1106.0
-offset_top = -452.0
-offset_right = -883.0
-offset_bottom = -386.0
-text = "sdfsdklfsldjflsd"
-label_settings = SubResource("LabelSettings_oh5qs")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
