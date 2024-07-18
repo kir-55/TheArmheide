@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dto7gf217r7fk"]
+[gd_scene load_steps=2 format=3 uid="uid://dto7gf217r7fk"]
+
+[ext_resource type="Texture2D" uid="uid://b5mon5nuxgdtw" path="res://icon.png" id="1_lyur8"]
 
 [node name="Main House Menu" type="Control"]
 layout_mode = 3
@@ -19,23 +21,69 @@ offset_right = 367.0
 offset_bottom = 510.0
 grow_horizontal = 2
 tab_alignment = 1
+current_tab = 1
 
 [node name="Citizens" type="TabBar" parent="TabContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Citizens"]
-layout_mode = 0
-offset_right = 734.0
-offset_bottom = 426.0
-
-[node name="Buildings" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Buildings"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Citizens"]
 layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 617.0
+offset_right = 733.0
+offset_bottom = 426.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Citizens/ScrollContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(733, 426)
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="TabContainer/Citizens/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+auto_height = true
+item_count = 6
+icon_scale = 1.4
+item_0/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
+item_0/icon = ExtResource("1_lyur8")
+item_1/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
+item_1/icon = ExtResource("1_lyur8")
+item_2/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
+item_2/icon = ExtResource("1_lyur8")
+item_3/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
+item_3/icon = ExtResource("1_lyur8")
+item_4/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
+item_4/icon = ExtResource("1_lyur8")
+item_5/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
+item_5/icon = ExtResource("1_lyur8")
+
+[node name="Buildings" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Buildings"]
+offset_right = 733.0
+offset_bottom = 426.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Buildings/ScrollContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(733, 426)
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="TabContainer/Buildings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+auto_height = true
+item_count = 6
+icon_scale = 1.4
+item_0/text = "Icon should be replaced with the building's sprite. And the part where this text is should be replaced with some info"
+item_0/icon = ExtResource("1_lyur8")
+item_1/text = "Icon should be replaced with the building's sprite. And the part where this text is should be replaced with some info"
+item_1/icon = ExtResource("1_lyur8")
+item_2/text = "Icon should be replaced with the building's sprite. And the part where this text is should be replaced with some info"
+item_2/icon = ExtResource("1_lyur8")
+item_3/text = "Icon should be replaced with the building's sprite. And the part where this text is should be replaced with some info"
+item_3/icon = ExtResource("1_lyur8")
+item_4/text = "Icon should be replaced with the building's sprite. And the part where this text is should be replaced with some info"
+item_4/icon = ExtResource("1_lyur8")
+item_5/text = "Icon should be replaced with the building's sprite. And the part where this text is should be replaced with some info"
+item_5/icon = ExtResource("1_lyur8")
 
 [node name="Upgrades" type="TabBar" parent="TabContainer"]
 visible = false
