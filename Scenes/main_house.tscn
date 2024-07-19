@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmf8sf2rn0k64"]
+[gd_scene load_steps=6 format=3 uid="uid://dmf8sf2rn0k64"]
 
 [ext_resource type="Texture2D" uid="uid://b4fxafmak3svm" path="res://Images/Rectangle 4.png" id="1_qvh4k"]
-[ext_resource type="Script" path="res://Scripts/main_house.gd" id="2_ou7et"]
+[ext_resource type="Script" path="res://Scripts/interactive_building.gd" id="2_g6oet"]
+[ext_resource type="PackedScene" uid="uid://bd8akof5a011b" path="res://Scenes/Main House Menu/main_house_popup.tscn" id="3_50x14"]
+[ext_resource type="PackedScene" uid="uid://dto7gf217r7fk" path="res://Scenes/Main House Menu/main_house_menu.tscn" id="4_jr8xk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqet6"]
 size = Vector2(394.5, 349.5)
@@ -15,7 +17,9 @@ offset = Vector2(0, -118)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
-script = ExtResource("2_ou7et")
+script = ExtResource("2_g6oet")
+popup_prefab = ExtResource("3_50x14")
+menu_prefab = ExtResource("4_jr8xk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-1.25, -117.75)

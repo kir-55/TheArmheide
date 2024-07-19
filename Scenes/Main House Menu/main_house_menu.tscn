@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dto7gf217r7fk"]
+[gd_scene load_steps=3 format=3 uid="uid://dto7gf217r7fk"]
 
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_2dpv6"]
 [ext_resource type="Texture2D" uid="uid://b5mon5nuxgdtw" path="res://icon.png" id="1_lyur8"]
 
 [node name="Main House Menu" type="Control"]
@@ -7,8 +8,11 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -328.0
+offset_bottom = -328.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2dpv6")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -21,10 +25,8 @@ offset_right = 367.0
 offset_bottom = 510.0
 grow_horizontal = 2
 tab_alignment = 1
-current_tab = 1
 
 [node name="Citizens" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Citizens"]
@@ -39,6 +41,7 @@ layout_mode = 2
 
 [node name="ItemList" type="ItemList" parent="TabContainer/Citizens/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 auto_height = true
 item_count = 6
 icon_scale = 1.4
@@ -56,9 +59,11 @@ item_5/text = "Icon should be replaced with the citizen's sprite. And the part w
 item_5/icon = ExtResource("1_lyur8")
 
 [node name="Buildings" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Buildings"]
+layout_mode = 0
 offset_right = 733.0
 offset_bottom = 426.0
 
@@ -69,6 +74,7 @@ layout_mode = 2
 
 [node name="ItemList" type="ItemList" parent="TabContainer/Buildings/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 auto_height = true
 item_count = 6
 icon_scale = 1.4
@@ -90,7 +96,6 @@ visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Upgrades"]
-visible = false
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 617.0
