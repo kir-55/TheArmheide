@@ -63,7 +63,6 @@ func _process(delta):
 		animation.play("PlayerFly")
 
 func _unhandled_input(event):
-	print("cos")
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("click"):
 			if event.double_click:

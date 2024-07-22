@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=12 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="PackedScene" uid="uid://cly0k6aynga6o" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_6coef"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/random_system.gd" id="7_5clvn"]
 [ext_resource type="Script" path="res://Scripts/LineGenerator.gd" id="7_qwvaq"]
 [ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
+[ext_resource type="PackedScene" uid="uid://cun8flcxq70m4" path="res://Scenes/enemy.tscn" id="10_t63s6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
 shader = ExtResource("4_tcox1")
@@ -52,3 +53,6 @@ village_end = 5
 
 [node name="RandomSystem" type="Node" parent="."]
 script = ExtResource("7_5clvn")
+
+[node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
+position = Vector2(604, 380)
