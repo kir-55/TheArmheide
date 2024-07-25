@@ -1,48 +1,58 @@
 fc8a56933c4b1c8d796fdb8f7a9f9475
-::res://::1721646835
-default_env.tres::Environment::8668313703490545624::1721646552::0::1::::<><>::
-export_presets.cfg::TextFile::-1::1721646465::0::1::::<><>::
-icon.png::CompressedTexture2D::4517733375824929928::1721646465::1721646465::1::::<><>::
-line.tres::VisualShader::2631915675580348926::1721646551::0::1::::<><>::
-Player.anim::Animation::-1::1721646465::0::1::::<><>::
-::res://Images/::1721646835
-.png::CompressedTexture2D::5491382388345866792::1721646465::1721646465::1::::<><>::
-Bober.png::CompressedTexture2D::439328588562657467::1721646465::1721646465::1::::<><>::
-dzik_grzepnica.png::CompressedTexture2D::7750805040623068396::1721646465::1721646465::1::::<><>::
-Ellipse 2.png::CompressedTexture2D::8003353310060469119::1721646465::1721646465::1::::<><>::
-enemy.png::CompressedTexture2D::2707060636284276274::1721646819::1721646835::1::::<><>::
-grass.png::CompressedTexture2D::1020799473119237816::1721646465::1721646465::1::::<><>::
-grasss.png::CompressedTexture2D::1895669435966104263::1721646465::1721646465::1::::<><>::
-grzepnica3.png::CompressedTexture2D::3550532262791387399::1721646465::1721646465::1::::<><>::
-grzepnica-tileset.png::CompressedTexture2D::1502947378502635578::1721646465::1721646465::1::::<><>::
-grzepnicaWeapons copy.png::CompressedTexture2D::5257747629465063075::1721646465::1721646465::1::::<><>::
-Rectangle 4.png::CompressedTexture2D::4433615809968856862::1721646465::1721646465::1::::<><>::
-Rectangle 5.png::CompressedTexture2D::7413031484250521750::1721646465::1721646465::1::::<><>::
-sprites2.png::CompressedTexture2D::8719120112546452049::1721646465::1721646465::1::::<><>::
-sprites.png::CompressedTexture2D::4147727490056406394::1721646465::1721646465::1::::<><>::
-::res://Scenes/::1721646552
-arrow.tscn::PackedScene::5429018279693623182::1721646465::0::1::::<><>::res://Scripts/arrow.gd<>uid://cg55lnujdjdlj::::res://Images/grzepnicaWeapons copy.png
-Bober.tscn::PackedScene::8575784684482898750::1721646465::0::1::::<><>::uid://gi2xbnaxx1op::::res://Images/Bober.png
-Game.tscn::PackedScene::4340983795963211568::1721646551::0::1::::<><>::uid://cly0k6aynga6o::::res://Scenes/Player.tscn<>res://Scripts/Camera.gd<>uid://bdq6jcim2vtvq::::res://line.tres<>uid://dou4shwlwq4ya::::res://Scenes/grasss.tscn<>uid://ba3si7esec1ox::::res://Scenes/tower.tscn<>res://Scripts/HealthSystem.gd<>res://Scripts/random_system.gd<>res://Scripts/LineGenerator.gd<>uid://dmf8sf2rn0k64::::res://Scenes/main_house.tscn
-grasss.tscn::PackedScene::8184986756352468068::1721646465::0::1::::<><>::uid://dma5cba6qs6tn::::res://Images/Ellipse 2.png<>res://Scripts/grasss.gd
-main_house.tscn::PackedScene::8013886173674811867::1721646551::0::1::::<><>::uid://b4fxafmak3svm::::res://Images/Rectangle 4.png<>res://Scripts/interactive_building.gd<>uid://bd8akof5a011b::::res://Scenes/Main House Menu/main_house_popup.tscn<>uid://dto7gf217r7fk::::res://Scenes/Main House Menu/main_house_menu.tscn
-Player.tscn::PackedScene::5596001125592117420::1721646552::0::1::::<><>::res://Scripts/Player.gd<>uid://bqt50oi2o544j::::res://Images/grzepnica3.png
-tower.tscn::PackedScene::2445332140777524715::1721646465::0::1::::<><>::uid://ddu6sst4pp0de::::res://Images/Rectangle 5.png
-wild_boar.tscn::PackedScene::2763836971768881680::1721646465::0::1::::<><>::uid://diosvkmmsldv5::::res://Images/dzik_grzepnica.png<>res://Scripts/wild_boar.gd
-::res://Scenes/Main House Menu/::1721646552
-main_house_menu.tscn::PackedScene::8523705332841970620::1721646552::0::1::::<><>::res://Scripts/menu.gd<>uid://b5mon5nuxgdtw::::res://icon.png
-main_house_popup.tscn::PackedScene::2665130282845220133::1721646551::0::1::::<><>::res://Scripts/popup.gd<>uid://dto7gf217r7fk::::res://Scenes/Main House Menu/main_house_menu.tscn
-::res://Scripts/::1721646537
-arrow.gd::GDScript::-1::1721646465::0::1::::<>CharacterBody2D<>::
-Bow.gd::GDScript::-1::1721646465::0::1::::<>Node2D<>::
-Camera.gd::GDScript::-1::1721646465::0::1::::<>Camera2D<>::
-grasss.gd::GDScript::-1::1721646465::0::1::::<>Sprite2D<>::
-HealthSystem.gd::GDScript::-1::1721646465::0::1::::<>Node<>::
-interactive_building.gd::GDScript::-1::1721646465::0::1::::<>Area2D<>::
-LineGenerator.gd::GDScript::-1::1721646465::0::1::::<>Line2D<>::
-menu.gd::GDScript::-1::1721646465::0::1::::<>Node<>::
-Player.gd::GDScript::-1::1721646465::0::1::::<>CharacterBody2D<>::
-popup.gd::GDScript::-1::1721646465::0::1::::<>Control<>::
-random_system.gd::GDScript::-1::1721646465::0::1::::RandomSystem<>Node<>::
-temp.gd::GDScript::-1::1721646465::0::1::::<>Sprite2D<>::
-wild_boar.gd::GDScript::-1::1721646465::0::1::::<>CharacterBody2D<>::
+::res://::1721823057
+default_env.tres::Environment::8668313703490545624::1721823063::0::1::::<><>::
+export_presets.cfg::TextFile::-1::1720011104::0::1::::<><>::
+icon.png::CompressedTexture2D::4517733375824929928::1714234951::1721209274::1::::<><>::
+line.tres::VisualShader::2631915675580348926::1721823063::0::1::::<><>::
+Player.anim::Animation::-1::1714236194::0::1::::<><>::
+::res://Images/::1721821553
+.png::CompressedTexture2D::5491382388345866792::1714234960::1721209274::1::::<><>::
+Bober.png::CompressedTexture2D::439328588562657467::1714572519::1721209274::1::::<><>::
+dzik_grzepnica.png::CompressedTexture2D::7750805040623068396::1715368669::1721209275::1::::<><>::
+Ellipse 2.png::CompressedTexture2D::8003353310060469119::1720427965::1721209274::1::::<><>::
+enemy.png::CompressedTexture2D::2707060636284276274::1721821421::1721821553::1::::<><>::
+grass.png::CompressedTexture2D::1020799473119237816::1720002024::1721209274::1::::<><>::
+grasss.png::CompressedTexture2D::1895669435966104263::1719838407::1721209274::1::::<><>::
+grzepnica3.png::CompressedTexture2D::3550532262791387399::1714299570::1721209275::1::::<><>::
+grzepnica-tileset.png::CompressedTexture2D::1502947378502635578::1714574338::1721209274::1::::<><>::
+grzepnicaWeapons copy.png::CompressedTexture2D::5257747629465063075::1716721945::1721209274::1::::<><>::
+Rectangle 4.png::CompressedTexture2D::4433615809968856862::1720427965::1721209274::1::::<><>::
+Rectangle 5.png::CompressedTexture2D::7413031484250521750::1720427965::1721209274::1::::<><>::
+sprites2.png::CompressedTexture2D::8719120112546452049::1714299413::1721209275::1::::<><>::
+sprites.png::CompressedTexture2D::4147727490056406394::1714298531::1721209275::1::::<><>::
+::res://Scenes/::1721823057
+arrow.tscn::PackedScene::5429018279693623182::1721822920::0::1::::<><>::res://Scripts/Unused/arrow.gd<>uid://cg55lnujdjdlj::::res://Images/grzepnicaWeapons copy.png
+Bober.tscn::PackedScene::8575784684482898750::1720007587::0::1::::<><>::uid://gi2xbnaxx1op::::res://Images/Bober.png
+enemy.tscn::PackedScene::6205468322594588281::1721822889::0::1::::<><>::res://Scripts/enemy.gd<>uid://betk5mrjmg11g::::res://Images/enemy.png<>res://Scripts/StateMachine/state_machine.gd<>res://Scripts/StateMachine/enemy_states/enemy_idle.gd<>res://Scripts/StateMachine/enemy_states/enemy_follow.gd
+Game.tscn::PackedScene::4340983795963211568::1721823063::0::1::::<><>::uid://cly0k6aynga6o::::res://Scenes/Player.tscn<>res://Scripts/camera.gd<>uid://bdq6jcim2vtvq::::res://line.tres<>uid://dou4shwlwq4ya::::res://Scenes/grasss.tscn<>uid://ba3si7esec1ox::::res://Scenes/tower.tscn<>res://Scripts/Unused/health_system.gd<>res://Scripts/random_system.gd<>res://Scripts/line_generator.gd<>uid://dmf8sf2rn0k64::::res://Scenes/main_house.tscn<>uid://cun8flcxq70m4::::res://Scenes/enemy.tscn
+grasss.tscn::PackedScene::8184986756352468068::1721823057::0::1::::<><>::uid://dma5cba6qs6tn::::res://Images/Ellipse 2.png<>res://Scripts/TerrainGeneration/grasss.gd
+main_house.tscn::PackedScene::8013886173674811867::1721822877::0::1::::<><>::uid://b4fxafmak3svm::::res://Images/Rectangle 4.png<>res://Scripts/interactive_building.gd<>uid://bd8akof5a011b::::res://Scenes/Main House Menu/main_house_popup.tscn<>uid://dto7gf217r7fk::::res://Scenes/Main House Menu/main_house_menu.tscn
+Player.tscn::PackedScene::5596001125592117420::1721822877::0::1::::<><>::res://Scripts/player.gd<>uid://bqt50oi2o544j::::res://Images/grzepnica3.png
+tower.tscn::PackedScene::2445332140777524715::1721821259::0::1::::<><>::uid://ddu6sst4pp0de::::res://Images/Rectangle 5.png
+wild_boar.tscn::PackedScene::2763836971768881680::1721823003::0::1::::<><>::uid://diosvkmmsldv5::::res://Images/dzik_grzepnica.png<>res://Scripts/Unused/wild_boar.gd
+::res://Scenes/Main House Menu/::1721822968
+main_house_menu.tscn::PackedScene::8523705332841970620::1721822964::0::1::::<><>::res://Scripts/UI/menu.gd<>uid://b5mon5nuxgdtw::::res://icon.png
+main_house_popup.tscn::PackedScene::2665130282845220133::1721822968::0::1::::<><>::res://Scripts/UI/popup.gd<>uid://dto7gf217r7fk::::res://Scenes/Main House Menu/main_house_menu.tscn
+::res://Scripts/::1721823057
+camera.gd::GDScript::-1::1716728658::0::1::::<>Camera2D<>::
+enemy.gd::GDScript::-1::1721821421::0::1::::<>CharacterBody2D<>::
+interactive_building.gd::GDScript::-1::1721821421::0::1::::<>Area2D<>::
+line_generator.gd::GDScript::-1::1720949369::0::1::::<>Line2D<>::
+player.gd::GDScript::-1::1721821421::0::1::::<>CharacterBody2D<>::
+random_system.gd::GDScript::-1::1720948604::0::1::::RandomSystem<>Node<>::
+::res://Scripts/StateMachine/::1721822695
+state.gd::GDScript::-1::1721822306::0::1::::State<>Node<>::
+state_machine.gd::GDScript::-1::1721821421::0::1::::<>Node<>::
+::res://Scripts/StateMachine/enemy_states/::1721822583
+enemy_follow.gd::GDScript::-1::1721822583::0::1::::EnemyFollow<>State<>::
+enemy_idle.gd::GDScript::-1::1721822579::0::1::::EnemyIdle<>State<>::
+::res://Scripts/TerrainGeneration/::1721823057
+grasss.gd::GDScript::-1::1721821259::0::1::::<>Sprite2D<>::
+::res://Scripts/UI/::1721822968
+menu.gd::GDScript::-1::1721821421::0::1::::<>Node<>::
+popup.gd::GDScript::-1::1721821421::0::1::::<>Control<>::
+::res://Scripts/Unused/::1721823055
+arrow.gd::GDScript::-1::1716990298::0::1::::<>CharacterBody2D<>::
+bow.gd::GDScript::-1::1716990266::0::1::::<>Node2D<>::
+health_system.gd::GDScript::-1::1721821259::0::1::::<>Node<>::
+wild_boar.gd::GDScript::-1::1716989758::0::1::::<>CharacterBody2D<>::

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const GRAVITY = 1000
+const GRAVITY = 100
 
 func _physics_process(delta):
 	if velocity.x > 0:
@@ -13,6 +13,6 @@ func _physics_process(delta):
 
 func _process(delta: float) -> void:
 	if is_on_floor():
-		var normal : Vector2 = get_floor_normal()
-		var offset : float = deg_to_rad(90)
+		var normal := get_floor_normal()
+		var offset := deg_to_rad(90)
 		rotation = lerp_angle(rotation, get_floor_normal().angle() + deg_to_rad(90), 0.1)

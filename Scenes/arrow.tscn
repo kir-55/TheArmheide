@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjl4exnecr2q1"]
 
-[ext_resource type="Script" path="res://Scripts/arrow.gd" id="1_7e2ug"]
+[ext_resource type="Script" path="res://Scripts/Unused/arrow.gd" id="1_7e2ug"]
 [ext_resource type="Texture2D" uid="uid://cg55lnujdjdlj" path="res://Images/grzepnicaWeapons copy.png" id="1_mrx37"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xipq"]

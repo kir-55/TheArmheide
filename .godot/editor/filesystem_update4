@@ -5,10 +5,8 @@ res://Scenes/main_house.tscn
 res://Scenes/Main House Menu/main_house_popup.tscn
 res://Scenes/Player.tscn
 res://Scenes/Main House Menu/main_house_menu.tscn
-res://Scripts/States/State.gd
-res://Scripts/States/State Machine.gd
 res://Scenes/enemy.tscn
-res://Scripts/States/EnemyIdle.gd
+res://Scripts/States/State.gd
+res://Scripts/StateMachine/EnemyStates/enemy_follow.gd
+res://Scripts/StateMachine/EnemyStates/enemy_idle.gd
 res://Scripts/enemy.gd
-res://Scripts/Player.gd
-res://Scripts/States/EnemyFollow.gd

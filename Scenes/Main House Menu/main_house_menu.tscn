@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dto7gf217r7fk"]
 
-[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_2dpv6"]
+[ext_resource type="Script" path="res://Scripts/UI/menu.gd" id="1_32elb"]
 [ext_resource type="Texture2D" uid="uid://b5mon5nuxgdtw" path="res://icon.png" id="1_lyur8"]
 
 [node name="Main House Menu" type="Control"]
@@ -12,7 +12,7 @@ offset_top = -328.0
 offset_bottom = -328.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2dpv6")
+script = ExtResource("1_32elb")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1

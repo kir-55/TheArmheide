@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cly0k6aynga6o"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_3kv3l"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_3kv3l"]
 [ext_resource type="Texture2D" uid="uid://bqt50oi2o544j" path="res://Images/grzepnica3.png" id="2_dvo07"]
 
 [sub_resource type="RectangleShape2D" id="1"]
