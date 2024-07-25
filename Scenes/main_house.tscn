@@ -9,7 +9,7 @@
 size = Vector2(394.5, 349.5)
 
 [node name="MainHouse" type="Sprite2D"]
-z_index = -1
+z_index = -5
 z_as_relative = false
 position = Vector2(303, 374)
 texture = ExtResource("1_qvh4k")

@@ -6,23 +6,27 @@ const JUMP_STRENGTH = 700
 
 var motion = Vector2()
 var direction = 0
-var jump_pressed = false
-var run_endless = false
 
+var run_endless = false
 var destination_x: float = 0.0
 
-@export var is_in_air = true
 
-@onready var animation = $AnimationPlayer
+var ready_to_attack = false
+var last_time_attacked := 0 # In miliseconds
+@export var chill_out_delay := 4000 # In miliseconds
+
+@export var animation_transitions_speed := 0.3 # In range 0-1
+@onready var animation_tree = $"AnimationTree"
 
 var last_floor_normal = Vector2.UP
 
 func _ready():
-	pass
+	destinationX = position.x
+	prepare_for_attack()
 
 func _physics_process(delta):
 	if direction != 0:
-		get_node("Sprite2D").scale.x = direction * 0.25
+		get_node("SkeletonContainer").scale.x = direction * -0.25
 	if !run_endless:
 		if destination_x - global_position.x > 5:
 			direction = 1
@@ -44,23 +48,32 @@ func _physics_process(delta):
 	else:
 		last_floor_normal = Vector2.UP  # Reset to default if not on floor
 
-	if is_on_floor() and !jump_pressed:
-		is_in_air = false
-
 func _process(delta):
-	if direction != 0 and !jump_pressed and !is_in_air:
-		animation.play("PlayerWalk")
-	elif !jump_pressed and !is_in_air:
-		animation.play("PlayerIdle")
-	elif is_on_floor() and jump_pressed:
-		jump()
-	elif is_in_air:
-		if motion.y > 0:
-			animation.play("PlayerFall")
-		else:
-			animation.play("PlayerJump")
-	elif !is_on_floor() or get_floor_normal().angle() > deg_to_rad(100) or get_floor_normal().angle() < deg_to_rad(-80):
-		animation.play("PlayerFly")
+	
+	if ready_to_attack and  Time.get_ticks_msec() - last_time_attacked > chill_out_delay:
+		ready_to_attack = false
+	elif ready_to_attack:
+		animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))
+		
+		
+	
+	if direction == 0:
+		if !ready_to_attack:
+			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.0, animation_transitions_speed))
+		animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.0, animation_transitions_speed))
+	else:
+		# Setting animation to walk
+		if !ready_to_attack:
+			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 1.0, animation_transitions_speed))
+		animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 1.0, animation_transitions_speed))
+	
+
+func prepare_for_attack():
+	ready_to_attack = true
+	last_time_attacked = Time.get_ticks_msec()
+	
+
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -70,12 +83,10 @@ func _unhandled_input(event):
 			else:
 				destination_x = get_global_mouse_position().x
 				run_endless = false
-
+        
+        
 func stop():
 	direction = 0
 	run_endless = false
 	destination_x = position.x
 
-func jump():
-	motion.y = -JUMP_STRENGTH
-	is_in_air = true
