@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=11 format=3 uid="uid://b232mspaehrfk"]
 
-[ext_resource type="PackedScene" uid="uid://cly0k6aynga6o" path="res://Scenes/Player.tscn" id="2_ak363"]
+[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="4_tcox1"]
 [ext_resource type="PackedScene" uid="uid://dou4shwlwq4ya" path="res://Scenes/grasss.tscn" id="5_dvx3f"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
-[ext_resource type="Script" path="res://Scripts/Unused/health_system.gd" id="6_mdbda"]
 [ext_resource type="Script" path="res://Scripts/random_system.gd" id="7_5clvn"]
 [ext_resource type="Script" path="res://Scripts/TerrainGeneration/line_generator.gd" id="7_qwvaq"]
 [ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
@@ -18,11 +17,6 @@ shader = ExtResource("4_tcox1")
 position = Vector2(1, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_ak363")]
-z_as_relative = false
-position = Vector2(285, 346)
-
-[node name="HealthSystem" type="Node" parent="Player"]
-script = ExtResource("6_mdbda")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 z_index = 12
