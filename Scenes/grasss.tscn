@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://dou4shwlwq4ya"]
 
 [ext_resource type="Texture2D" uid="uid://dma5cba6qs6tn" path="res://Images/Ellipse 2.png" id="1_8rsuo"]
-[ext_resource type="Script" path="res://Scripts/grasss.gd" id="2_p6r8r"]
+[ext_resource type="Script" path="res://Scripts/TerrainGeneration/grasss.gd" id="2_p6r8r"]
+
 
 [node name="Grasss" type="Sprite2D"]
 modulate = Color(0.309804, 0.701961, 0.623529, 1)

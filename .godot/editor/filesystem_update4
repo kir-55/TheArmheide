@@ -1,16 +1,12 @@
 res://default_env.tres
-res://Scenes/Player.tscn
-res://line.tres
-res://Scripts/Player.gd
 res://Scenes/Game.tscn
+res://line.tres
 res://Scenes/main_house.tscn
-res://Scenes/grasss.tscn
 res://Scenes/Main House Menu/main_house_popup.tscn
+res://Scenes/Player.tscn
 res://Scenes/Main House Menu/main_house_menu.tscn
-res://Scripts/main_house_menu.gd
-res://Scripts/main_house.gd
-res://Scripts/LineGenerator.gd
-res://Scripts/main_house_popup.gd
-res://Scripts/interactive_building.gd
-res://Scripts/menu.gd
-res://Scripts/popup.gd
+res://Scenes/enemy.tscn
+res://Scripts/States/State.gd
+res://Scripts/StateMachine/EnemyStates/enemy_follow.gd
+res://Scripts/StateMachine/EnemyStates/enemy_idle.gd
+res://Scripts/enemy.gd
