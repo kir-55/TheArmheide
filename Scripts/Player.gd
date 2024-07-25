@@ -21,7 +21,7 @@ var last_time_attacked := 0 # In miliseconds
 var last_floor_normal = Vector2.UP
 
 func _ready():
-	destinationX = position.x
+	destination_x = position.x
 	prepare_for_attack()
 
 func _physics_process(delta):
@@ -83,8 +83,8 @@ func _unhandled_input(event):
 			else:
 				destination_x = get_global_mouse_position().x
 				run_endless = false
-        
-        
+		
+		
 func stop():
 	direction = 0
 	run_endless = false
