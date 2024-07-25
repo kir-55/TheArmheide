@@ -8,7 +8,8 @@ var motion = Vector2()
 var direction = 0
 
 var run_endless = false
-var destinationX: float = 0.0
+var destination_x: float = 0.0
+
 
 var ready_to_attack = false
 var last_time_attacked := 0 # In miliseconds
@@ -27,9 +28,9 @@ func _physics_process(delta):
 	if direction != 0:
 		get_node("SkeletonContainer").scale.x = direction * -0.25
 	if !run_endless:
-		if destinationX - global_position.x > 5:
+		if destination_x - global_position.x > 5:
 			direction = 1
-		elif destinationX - global_position.x < -5:
+		elif destination_x - global_position.x < -5:
 			direction = -1
 		else:
 			direction = 0
@@ -74,12 +75,18 @@ func prepare_for_attack():
 
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("click"):
 			if event.double_click:
 				run_endless = true
 			else:
-				destinationX = get_global_mouse_position().x
+				destination_x = get_global_mouse_position().x
 				run_endless = false
+        
+        
+func stop():
+	direction = 0
+	run_endless = false
+	destination_x = position.x
 

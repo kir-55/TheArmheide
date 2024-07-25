@@ -1,17 +1,16 @@
 [gd_scene load_steps=11 format=3 uid="uid://b232mspaehrfk"]
 
-[ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_6coef"]
+[ext_resource type="PackedScene" uid="uid://cly0k6aynga6o" path="res://Scenes/Player.tscn" id="2_ak363"]
+[ext_resource type="Script" path="res://Scripts/camera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="4_tcox1"]
 [ext_resource type="PackedScene" uid="uid://dou4shwlwq4ya" path="res://Scenes/grasss.tscn" id="5_dvx3f"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
+[ext_resource type="Script" path="res://Scripts/Unused/health_system.gd" id="6_mdbda"]
 [ext_resource type="Script" path="res://Scripts/random_system.gd" id="7_5clvn"]
-[ext_resource type="Script" path="res://Scripts/LineGenerator.gd" id="7_qwvaq"]
-[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="8_mlkyr"]
-[ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
+[ext_resource type="Script" path="res://Scripts/TerrainGeneration/line_generator.gd" id="7_qwvaq"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_oh5qs"]
-font_size = 31
-font_color = Color(1, 0.439216, 0, 1)
+[ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
+[ext_resource type="PackedScene" uid="uid://cun8flcxq70m4" path="res://Scenes/enemy.tscn" id="10_t63s6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
 shader = ExtResource("4_tcox1")
@@ -22,18 +21,15 @@ position = Vector2(1, 1)
 [node name="Player" parent="." instance=ExtResource("8_mlkyr")]
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+z_index = 12
 position = Vector2(2, 259)
+process_callback = 0
+position_smoothing_enabled = true
 script = ExtResource("3_6coef")
 target = NodePath("../Player")
 max_distance = Vector2(100, 50)
 
-[node name="HPBar" type="Label" parent="Camera2D"]
-offset_left = -1106.0
-offset_top = -452.0
-offset_right = -883.0
-offset_bottom = -386.0
-text = "sdfsdklfsldjflsd"
-label_settings = SubResource("LabelSettings_oh5qs")
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="Line2D" type="Line2D" parent="." node_paths=PackedStringArray("rs", "player")]
 z_index = 11
@@ -47,9 +43,12 @@ tower_prefab = ExtResource("6_4j0ad")
 main_house_prefab = ExtResource("8_us4v6")
 player = NodePath("../Player")
 village_start = 5
-village_end = 15
+village_end = 5
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Line2D"]
 
 [node name="RandomSystem" type="Node" parent="."]
 script = ExtResource("7_5clvn")
+
+[node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
+position = Vector2(604, 380)

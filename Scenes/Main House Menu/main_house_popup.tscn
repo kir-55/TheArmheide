@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd8akof5a011b"]
+
+[ext_resource type="Script" path="res://Scripts/UI/popup.gd" id="1_wfk7j"]
+[ext_resource type="PackedScene" uid="uid://dto7gf217r7fk" path="res://Scenes/Main House Menu/main_house_menu.tscn" id="2_m6a2q"]
+
+[node name="Popup" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -246.0
+offset_bottom = -246.0
+script = ExtResource("1_wfk7j")
+menu_prefab = ExtResource("2_m6a2q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -46.0
+offset_top = -6.0
+offset_right = 53.0
+offset_bottom = 178.0
+alignment = 1
+
+[node name="Open Menu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Open menu"
+
+[connection signal="pressed" from="VBoxContainer/Open Menu" to="." method="_on_open_menu_pressed"]

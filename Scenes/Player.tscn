@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dhrg6bdntlylv" path="res://body_parts/body.png" id="10_8m8ft"]
 [ext_resource type="Texture2D" uid="uid://quwo3capsgev" path="res://body_parts/the_armheide_sword.png" id="11_pne74"]
 
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4wae"]
 size = Vector2(31, 177)
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bfm28x0d43shk"]
 
 [ext_resource type="Texture2D" uid="uid://diosvkmmsldv5" path="res://Images/dzik_grzepnica.png" id="1_pwiq6"]
-[ext_resource type="Script" path="res://Scripts/wild_boar.gd" id="2_ywjbd"]
+[ext_resource type="Script" path="res://Scripts/Unused/wild_boar.gd" id="2_ywjbd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jybcw"]
 size = Vector2(310, 216)
