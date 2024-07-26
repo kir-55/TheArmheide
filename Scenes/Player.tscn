@@ -1,5 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://gs87w8kxkxqk"]
+[gd_scene load_steps=31 format=3 uid="uid://gs87w8kxkxqk"]
 
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_oy3o2"]
 [ext_resource type="Texture2D" uid="uid://c73y68sbmaylo" path="res://body_parts/foot.png" id="2_wi2do"]
 [ext_resource type="Texture2D" uid="uid://da30nt4tjwmb5" path="res://body_parts/calf.png" id="3_polev"]
 [ext_resource type="Texture2D" uid="uid://b8gc2c46aitve" path="res://body_parts/thigh.png" id="4_h2pnv"]
@@ -11,103 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://dhrg6bdntlylv" path="res://body_parts/body.png" id="10_od11n"]
 [ext_resource type="Texture2D" uid="uid://quwo3capsgev" path="res://body_parts/the_armheide_sword.png" id="11_a4inu"]
 
-[sub_resource type="GDScript" id="GDScript_36oqs"]
-script/source = "extends CharacterBody2D
-
-const SPEED = 300
-const GRAVITY = 1000
-const JUMP_STRENGTH = 700
-
-var motion = Vector2()
-var direction = 0
-
-var run_endless = false
-var destination_x: float = 0.0
-
-
-var ready_to_attack = false
-var last_time_attacked := 0 # In miliseconds
-@export var chill_out_delay := 4000 # In miliseconds
-
-@export var animation_transitions_speed := 0.3 # In range 0-1
-@onready var animation_tree = $\"AnimationTree\"
-
-var last_floor_normal = Vector2.UP
-
-func _ready():
-	destination_x = position.x
-	prepare_for_attack()
-
-func _physics_process(delta):
-	if direction != 0:
-		get_node(\"SkeletonContainer\").scale.x = direction * -0.25
-	if !run_endless:
-		if destination_x - global_position.x > 5:
-			direction = 1
-		elif destination_x - global_position.x < -5:
-			direction = -1
-		else:
-			direction = 0
-
-	motion.y += delta * GRAVITY
-	motion.x = SPEED * direction
-	set_velocity(motion)
-	move_and_slide()
-	motion = velocity
-
-	if is_on_floor():
-		var floor_normal = get_floor_normal()
-		last_floor_normal = floor_normal
-		rotation = lerp_angle(rotation, floor_normal.angle() + deg_to_rad(90), 0.1)
-	else:
-		last_floor_normal = Vector2.UP  # Reset to default if not on floor
-
-func _process(delta):
-	
-	if ready_to_attack and  Time.get_ticks_msec() - last_time_attacked > chill_out_delay:
-		ready_to_attack = false
-	elif ready_to_attack:
-		animation_tree.set(\"parameters/arms_state/blend_amount\", lerp(animation_tree.get(\"parameters/arms_state/blend_amount\"), -1.0, animation_transitions_speed))
-		
-		
-	
-	if direction == 0:
-		if !ready_to_attack:
-			animation_tree.set(\"parameters/arms_state/blend_amount\", lerp(animation_tree.get(\"parameters/arms_state/blend_amount\"), 0.0, animation_transitions_speed))
-		animation_tree.set(\"parameters/walking_legs/blend_amount\", lerp(animation_tree.get(\"parameters/walking_legs/blend_amount\"), 0.0, animation_transitions_speed))
-	else:
-		# Setting animation to walk
-		if !ready_to_attack:
-			animation_tree.set(\"parameters/arms_state/blend_amount\", lerp(animation_tree.get(\"parameters/arms_state/blend_amount\"), 1.0, animation_transitions_speed))
-		animation_tree.set(\"parameters/walking_legs/blend_amount\", lerp(animation_tree.get(\"parameters/walking_legs/blend_amount\"), 1.0, animation_transitions_speed))
-	
-
-func prepare_for_attack():
-	ready_to_attack = true
-	last_time_attacked = Time.get_ticks_msec()
-	
-
-
-
-func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if event.is_action_pressed(\"click\"):
-			if event.double_click:
-				run_endless = true
-			else:
-				destination_x = get_global_mouse_position().x
-				run_endless = false
-		
-		
-func stop():
-	direction = 0
-	run_endless = false
-	destination_x = position.x
-
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4wae"]
 size = Vector2(31, 177)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3x5b"]
+size = Vector2(29, 157)
 
 [sub_resource type="Animation" id="Animation_vspt5"]
 length = 0.001
@@ -115,7 +24,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso:position")
+tracks/0/path = NodePath("Flippable/Skeleton2D/Base/Torso:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -127,7 +36,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso:rotation")
+tracks/1/path = NodePath("Flippable/Skeleton2D/Base/Torso:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -139,7 +48,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight:position")
+tracks/2/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -151,7 +60,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight:rotation")
+tracks/3/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -163,7 +72,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
+tracks/4/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -175,7 +84,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft:position")
+tracks/5/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -187,7 +96,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
+tracks/6/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -199,7 +108,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:position")
+tracks/7/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -211,7 +120,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/Neck/Head:position")
+tracks/8/path = NodePath("Flippable/Skeleton2D/Base/Torso/Neck/Head:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -223,7 +132,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/Neck/Head:rotation")
+tracks/9/path = NodePath("Flippable/Skeleton2D/Base/Torso/Neck/Head:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -235,7 +144,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight:rotation")
+tracks/10/path = NodePath("Flippable/Skeleton2D/Base/LegRight:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -247,7 +156,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight:position")
+tracks/11/path = NodePath("Flippable/Skeleton2D/Base/LegRight:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -259,7 +168,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft:position")
+tracks/12/path = NodePath("Flippable/Skeleton2D/Base/LegLeft:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -271,7 +180,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft:rotation")
+tracks/13/path = NodePath("Flippable/Skeleton2D/Base/LegLeft:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -283,7 +192,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:position")
+tracks/14/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -295,7 +204,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
+tracks/15/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -307,7 +216,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight:rotation")
+tracks/16/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight:rotation")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -319,7 +228,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft:rotation")
+tracks/17/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft:rotation")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -331,7 +240,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("SkeletonContainer/Skeleton2D/Base:rotation")
+tracks/18/path = NodePath("Flippable/Skeleton2D/Base:rotation")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -343,7 +252,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft:rotation")
+tracks/19/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft:rotation")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -355,7 +264,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight/FootRight:rotation")
+tracks/20/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight/FootRight:rotation")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -367,7 +276,7 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:rotation")
+tracks/21/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:rotation")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
@@ -379,7 +288,7 @@ tracks/21/keys = {
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("SkeletonContainer/Skeleton2D/Base:position")
+tracks/22/path = NodePath("Flippable/Skeleton2D/Base:position")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -391,7 +300,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/Neck:position")
+tracks/23/path = NodePath("Flippable/Skeleton2D/Base/Torso/Neck:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -403,7 +312,7 @@ tracks/23/keys = {
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/Neck:rotation")
+tracks/24/path = NodePath("Flippable/Skeleton2D/Base/Torso/Neck:rotation")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
@@ -415,7 +324,7 @@ tracks/24/keys = {
 tracks/25/type = "value"
 tracks/25/imported = false
 tracks/25/enabled = true
-tracks/25/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight:position")
+tracks/25/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight:position")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/keys = {
@@ -427,7 +336,7 @@ tracks/25/keys = {
 tracks/26/type = "value"
 tracks/26/imported = false
 tracks/26/enabled = true
-tracks/26/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft:position")
+tracks/26/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft:position")
 tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/keys = {
@@ -439,7 +348,7 @@ tracks/26/keys = {
 tracks/27/type = "value"
 tracks/27/imported = false
 tracks/27/enabled = true
-tracks/27/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:position")
+tracks/27/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:position")
 tracks/27/interp = 1
 tracks/27/loop_wrap = true
 tracks/27/keys = {
@@ -451,7 +360,7 @@ tracks/27/keys = {
 tracks/28/type = "value"
 tracks/28/imported = false
 tracks/28/enabled = true
-tracks/28/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight/FootRight:position")
+tracks/28/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight/FootRight:position")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/keys = {
@@ -463,7 +372,7 @@ tracks/28/keys = {
 tracks/29/type = "value"
 tracks/29/imported = false
 tracks/29/enabled = true
-tracks/29/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:position")
+tracks/29/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:position")
 tracks/29/interp = 1
 tracks/29/loop_wrap = true
 tracks/29/keys = {
@@ -475,7 +384,7 @@ tracks/29/keys = {
 tracks/30/type = "value"
 tracks/30/imported = false
 tracks/30/enabled = true
-tracks/30/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:rotation")
+tracks/30/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:rotation")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/keys = {
@@ -487,7 +396,7 @@ tracks/30/keys = {
 tracks/31/type = "value"
 tracks/31/imported = false
 tracks/31/enabled = true
-tracks/31/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight:rotation")
+tracks/31/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight:rotation")
 tracks/31/interp = 1
 tracks/31/loop_wrap = true
 tracks/31/keys = {
@@ -517,7 +426,7 @@ step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight:rotation")
+tracks/0/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -529,7 +438,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
+tracks/1/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -541,7 +450,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight:rotation")
+tracks/2/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -553,7 +462,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:rotation")
+tracks/3/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -565,7 +474,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
+tracks/4/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -577,7 +486,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft:rotation")
+tracks/5/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -589,7 +498,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
+tracks/6/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -601,7 +510,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:position")
+tracks/7/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -629,7 +538,7 @@ step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:rotation")
+tracks/0/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -641,7 +550,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight:rotation")
+tracks/1/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -653,7 +562,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
+tracks/2/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -665,7 +574,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight:rotation")
+tracks/3/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -677,7 +586,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
+tracks/4/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -689,7 +598,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft:rotation")
+tracks/5/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -701,7 +610,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
+tracks/6/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -731,7 +640,7 @@ step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight:position")
+tracks/0/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -743,7 +652,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight:rotation")
+tracks/1/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -755,7 +664,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
+tracks/2/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -767,7 +676,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft:position")
+tracks/3/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft:position")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -779,7 +688,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
+tracks/4/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -791,7 +700,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:position")
+tracks/5/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -803,7 +712,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/Neck/Head:position")
+tracks/6/path = NodePath("Flippable/Skeleton2D/Base/Torso/Neck/Head:position")
 tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -815,7 +724,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/Neck/Head:rotation")
+tracks/7/path = NodePath("Flippable/Skeleton2D/Base/Torso/Neck/Head:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -827,7 +736,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:position")
+tracks/8/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -839,7 +748,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
+tracks/9/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -851,7 +760,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/Neck:position")
+tracks/10/path = NodePath("Flippable/Skeleton2D/Base/Torso/Neck:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -863,7 +772,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/Neck:rotation")
+tracks/11/path = NodePath("Flippable/Skeleton2D/Base/Torso/Neck:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -893,7 +802,7 @@ step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso:position")
+tracks/0/path = NodePath("Flippable/Skeleton2D/Base/Torso:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -905,7 +814,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso:rotation")
+tracks/1/path = NodePath("Flippable/Skeleton2D/Base/Torso:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -917,7 +826,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight:rotation")
+tracks/2/path = NodePath("Flippable/Skeleton2D/Base/LegRight:rotation")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -929,7 +838,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight:position")
+tracks/3/path = NodePath("Flippable/Skeleton2D/Base/LegRight:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -941,7 +850,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft:position")
+tracks/4/path = NodePath("Flippable/Skeleton2D/Base/LegLeft:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -953,7 +862,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft:rotation")
+tracks/5/path = NodePath("Flippable/Skeleton2D/Base/LegLeft:rotation")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -965,7 +874,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight:position")
+tracks/6/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -977,7 +886,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight:rotation")
+tracks/7/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -989,7 +898,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft:position")
+tracks/8/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1001,7 +910,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft:rotation")
+tracks/9/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1013,7 +922,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:position")
+tracks/10/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1025,7 +934,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:rotation")
+tracks/11/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -1037,7 +946,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight/FootRight:position")
+tracks/12/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight/FootRight:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -1049,7 +958,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight/FootRight:rotation")
+tracks/13/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight/FootRight:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -1061,7 +970,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("SkeletonContainer/Skeleton2D/Base:position")
+tracks/14/path = NodePath("Flippable/Skeleton2D/Base:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -1079,7 +988,7 @@ step = 0.12
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight:rotation")
+tracks/0/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1091,7 +1000,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight:rotation")
+tracks/1/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1103,7 +1012,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
+tracks/2/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1115,7 +1024,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft:rotation")
+tracks/3/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1127,7 +1036,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
+tracks/4/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1139,7 +1048,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
+tracks/5/path = NodePath("Flippable/Skeleton2D/Base/Torso/ShoulderLeft:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1169,7 +1078,7 @@ step = 0.12
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight:rotation")
+tracks/0/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1181,7 +1090,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft:rotation")
+tracks/1/path = NodePath("Flippable/Skeleton2D/Base/LegLeft:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1193,7 +1102,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft:rotation")
+tracks/2/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1205,7 +1114,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight:rotation")
+tracks/3/path = NodePath("Flippable/Skeleton2D/Base/LegRight:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1217,7 +1126,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SkeletonContainer/Skeleton2D/Base:rotation")
+tracks/4/path = NodePath("Flippable/Skeleton2D/Base:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1229,7 +1138,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight/FootRight:rotation")
+tracks/5/path = NodePath("Flippable/Skeleton2D/Base/LegRight/CalfRight/FootRight:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1241,7 +1150,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:rotation")
+tracks/6/path = NodePath("Flippable/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft:rotation")
 tracks/6/interp = 3
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1253,7 +1162,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("SkeletonContainer/Skeleton2D/Base:position")
+tracks/7/path = NodePath("Flippable/Skeleton2D/Base:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1316,202 +1225,215 @@ nodes/walking_legs/node = SubResource("AnimationNodeBlend2_4y8lh")
 nodes/walking_legs/position = Vector2(340, 460)
 node_connections = [&"Add2", 0, &"arms_state", &"Add2", 1, &"walking_legs", &"arms_state", 0, &"Animation 4", &"arms_state", 1, &"Animation 3", &"arms_state", 2, &"Animation", &"output", 0, &"Add2", &"walking_legs", 0, &"Animation 5", &"walking_legs", 1, &"Animation 2"]
 
-[node name="Player" type="CharacterBody2D" groups=["Willagers"]]
+[node name="Player" type="CharacterBody2D" groups=["willagers"]]
 position = Vector2(550, -1)
-script = SubResource("GDScript_36oqs")
+collision_layer = 2
+script = ExtResource("1_oy3o2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 2
 position = Vector2(1.5, 92.5)
 shape = SubResource("RectangleShape2D_g4wae")
 
-[node name="SkeletonContainer" type="Node2D" parent="."]
+[node name="Flippable" type="Node2D" parent="."]
 position = Vector2(2, 18)
 scale = Vector2(0.25, 0.25)
 
-[node name="Parts" type="Node2D" parent="SkeletonContainer"]
+[node name="Area2D" type="Area2D" parent="Flippable"]
+position = Vector2(-8, -72)
+scale = Vector2(4, 4)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Area2D"]
+position = Vector2(-38.5, 96.5)
+shape = SubResource("RectangleShape2D_j3x5b")
+
+[node name="Parts" type="Node2D" parent="Flippable"]
 position = Vector2(-398, -362)
 
-[node name="FootBack" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="FootBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(440.342, 901.152)
-rotation = -0.951063
-scale = Vector2(0.999985, 0.999985)
+position = Vector2(283.433, 890.944)
+rotation = -0.34322
+scale = Vector2(0.999977, 0.999977)
 texture = ExtResource("2_wi2do")
 offset = Vector2(-31.9269, 3)
 
-[node name="CalfBack" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="CalfBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -2
-position = Vector2(334.286, 871.88)
-rotation = -1.36415
-scale = Vector2(0.999986, 0.999986)
+position = Vector2(235.533, 791.898)
+rotation = -0.513102
+scale = Vector2(0.99998, 0.99998)
 texture = ExtResource("3_polev")
 offset = Vector2(-1.93497, 48)
 
-[node name="LegBack" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="LegBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -2
-position = Vector2(387.934, 714.901)
-rotation = 0.401936
-scale = Vector2(0.999989, 0.999989)
+position = Vector2(388.088, 726.728)
+rotation = 1.2397
+scale = Vector2(0.999984, 0.999984)
 texture = ExtResource("4_h2pnv")
 offset = Vector2(0, 72)
 
-[node name="FootFront" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="FootFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 1
-position = Vector2(415.698, 991.378)
-rotation = -0.0468814
-scale = Vector2(0.999981, 0.999981)
+position = Vector2(532.364, 968.721)
+rotation = -0.414269
+scale = Vector2(0.999977, 0.999977)
 texture = ExtResource("2_wi2do")
 offset = Vector2(-32.459, 3)
 
-[node name="CalfFront" type="Sprite2D" parent="SkeletonContainer/Parts"]
-position = Vector2(396.547, 881.029)
-rotation = -0.219845
-scale = Vector2(0.999982, 0.999982)
+[node name="CalfFront" type="Sprite2D" parent="Flippable/Parts"]
+position = Vector2(459.942, 883.288)
+rotation = -0.751168
+scale = Vector2(0.999978, 0.999978)
 texture = ExtResource("3_polev")
 offset = Vector2(0, 50)
 
-[node name="LegFront" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="LegFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(405.811, 729.915)
-rotation = 0.101646
-scale = Vector2(0.999987, 0.999987)
+position = Vector2(405.841, 741.888)
+rotation = -0.325003
+scale = Vector2(0.999982, 0.999982)
 texture = ExtResource("4_h2pnv")
 offset = Vector2(-3, 74)
 
-[node name="Head" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="Head" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 1
-position = Vector2(392.724, 397.185)
-rotation = -0.183251
-scale = Vector2(0.999991, 0.999991)
+position = Vector2(395.496, 409.063)
+rotation = -0.17501
+scale = Vector2(0.999988, 0.999988)
 texture = ExtResource("5_tdh2i")
 offset = Vector2(-15, -24)
 
-[node name="Neck" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="Neck" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(393.813, 453.575)
-rotation = 3.1018
-scale = Vector2(0.999991, 0.999991)
+position = Vector2(396.121, 465.459)
+rotation = 3.11004
+scale = Vector2(0.999988, 0.999988)
 texture = ExtResource("6_di4k6")
 offset = Vector2(1.67726, 34.3009)
 
-[node name="HandBack" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="HandBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -3
-position = Vector2(354.176, 709.895)
-rotation = 0.638389
-scale = Vector2(0.99999, 0.99999)
+position = Vector2(440.176, 720.28)
+rotation = 0.346669
+scale = Vector2(0.999986, 0.999986)
 texture = ExtResource("7_j7ejh")
 offset = Vector2(-10, 26)
 
-[node name="LowarmBack" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="LowarmBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(412.932, 608.443)
-rotation = 0.516891
-scale = Vector2(0.99999, 0.99999)
+position = Vector2(467.272, 606.216)
+rotation = 0.225172
+scale = Vector2(0.999986, 0.999986)
 texture = ExtResource("8_0jtyr")
 offset = Vector2(-6, 56)
 
-[node name="ShoulderBack" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="ShoulderBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(405.074, 476.448)
-rotation = 0.0183502
-scale = Vector2(0.999991, 0.999991)
+position = Vector2(407.193, 488.424)
+rotation = -0.393841
+scale = Vector2(0.999988, 0.999988)
 texture = ExtResource("9_a4fc2")
 offset = Vector2(2, 57)
 
-[node name="HandFront" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="HandFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 2
-position = Vector2(417.195, 719.881)
-rotation = 0.422292
-scale = Vector2(0.999989, 0.999989)
+position = Vector2(264.951, 649.399)
+rotation = 1.52267
+scale = Vector2(0.999985, 0.999985)
 texture = ExtResource("7_j7ejh")
 offset = Vector2(-10, 26)
 
-[node name="LowarmFront" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="LowarmFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 1
-position = Vector2(444.037, 609.376)
-rotation = 0.237086
-scale = Vector2(0.999989, 0.999989)
+position = Vector2(375.619, 623.238)
+rotation = 1.33747
+scale = Vector2(0.999985, 0.999985)
 texture = ExtResource("8_0jtyr")
 offset = Vector2(-6.87169, 50.9186)
 
-[node name="ShoulderFront" type="Sprite2D" parent="SkeletonContainer/Parts"]
+[node name="ShoulderFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 2
-position = Vector2(407.496, 487.383)
-rotation = -0.167573
-scale = Vector2(0.99999, 0.99999)
+position = Vector2(401.332, 498.513)
+rotation = 0.326763
+scale = Vector2(0.999987, 0.999987)
 texture = ExtResource("9_a4fc2")
 offset = Vector2(3, 55)
 
-[node name="Body" type="Sprite2D" parent="SkeletonContainer/Parts"]
-position = Vector2(398.783, 714.533)
-rotation = -0.0436796
-scale = Vector2(0.999991, 0.999991)
+[node name="Body" type="Sprite2D" parent="Flippable/Parts"]
+position = Vector2(398.94, 726.448)
+rotation = -0.0354385
+scale = Vector2(0.999988, 0.999988)
 texture = ExtResource("10_od11n")
 offset = Vector2(-2.76303, -115.71)
 
-[node name="Skeleton2D" type="Skeleton2D" parent="SkeletonContainer"]
+[node name="Skeleton2D" type="Skeleton2D" parent="Flippable"]
 position = Vector2(0, 4)
 
-[node name="Base" type="Bone2D" parent="SkeletonContainer/Skeleton2D"]
+[node name="Base" type="Bone2D" parent="Flippable/Skeleton2D"]
 position = Vector2(-4, 360)
 rotation = -1.6321
-scale = Vector2(0.999991, 0.999991)
+scale = Vector2(0.999987, 0.999987)
 rest = Transform2D(-0.0980598, -0.99518, 0.99518, -0.0980598, -1, 365)
 
-[node name="LegRight" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base"]
+[node name="LegRight" type="Bone2D" parent="Flippable/Skeleton2D/Base"]
 position = Vector2(19.1515, -4.38376)
 rotation = -0.00262383
-scale = Vector2(0.999998, 0.999998)
+scale = Vector2(0.999997, 0.999997)
 rest = Transform2D(0.999758, 0.0219787, -0.0219787, 0.999758, 19.1515, -4.38376)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/LegRight"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/LegRight"]
 rotation = 1.74184
 remote_path = NodePath("../../../../Parts/LegBack")
 
-[node name="CalfRight" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/LegRight"]
+[node name="CalfRight" type="Bone2D" parent="Flippable/Skeleton2D/Base/LegRight"]
 position = Vector2(-165.092, -16.3001)
 rotation = -0.344221
-scale = Vector2(0.999997, 0.999997)
+scale = Vector2(0.999995, 0.999995)
 rest = Transform2D(0.981001, -0.193999, 0.193999, 0.981001, -165.092, -16.3001)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/LegRight/CalfRight"]
 rotation = 1.55509
 remote_path = NodePath("../../../../../Parts/CalfBack")
 
-[node name="FootRight" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight"]
+[node name="FootRight" type="Bone2D" parent="Flippable/Skeleton2D/Base/LegRight/CalfRight"]
 position = Vector2(-109.901, -5.16322)
 rotation = 0.374808
-scale = Vector2(0.999999, 0.999999)
+scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(0.990824, 0.135154, -0.135154, 0.990824, -109.901, -5.16322)
 auto_calculate_length_and_angle = false
 length = 76.866
 bone_angle = -95.422
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/LegRight/CalfRight/FootRight"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/LegRight/CalfRight/FootRight"]
 rotation = 1.5708
 remote_path = NodePath("../../../../../../Parts/FootBack")
 
-[node name="LegLeft" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base"]
+[node name="LegLeft" type="Bone2D" parent="Flippable/Skeleton2D/Base"]
 position = Vector2(2.61087, 12.0906)
 rotation = 0.109464
 scale = Vector2(0.999995, 0.999995)
 rest = Transform2D(0.99416, 0.107905, -0.107905, 0.99416, 2.61087, 12.0906)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/LegLeft"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/LegLeft"]
 rotation = 1.5708
 remote_path = NodePath("../../../../Parts/LegFront")
 
-[node name="CalfLeft" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/LegLeft"]
+[node name="CalfLeft" type="Bone2D" parent="Flippable/Skeleton2D/Base/LegLeft"]
 position = Vector2(-151.276, 6.11748)
 rotation = -0.270686
 scale = Vector2(0.999996, 0.999996)
 rest = Transform2D(0.977571, -0.210596, 0.210596, 0.977571, -151.276, 6.11748)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/LegLeft/CalfLeft"]
 rotation = 1.55509
 remote_path = NodePath("../../../../../Parts/CalfFront")
 
-[node name="FootLeft" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft"]
+[node name="FootLeft" type="Bone2D" parent="Flippable/Skeleton2D/Base/LegLeft/CalfLeft"]
 position = Vector2(-111.942, -3.61722)
 rotation = 0.157254
 scale = Vector2(0.999999, 0.999999)
@@ -1520,25 +1442,25 @@ auto_calculate_length_and_angle = false
 length = 76.866
 bone_angle = -95.422
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/LegLeft/CalfLeft/FootLeft"]
 rotation = 1.5708
 remote_path = NodePath("../../../../../../Parts/FootFront")
 
-[node name="Torso" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base"]
+[node name="Torso" type="Bone2D" parent="Flippable/Skeleton2D/Base"]
 rotation = 0.0451711
 rest = Transform2D(0.99898, 0.0451557, -0.0451557, 0.99898, -4.13626, -0.25389)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso"]
 position = Vector2(18.8286, 5.61103)
 rotation = 1.5708
 remote_path = NodePath("../../../../Parts/Body")
 
-[node name="Neck" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/Torso"]
+[node name="Neck" type="Bone2D" parent="Flippable/Skeleton2D/Base/Torso"]
 position = Vector2(279.757, 12.0415)
 rotation = 0.00389059
 rest = Transform2D(0.999006, 0.0445666, -0.0445666, 0.999006, 279.757, 12.0415)
 
-[node name="Head" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/Neck"]
+[node name="Head" type="Bone2D" parent="Flippable/Skeleton2D/Base/Torso/Neck"]
 position = Vector2(67.0866, -2.09507)
 rotation = -0.143462
 rest = Transform2D(0.94358, -0.331144, 0.331144, 0.94358, 72.7968, -1.82335)
@@ -1546,33 +1468,33 @@ auto_calculate_length_and_angle = false
 length = 64.948
 bone_angle = -116.29
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/Neck/Head"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso/Neck/Head"]
 position = Vector2(-11.0524, 1.68671)
 rotation = 1.5708
 remote_path = NodePath("../../../../../../Parts/Head")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/Neck"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso/Neck"]
 rotation = -1.5708
 remote_path = NodePath("../../../../../Parts/Neck")
 
-[node name="ShoulderLeft" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/Torso"]
+[node name="ShoulderLeft" type="Bone2D" parent="Flippable/Skeleton2D/Base/Torso"]
 position = Vector2(262.411, 22.4867)
 rotation = -0.153483
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(0.988245, -0.152881, 0.152881, 0.988245, 264.092, 22.9524)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderLeft"]
 position = Vector2(-17.0769, -1.17463)
 rotation = -4.66527
 remote_path = NodePath("../../../../../Parts/ShoulderFront")
 
-[node name="MiddleArmLeft" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft"]
+[node name="MiddleArmLeft" type="Bone2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderLeft"]
 position = Vector2(-144.056, 8.53713)
 rotation = 0.699051
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(0.842584, 0.538565, -0.538565, 0.842584, -144.056, 8.53713)
 
-[node name="HandLeft" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft"]
+[node name="HandLeft" type="Bone2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft"]
 position = Vector2(-113.438, 7.99392)
 rotation = -0.529565
 rest = Transform2D(0.863027, -0.505158, 0.505158, 0.863027, -113.438, 7.99392)
@@ -1580,33 +1502,33 @@ auto_calculate_length_and_angle = false
 length = 28.74
 bone_angle = -153.265
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft/HandLeft"]
 rotation = 1.80293
 remote_path = NodePath("../../../../../../../Parts/HandFront")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderLeft/MiddleArmLeft"]
 rotation = 1.49924
 remote_path = NodePath("../../../../../../Parts/LowarmFront")
 
-[node name="ShoulderRight" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/Torso"]
+[node name="ShoulderRight" type="Bone2D" parent="Flippable/Skeleton2D/Base/Torso"]
 z_index = -4
 position = Vector2(256.414, 22.2929)
 rotation = 0.0557664
 scale = Vector2(1, 1)
 rest = Transform2D(0.999622, -0.0274883, 0.0274883, 0.999622, 258.095, 22.7587)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderRight"]
 rotation = 1.6057
 remote_path = NodePath("../../../../../Parts/ShoulderBack")
 
-[node name="MiddleArmRight" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight"]
+[node name="MiddleArmRight" type="Bone2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderRight"]
 z_index = -1
 position = Vector2(-132.109, 5.67219)
 rotation = 0.421534
-scale = Vector2(0.999999, 0.999999)
+scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(0.957895, 0.287118, -0.287118, 0.957895, -132.109, 5.67219)
 
-[node name="HandRight" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight"]
+[node name="HandRight" type="Bone2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight"]
 z_index = -2
 position = Vector2(-117.061, -6.46693)
 rotation = -0.184673
@@ -1615,22 +1537,22 @@ auto_calculate_length_and_angle = false
 length = 28.74
 bone_angle = -153.265
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight"]
 z_index = -4
 rotation = 1.61792
 remote_path = NodePath("../../../../../../../Parts/HandBack")
 
-[node name="Fingers" type="Bone2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight"]
+[node name="Fingers" type="Bone2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight"]
 position = Vector2(-26.2593, -9.9122)
 rotation = 2.93391
 rest = Transform2D(-0.994747, 0.102365, -0.102365, -0.994747, -28.0071, -12.0782)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight/HandRight/Fingers"]
 position = Vector2(-40.0644, -3.29295)
 rotation = 1.71423
 remote_path = NodePath("../../../../../../../../../TheArmheideSword")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="SkeletonContainer/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/Torso/ShoulderRight/MiddleArmRight"]
 rotation = 1.61792
 remote_path = NodePath("../../../../../../Parts/LowarmBack")
 
@@ -1649,8 +1571,10 @@ parameters/walking_legs/blend_amount = 1.0
 [node name="TheArmheideSword" type="Sprite2D" parent="."]
 visible = false
 z_index = -3
-position = Vector2(-10.1609, 100.063)
-rotation = -2.61458
+position = Vector2(9.97766, 103.213)
+rotation = -2.9063
 scale = Vector2(0.249997, 0.249997)
 texture = ExtResource("11_a4inu")
 offset = Vector2(-0.213623, -130.364)
+
+[connection signal="body_entered" from="Flippable/Area2D" to="." method="_on_area_2d_body_entered"]

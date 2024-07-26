@@ -8,6 +8,9 @@ extends Line2D
 @export var points_distance = 300
 
 @export var grass_prefab: PackedScene
+
+@export var willadge: Node
+
 @export var tower_prefab: PackedScene
 @export var main_house_prefab: PackedScene
 
@@ -53,7 +56,7 @@ func _ready():
 			tower.position = Vector2(x, x * a + b - line_offset)
 			tower.rotation = distance.angle()
 			
-			add_child(tower)
+			willadge.add_child(tower)
 		
 		if i == main_house_pos:
 			var main_house = main_house_prefab.instantiate()
@@ -62,7 +65,7 @@ func _ready():
 			main_house.position = Vector2(x, x * a + b - line_offset)
 			main_house.rotation = distance.angle()
 			
-			add_child(main_house)
+			willadge.add_child(main_house)
 		
 		
 		for g in range(grass_per_line):

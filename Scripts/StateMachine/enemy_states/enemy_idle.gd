@@ -16,8 +16,9 @@ func randomize_wander():
 	wander_time = randf_range(1, 3.5)
 
 func Enter():
+	print(self.name)
 	randomize_wander()
-	target = get_tree().get_first_node_in_group("Willagers")
+	target = get_tree().get_first_node_in_group("willagers")
 
 func Update(delta: float):
 	if wander_time > 0:
@@ -26,7 +27,6 @@ func Update(delta: float):
 		randomize_wander()
 
 func Physics_Update(delta: float):
-	print(self.name)
 	if enemy and enemy.is_on_floor():
 		enemy.velocity = move_direction * move_speed
 	
