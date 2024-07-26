@@ -7,12 +7,11 @@ extends State
 var target : CharacterBody2D
 
 func Enter():
-	target = get_tree().get_first_node_in_group("Willagers")
+	target = get_tree().get_first_node_in_group("willagers")
+	print(self.name)
 
 
 func Physics_Update(delta: float):
-	print(self.name)
-	
 	if enemy.is_on_floor():
 		var direction = target.global_position - enemy.global_position
 		
