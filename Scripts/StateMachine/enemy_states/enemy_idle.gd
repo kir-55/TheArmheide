@@ -3,7 +3,7 @@ extends State
 
 
 @export var enemy: CharacterBody2D
-@export var move_speed := 120.0
+@export var move_speed := 170.0
 
 
 var move_direction : Vector2

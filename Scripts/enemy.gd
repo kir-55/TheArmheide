@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const GRAVITY = 100
+const GRAVITY = 1000
 
 var current_closest_target
 
