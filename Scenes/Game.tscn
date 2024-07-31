@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=11 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="3_6coef"]
@@ -12,11 +12,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
 shader = ExtResource("4_tcox1")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_25utg"]
-size = Vector2(187, 163)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_t34yf"]
 
 [node name="Game" type="Node2D"]
 position = Vector2(1, 1)
@@ -58,15 +53,3 @@ script = ExtResource("7_5clvn")
 
 [node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
 position = Vector2(604, 380)
-
-[node name="TestTarget" type="CharacterBody2D" parent="." groups=["villagers"]]
-position = Vector2(-21, 293)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestTarget"]
-position = Vector2(83.5, 71.5)
-shape = SubResource("RectangleShape2D_25utg")
-
-[node name="Sprite2D" type="Sprite2D" parent="TestTarget"]
-position = Vector2(83.5, 72)
-scale = Vector2(185, 166)
-texture = SubResource("PlaceholderTexture2D_t34yf")
