@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ddu6sst4pp0de" path="res://Images/Rectangle 5.png" id="1_4yfq3"]
 
 [node name="Tower" type="Sprite2D"]
+modulate = Color(0.517647, 0.470588, 0.458824, 1)
 z_index = -5
 z_as_relative = false
 texture = ExtResource("1_4yfq3")
