@@ -10,9 +10,10 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.seed = hash(seed)
+	rng.state = 1
 
 func get_rnd_int(min: int, max: int) -> int:
-	return randi_range(min, max)
+	return rng.randi_range(min, max)# randi_range
 	
 func get_rnd_float(min: float, max: float) -> float:
-	return randf_range(min, max)
+	return rng.randf_range(min, max)

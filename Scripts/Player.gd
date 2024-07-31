@@ -73,7 +73,8 @@ func prepare_for_attack():
 	last_time_attacked = Time.get_ticks_msec()
 	
 
-
+func attack():
+	animation_tree.set("parameters/attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE);
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -96,3 +97,4 @@ func _on_area_2d_body_entered(body):
 	print("some body enetered")
 	if body.is_in_group("enemies"):
 		prepare_for_attack()
+		attack()

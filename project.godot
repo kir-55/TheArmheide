@@ -54,5 +54,5 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
-environment/defaults/default_clear_color=Color(0.796078, 0.894118, 0.741176, 1)
+environment/defaults/default_clear_color=Color(0.54902, 0.670588, 0.631373, 1)
 environment/defaults/default_environment="res://default_env.tres"

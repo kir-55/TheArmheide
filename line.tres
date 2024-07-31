@@ -1,5 +1,10 @@
 [gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://bdq6jcim2vtvq"]
 
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_xww2v"]
+parameter_name = "LineThikness"
+default_value_enabled = true
+default_value = Vector2(0, 300)
+
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_2qai6"]
 expanded_output_ports = [0]
 input_name = "vertex"
@@ -22,13 +27,11 @@ operator = 3
 default_input_values = [0, 0, 1, 2]
 operator = 3
 
-[sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_ftios"]
-constant = Vector2(0, 700)
-
 [resource]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
+uniform vec2 LineThikness = vec2(0.000000, 300.000000);
 
 
 
@@ -51,8 +54,8 @@ void vertex() {
 	int n_out8p0 = n_out5p0 / n_in8p1;
 
 
-// Vector2Constant:9
-	vec2 n_out9p0 = vec2(0.000000, 700.000000);
+// Vector2Parameter:10
+	vec2 n_out10p0 = LineThikness;
 
 
 	vec3 n_out6p0;
@@ -65,11 +68,11 @@ void vertex() {
 	}
 	else if(n_out7p0 < float(n_out8p0))
 	{
-		n_out6p0 = vec3(n_out9p0, 0.0);
+		n_out6p0 = vec3(n_out10p0, 0.0);
 	}
 	else
 	{
-		n_out6p0 = vec3(n_out9p0, 0.0);
+		n_out6p0 = vec3(n_out10p0, 0.0);
 	}
 
 
@@ -83,9 +86,10 @@ void vertex() {
 
 }
 "
+graph_offset = Vector2(-116.963, 676.307)
 mode = 1
 flags/light_only = false
-nodes/vertex/0/position = Vector2(920, 120)
+nodes/vertex/0/position = Vector2(1260, 200)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_2qai6")
 nodes/vertex/2/position = Vector2(400, 100)
 nodes/vertex/4/node = SubResource("VisualShaderNodeVectorOp_el8f0")
@@ -93,12 +97,12 @@ nodes/vertex/4/position = Vector2(740, 140)
 nodes/vertex/5/node = SubResource("VisualShaderNodeInput_erqc5")
 nodes/vertex/5/position = Vector2(-40, 380)
 nodes/vertex/6/node = SubResource("VisualShaderNodeIf_1cljs")
-nodes/vertex/6/position = Vector2(580, 340)
+nodes/vertex/6/position = Vector2(660, 300)
 nodes/vertex/7/node = SubResource("VisualShaderNodeFloatOp_lf56d")
 nodes/vertex/7/position = Vector2(280, 320)
 nodes/vertex/8/node = SubResource("VisualShaderNodeIntOp_8ac07")
 nodes/vertex/8/position = Vector2(278.565, 472.28)
-nodes/vertex/9/node = SubResource("VisualShaderNodeVec2Constant_ftios")
-nodes/vertex/9/position = Vector2(300, 640)
-nodes/vertex/connections = PackedInt32Array(4, 0, 0, 0, 2, 0, 4, 0, 5, 0, 7, 0, 5, 0, 8, 0, 7, 0, 6, 0, 8, 0, 6, 1, 6, 0, 4, 1, 9, 0, 6, 4, 9, 0, 6, 5)
-nodes/fragment/0/position = Vector2(760, 140)
+nodes/vertex/10/node = SubResource("VisualShaderNodeVec2Parameter_xww2v")
+nodes/vertex/10/position = Vector2(60, 680)
+nodes/vertex/connections = PackedInt32Array(4, 0, 0, 0, 2, 0, 4, 0, 5, 0, 7, 0, 5, 0, 8, 0, 7, 0, 6, 0, 8, 0, 6, 1, 6, 0, 4, 1, 10, 0, 6, 4, 10, 0, 6, 5)
+nodes/fragment/0/position = Vector2(1260, 80)

@@ -1,4 +1,8 @@
-extends Line2D
+extends Node
+
+@export var ground_line: Line2D
+@export var grass_line: Line2D
+@export var floor_collider: StaticBody2D
 
 @export var rs: RandomSystem
 
@@ -18,7 +22,7 @@ extends Line2D
 
 @export var grass_spawn_range := 20.0
 
-@onready var line_offset = width / 2 - 1
+@onready var line_offset = ground_line.width / 2 - 1
 
 
 
@@ -30,17 +34,17 @@ extends Line2D
 
 
 func _ready():
-	add_point(Vector2.ZERO)
+	create_next_point(Vector2.ZERO)
 	points_amount -= 1
 	
 	for i in range(points_amount):
 		if i % 2 == 1:
-			add_point(get_point_position(i) + Vector2(points_distance, rs.get_rnd_float(-100, 100)))
+			create_next_point(ground_line.get_point_position(i) + Vector2(points_distance, rs.get_rnd_float(-100, 100)))
 		else:
-			add_point(get_point_position(i) + Vector2(points_distance, 0))
+			create_next_point(ground_line.get_point_position(i) + Vector2(points_distance, 0))
 		
-		var p1 = get_point_position(i)
-		var p2 = get_point_position(i + 1)
+		var p1 = ground_line.get_point_position(i)
+		var p2 = ground_line.get_point_position(i + 1)
 		
 		var a = (p2.y - p1.y) / (p2.x - p1.x)
 		var b = -a * p2.x + p2.y
@@ -71,18 +75,25 @@ func _ready():
 		for g in range(grass_per_line):
 			var grass = grass_prefab.instantiate()
 
-			var x = randf_range(p1.x, p2.x)
+			var x = rs.get_rnd_float(p1.x, p2.x)
 			grass.position = Vector2(x, x * a + b - line_offset)
 			grass.rotation = distance.angle()
 			grass.player = player
 
 			add_child(grass)
-
+			
+	var points = ground_line.points
 	for i in points.size() - 1:
 		var new_shape = CollisionShape2D.new()
-		$StaticBody2D.add_child(new_shape)
+		floor_collider.add_child(new_shape)
 		var segment = SegmentShape2D.new()
 		segment.a = points[i] - Vector2(0, line_offset)
 		segment.b = points[i + 1] - Vector2(0, line_offset)
 		new_shape.shape = segment
 
+
+
+	
+func create_next_point(position: Vector2):
+	ground_line.add_point(position)
+	grass_line.add_point(position)
