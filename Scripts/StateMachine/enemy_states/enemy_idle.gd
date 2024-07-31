@@ -3,11 +3,9 @@ extends State
 
 
 @export var enemy: CharacterBody2D
-@export var move_speed := 120.0
+@export var move_speed := 170.0
 
 
-
-var target : CharacterBody2D
 var move_direction : Vector2
 var wander_time : float
 
@@ -18,7 +16,6 @@ func randomize_wander():
 func Enter():
 	print(self.name)
 	randomize_wander()
-	target = get_tree().get_first_node_in_group("willagers")
 
 func Update(delta: float):
 	if wander_time > 0:
@@ -30,7 +27,8 @@ func Physics_Update(delta: float):
 	if enemy and enemy.is_on_floor():
 		enemy.velocity = move_direction * move_speed
 	
-	var direction = target.global_position - enemy.global_position
-	
-	if direction.length() < 500:
-		RequestTransition.emit(self, "Follow")
+	if enemy.current_closest_target:
+		var direction = enemy.current_closest_target.global_position - enemy.global_position
+		
+		if direction.length() < 500:
+			RequestTransition.emit(self, "Follow")
