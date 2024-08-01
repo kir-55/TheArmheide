@@ -34,3 +34,8 @@ enemy = NodePath("../..")
 [node name="Follow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_wglmd")
 enemy = NodePath("../..")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="_find_closest_target"]
