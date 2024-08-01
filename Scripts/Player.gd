@@ -10,7 +10,7 @@ var direction = 0
 var run_endless = false
 var destination_x: float = 0.0
 
-
+var enemies_near := 0
 
 var ready_to_attack = false
 var last_time_attacked := 0 # In miliseconds
@@ -50,6 +50,11 @@ func _physics_process(delta):
 		last_floor_normal = Vector2.UP  # Reset to default if not on floor
 
 func _process(delta):
+	if enemies_near > 0 and !ready_to_attack:
+		prepare_for_attack()
+	elif enemies_near > 0: 
+		attack()
+	
 	if ready_to_attack and  Time.get_ticks_msec() - last_time_attacked > chill_out_delay:
 		ready_to_attack = false
 	elif ready_to_attack:
@@ -94,7 +99,13 @@ func stop():
 
 
 func _on_area_2d_body_entered(body):
-	print("some body enetered")
 	if body.is_in_group("enemies"):
-		prepare_for_attack()
-		attack()
+		enemies_near += 1
+		print("enemies near: " + str(enemies_near))
+
+
+
+func _on_area_2d_body_exited(body):
+	if body.is_in_group("enemies"):
+		enemies_near -= 1
+		print("enemies near: " + str(enemies_near))
