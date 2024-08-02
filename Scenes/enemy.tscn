@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cun8flcxq70m4"]
+[gd_scene load_steps=8 format=3 uid="uid://cun8flcxq70m4"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_d8oih"]
 [ext_resource type="Texture2D" uid="uid://betk5mrjmg11g" path="res://Images/enemy.png" id="1_je23y"]
+[ext_resource type="Script" path="res://Scripts/health_system.gd" id="2_okkjr"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="3_wdkkv"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_idle.gd" id="4_xh077"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_follow.gd" id="5_wglmd"]
@@ -13,6 +14,11 @@ size = Vector2(51, 53)
 z_index = -3
 collision_layer = 4
 script = ExtResource("1_d8oih")
+
+[node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("2_okkjr")
+sprite = NodePath("../Sprite2D")
+max_HP = 255.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-38.5, -37.5)

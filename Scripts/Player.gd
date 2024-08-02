@@ -10,19 +10,17 @@ var direction = 0
 var run_endless = false
 var destination_x: float = 0.0
 
-var enemies_near := 0
-
-var ready_to_attack = false
-var last_time_attacked := 0 # In miliseconds
-
-@export var chill_out_delay := 4000 # In miliseconds
+@export var attack_manager: AttackManager
 
 @export var animation_transitions_speed := 0.3 # In range 0-1
-@onready var animation_tree = $"AnimationTree"
+@onready var animation_tree = $AnimationTree
 
 var last_floor_normal = Vector2.UP
 
+
+
 func _ready():
+	
 	destination_x = position.x
 
 func _physics_process(delta):
@@ -50,36 +48,22 @@ func _physics_process(delta):
 		last_floor_normal = Vector2.UP  # Reset to default if not on floor
 
 func _process(delta):
-	if enemies_near > 0 and !ready_to_attack:
-		prepare_for_attack()
-	elif enemies_near > 0: 
-		attack()
-	
-	if ready_to_attack and  Time.get_ticks_msec() - last_time_attacked > chill_out_delay:
-		ready_to_attack = false
-	elif ready_to_attack:
+	if attack_manager.ready_to_attack:
 		animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))
 		
-		
-	
 	if direction == 0:
-		if !ready_to_attack:
+		# Setting idle animation
+		if !attack_manager.ready_to_attack:
 			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.0, animation_transitions_speed))
 		animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.0, animation_transitions_speed))
 	else:
-		# Setting animation to walk
-		if !ready_to_attack:
+		# Setting walk animation
+		if !attack_manager.ready_to_attack:
 			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 1.0, animation_transitions_speed))
 		animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 1.0, animation_transitions_speed))
 	
 
-func prepare_for_attack():
-	ready_to_attack = true
-	last_time_attacked = Time.get_ticks_msec()
-	
 
-func attack():
-	animation_tree.set("parameters/attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE);
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -90,22 +74,19 @@ func _unhandled_input(event):
 				destination_x = get_global_mouse_position().x
 				run_endless = false
 		
-		
+
+func run_attack_animation():
+	animation_tree.set("parameters/attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+
 func stop():
 	direction = 0
 	run_endless = false
 	destination_x = position.x
+	
 
-
-
-func _on_area_2d_body_entered(body):
-	if body.is_in_group("enemies"):
-		enemies_near += 1
-		print("enemies near: " + str(enemies_near))
-
-
-
-func _on_area_2d_body_exited(body):
-	if body.is_in_group("enemies"):
-		enemies_near -= 1
-		print("enemies near: " + str(enemies_near))
+func _on_animation_tree_animation_finished(anim_name):
+	print("finished: " + str(anim_name))
+	
+	if anim_name == "attack":
+		attack_manager._on_attack_aniamtion_finished()

@@ -36,3 +36,7 @@ func _find_closest_target(): #this is a signal from a timer
 				min_dist = dist
 				min_target = target
 		current_closest_target = min_target
+		
+func die():
+	print("enemy is dying")
+	queue_free()
