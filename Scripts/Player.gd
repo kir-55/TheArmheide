@@ -1,13 +1,17 @@
 extends CharacterBody2D
 
-const SPEED = 300
+
+
+const WALK_SPEED = 300
+const RUN_SPEED = 400
 const GRAVITY = 1000
-const JUMP_STRENGTH = 700
+
+var speed
 
 var motion = Vector2()
 var direction = 0
 
-var run_endless = false
+var run = false
 var destination_x: float = 0.0
 
 @export var attack_manager: AttackManager
@@ -20,22 +24,24 @@ var last_floor_normal = Vector2.UP
 
 
 func _ready():
-	
 	destination_x = position.x
 
 func _physics_process(delta):
 	if direction != 0:
 		get_node("Flippable").scale.x = direction * -0.25
-	if !run_endless:
+	if !run:
+		speed = WALK_SPEED
 		if destination_x - global_position.x > 5:
 			direction = 1
 		elif destination_x - global_position.x < -5:
 			direction = -1
 		else:
 			direction = 0
+	else:
+		speed = RUN_SPEED
 
 	motion.y += delta * GRAVITY
-	motion.x = SPEED * direction
+	motion.x = speed * direction
 	set_velocity(motion)
 	move_and_slide()
 	motion = velocity
@@ -57,11 +63,20 @@ func _process(delta):
 			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.0, animation_transitions_speed))
 		animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.0, animation_transitions_speed))
 	else:
+		
+		
 		# Setting walk animation
 		if !attack_manager.ready_to_attack:
-			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 1.0, animation_transitions_speed))
-		animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 1.0, animation_transitions_speed))
-	
+			if run:
+				animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 1.0, animation_transitions_speed))
+			else:
+				animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.5, animation_transitions_speed))
+		
+		if run:
+			animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 1.0, animation_transitions_speed))
+		else: 
+			animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.7, animation_transitions_speed))
+			
 
 
 
@@ -69,10 +84,10 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("click"):
 			if event.double_click:
-				run_endless = true
+				run = true
 			else:
 				destination_x = get_global_mouse_position().x
-				run_endless = false
+				run = false
 		
 
 func run_attack_animation():
@@ -81,7 +96,7 @@ func run_attack_animation():
 
 func stop():
 	direction = 0
-	run_endless = false
+	run = false
 	destination_x = position.x
 	
 

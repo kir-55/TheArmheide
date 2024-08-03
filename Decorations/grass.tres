@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_qnadg")
 prefab = ExtResource("1_p0rhr")
+initial_chance = 100
 chance_to_spawn = 20.0
 chance_multiplyer = 5
 min_scale = 0.3
