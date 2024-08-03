@@ -1,5 +1,4 @@
 class_name RandomSystem
-
 extends Node
 
 

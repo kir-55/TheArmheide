@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2ikhuvkg0t4j"]
+
+[ext_resource type="Texture2D" uid="uid://f8qsg2jfi75e" path="res://Images/flower.png" id="1_g4xvd"]
+[ext_resource type="Script" path="res://Scripts/TerrainGeneration/grasss.gd" id="2_47e4u"]
+
+[node name="Flower" type="Sprite2D"]
+z_index = 5
+position = Vector2(707, 175)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_g4xvd")
+offset = Vector2(3.33305, -50)
+script = ExtResource("2_47e4u")
+max_angle = 50.0

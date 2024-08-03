@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1dx0js68nirg"
-path="res://.godot/imported/Layer 16.png-7afdc7e92ee2b4d2142c01fb7c606d8d.ctex"
+uid="uid://cnw8rbtv1unad"
+path="res://.godot/imported/TheArmheideStone.png-e2845721af4c7a7eb50061be782183bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Layer 16.png"
-dest_files=["res://.godot/imported/Layer 16.png-7afdc7e92ee2b4d2142c01fb7c606d8d.ctex"]
+source_file="res://Images/TheArmheideStone.png"
+dest_files=["res://.godot/imported/TheArmheideStone.png-e2845721af4c7a7eb50061be782183bb.ctex"]
 
 [params]
 

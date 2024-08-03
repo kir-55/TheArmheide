@@ -12,6 +12,7 @@ extends Node
 @export var points_distance = 300
 
 @export var grass_prefab: PackedScene
+@export var decorations: Array[Decoration]
 
 @export var willadge: Node
 
@@ -33,7 +34,12 @@ extends Node
 @onready var main_house_pos: int = village_start + (village_end - village_start)/2
 
 
+
+
 func _ready():
+	for decoration in decorations:
+		print(decoration.chance_to_spawn)
+		
 	create_next_point(Vector2.ZERO)
 	points_amount -= 1
 	
@@ -72,16 +78,26 @@ func _ready():
 			willadge.add_child(main_house)
 		
 		
-		for g in range(grass_per_line):
-			var grass = grass_prefab.instantiate()
+		for decoration in decorations:
+			if decoration and decoration.prefab:
+				var rnd_i = rs.get_rnd_int(0, 100)
+				if decoration.initial_chance > rnd_i:
+					for _i in range(decoration.chance_multiplyer):
+						var rnd = rs.get_rnd_int(0, 100)
+					
+						if decoration.chance_to_spawn > rnd:
+							var decoration_instance = decoration.prefab.instantiate()
+							
+							var x = rs.get_rnd_float(p1.x, p2.x)
+							decoration_instance.position = Vector2(x, x * a + b - line_offset)
+							decoration_instance.rotation = distance.angle()
+							if decoration.min_scale != 0 and decoration.max_scale != 0:
+								var scale = rs.get_rnd_float(decoration.min_scale, decoration.max_scale)
+								decoration_instance.scale = Vector2(scale, scale)
+							#decoration_instance.player = player
+							
+							add_child(decoration_instance)
 
-			var x = rs.get_rnd_float(p1.x, p2.x)
-			grass.position = Vector2(x, x * a + b - line_offset)
-			grass.rotation = distance.angle()
-			grass.player = player
-
-			add_child(grass)
-			
 	var points = ground_line.points
 	for i in points.size() - 1:
 		var new_shape = CollisionShape2D.new()

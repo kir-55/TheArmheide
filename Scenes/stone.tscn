@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://0qrksmssibnb"]
+
+[ext_resource type="Texture2D" uid="uid://cnw8rbtv1unad" path="res://Images/TheArmheideStone.png" id="1_1vig6"]
+
+[node name="Stone" type="Sprite2D"]
+z_index = 5
+position = Vector2(711, 169)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_1vig6")
+offset = Vector2(-10.0002, -30)
