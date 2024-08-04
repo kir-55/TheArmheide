@@ -9,9 +9,8 @@ extends Node
 @export var points_amount := 100
 
 # x distance between points
-@export var points_distance = 300
+@export var line_section_length = 300
 
-@export var grass_prefab: PackedScene
 @export var decorations: Array[Decoration]
 
 @export var willadge: Node
@@ -20,8 +19,6 @@ extends Node
 @export var main_house_prefab: PackedScene
 
 @export var player: Node2D
-
-@export var grass_spawn_range := 20.0
 
 @onready var line_offset = ground_line.width / 2 - 1
 
@@ -45,9 +42,9 @@ func _ready():
 	
 	for i in range(points_amount):
 		if i % 2 == 1:
-			create_next_point(ground_line.get_point_position(i) + Vector2(points_distance, rs.get_rnd_float(-100, 100)))
+			create_next_point(ground_line.get_point_position(i) + Vector2(line_section_length, rs.get_rnd_float(-100, 100)))
 		else:
-			create_next_point(ground_line.get_point_position(i) + Vector2(points_distance, 0))
+			create_next_point(ground_line.get_point_position(i) + Vector2(line_section_length, 0))
 		
 		var p1 = ground_line.get_point_position(i)
 		var p2 = ground_line.get_point_position(i + 1)
@@ -56,7 +53,6 @@ func _ready():
 		var b = -a * p2.x + p2.y
 		
 		var distance = p2 - p1
-		var grass_per_line := rs.get_rnd_int(1, 5)
 		
 
 		if i == village_start or i == village_end:
@@ -78,25 +74,25 @@ func _ready():
 			willadge.add_child(main_house)
 		
 		
-		for decoration in decorations:
-			if decoration and decoration.prefab:
-				var rnd_i = rs.get_rnd_int(0, 100)
-				if decoration.initial_chance > rnd_i:
-					for _i in range(decoration.chance_multiplyer):
-						var rnd = rs.get_rnd_int(0, 100)
-					
-						if decoration.chance_to_spawn > rnd:
-							var decoration_instance = decoration.prefab.instantiate()
-							
-							var x = rs.get_rnd_float(p1.x, p2.x)
-							decoration_instance.position = Vector2(x, x * a + b - line_offset)
-							decoration_instance.rotation = distance.angle()
-							if decoration.min_scale != 0 and decoration.max_scale != 0:
-								var scale = rs.get_rnd_float(decoration.min_scale, decoration.max_scale)
-								decoration_instance.scale = Vector2(scale, scale)
-							#decoration_instance.player = player
-							
-							add_child(decoration_instance)
+		#for decoration in decorations:
+			#if decoration and decoration.prefab:
+				#var rnd_i = rs.get_rnd_int(0, 100)
+				#if decoration.initial_chance > rnd_i:
+					#for _i in range(decoration.chance_multiplyer):
+						#var rnd = rs.get_rnd_int(0, 100)
+					#
+						#if decoration.chance_to_spawn > rnd:
+							#var decoration_instance = decoration.prefab.instantiate()
+							#
+							#var x = rs.get_rnd_float(p1.x, p2.x)
+							#decoration_instance.position = Vector2(x, x * a + b - line_offset)
+							#decoration_instance.rotation = distance.angle()
+							#if decoration.min_scale != 0 and decoration.max_scale != 0:
+								#var scale = rs.get_rnd_float(decoration.min_scale, decoration.max_scale)
+								#decoration_instance.scale = Vector2(scale, scale)
+							##decoration_instance.player = player
+							#
+							#add_child(decoration_instance)
 
 	var points = ground_line.points
 	for i in points.size() - 1:

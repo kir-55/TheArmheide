@@ -1,9 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://b232mspaehrfk"]
 
-[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
+[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="3_idhyc"]
-[ext_resource type="PackedScene" uid="uid://dou4shwlwq4ya" path="res://Scenes/grasss.tscn" id="5_dvx3f"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
 [ext_resource type="Resource" uid="uid://sq3kjagkdci0" path="res://Decorations/grass.tres" id="6_ktmbv"]
 [ext_resource type="Script" path="res://Scripts/random_system.gd" id="7_5clvn"]
@@ -12,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://dnstlibccmmqt" path="res://Decorations/flower.tres" id="8_m48or"]
 [ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
 [ext_resource type="PackedScene" uid="uid://cun8flcxq70m4" path="res://Scenes/enemy.tscn" id="10_t63s6"]
+[ext_resource type="Script" path="res://Scripts/decoration_spawner.gd" id="11_1gig2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_csvj8"]
 shader = ExtResource("3_idhyc")
@@ -52,7 +52,6 @@ ground_line = NodePath("GroundLine")
 grass_line = NodePath("GrassLine")
 floor_collider = NodePath("GroundLine/StaticBody2D")
 rs = NodePath("../RandomSystem")
-grass_prefab = ExtResource("5_dvx3f")
 decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or")])
 willadge = NodePath("Willadge")
 tower_prefab = ExtResource("6_4j0ad")
@@ -60,6 +59,14 @@ main_house_prefab = ExtResource("8_us4v6")
 player = NodePath("../Player")
 village_start = 3
 village_end = 6
+
+[node name="DecorationSpawner" type="Node" parent="Terrain" node_paths=PackedStringArray("rs", "player", "line", "terrain_generator")]
+script = ExtResource("11_1gig2")
+rs = NodePath("../../RandomSystem")
+player = NodePath("../../Player")
+line = NodePath("../GroundLine")
+terrain_generator = NodePath("..")
+decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("8_m48or"), ExtResource("7_hbsh7")])
 
 [node name="Willadge" type="Node2D" parent="Terrain"]
 

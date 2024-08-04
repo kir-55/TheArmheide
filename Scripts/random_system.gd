@@ -4,11 +4,12 @@ extends Node
 
 # Use this script when generating terain, objects positions, man stats and other static stuff
 # For dynamic stuff like man wounder direction don't use this script
-@export var seed = "kirill"
+@export var main_seed = "kirill"
 var rng = RandomNumberGenerator.new()
 
+
 func _ready():
-	rng.seed = hash(seed)
+	rng.seed = hash(main_seed)
 	rng.state = 1
 
 func get_rnd_int(min: int, max: int) -> int:
@@ -16,3 +17,32 @@ func get_rnd_int(min: int, max: int) -> int:
 	
 func get_rnd_float(min: float, max: float) -> float:
 	return rng.randf_range(min, max)
+
+
+func get_rnd_int_at(min: int, max: int, seed = main_seed) -> int:
+	#var prev_state = rng.state
+	
+	rng.seed = hash(seed)
+	#rng.state = at
+	
+	var value = rng.randi_range(min, max)
+	
+	rng.seed = hash(main_seed)
+	#rng.state = prev_state
+	
+	return value
+
+
+func get_rnd_float_at(min: float, max: float, seed = main_seed) -> float:
+	#var prev_state = rng.state
+	
+	rng.seed = hash(seed)
+	#rng.state = at
+	
+	var value = rng.randf_range(min, max)
+	print("value: " + str(value))
+	
+	rng.seed = hash(main_seed)
+	#rng.state = prev_state
+	
+	return value
