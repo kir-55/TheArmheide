@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6kqf7"]
 size = Vector2(51, 53)
 
-[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemies"]]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemies", "to_be_alined"]]
 z_index = -3
 collision_layer = 4
 script = ExtResource("1_d8oih")

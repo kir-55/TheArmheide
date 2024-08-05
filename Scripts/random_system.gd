@@ -40,7 +40,6 @@ func get_rnd_float_at(min: float, max: float, seed = main_seed) -> float:
 	#rng.state = at
 	
 	var value = rng.randf_range(min, max)
-	print("value: " + str(value))
 	
 	rng.seed = hash(main_seed)
 	#rng.state = prev_state

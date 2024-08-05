@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 const WALK_SPEED = 300
 const RUN_SPEED = 400
-const GRAVITY = 1000
+const GRAVITY = 5000
 
 var speed
 
@@ -14,17 +14,20 @@ var direction = 0
 var run = false
 var destination_x: float = 0.0
 
+var floor_normal = Vector2.UP
+var closest_point: int
+
+
+
 @export var attack_manager: AttackManager
 
 @export var animation_transitions_speed := 0.3 # In range 0-1
 @onready var animation_tree = $AnimationTree
 
-var last_floor_normal = Vector2.UP
-
-
 
 func _ready():
 	destination_x = position.x
+
 
 func _physics_process(delta):
 	if direction != 0:
@@ -46,13 +49,6 @@ func _physics_process(delta):
 	move_and_slide()
 	motion = velocity
 
-	if is_on_floor():
-		var floor_normal = get_floor_normal()
-		last_floor_normal = floor_normal
-		rotation = lerp_angle(rotation, floor_normal.angle() + deg_to_rad(90), 0.1)
-	else:
-		last_floor_normal = Vector2.UP  # Reset to default if not on floor
-
 func _process(delta):
 	if attack_manager.ready_to_attack:
 		animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))
@@ -63,8 +59,6 @@ func _process(delta):
 			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.0, animation_transitions_speed))
 		animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.0, animation_transitions_speed))
 	else:
-		
-		
 		# Setting walk animation
 		if !attack_manager.ready_to_attack:
 			if run:
@@ -98,7 +92,8 @@ func stop():
 	direction = 0
 	run = false
 	destination_x = position.x
-	
+
+
 
 func _on_animation_tree_animation_finished(anim_name):
 	print("finished: " + str(anim_name))
