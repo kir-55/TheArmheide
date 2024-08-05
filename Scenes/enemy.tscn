@@ -21,7 +21,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Flippable/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -50,7 +50,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/path = NodePath("Flippable/Sprite2D:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -81,7 +81,7 @@ chill_out_delay = 0
 
 [node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("2_okkjr")
-sprite = NodePath("../Sprite2D")
+sprite = NodePath("../Flippable/Sprite2D")
 max_HP = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -90,6 +90,11 @@ shape = SubResource("RectangleShape2D_6kqf7")
 [node name="Flippable" type="Node2D" parent="."]
 position = Vector2(9.15527e-05, 0)
 scale = Vector2(0.25, 0.25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Flippable"]
+position = Vector2(-1.99976, -2.81238)
+scale = Vector2(1.59375, 1.64356)
+texture = ExtResource("1_je23y")
 
 [node name="Area2D" type="Area2D" parent="Flippable"]
 position = Vector2(0, -284)
@@ -100,11 +105,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Area2D"]
 position = Vector2(-71, 53)
 shape = SubResource("RectangleShape2D_ds084")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.499908, -0.703098)
-scale = Vector2(0.398438, 0.410889)
-texture = ExtResource("1_je23y")
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_wdkkv")
@@ -124,6 +124,7 @@ enemy = NodePath("../..")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
+autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
