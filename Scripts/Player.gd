@@ -99,4 +99,4 @@ func _on_animation_tree_animation_finished(anim_name):
 	print("finished: " + str(anim_name))
 	
 	if anim_name == "attack":
-		attack_manager._on_attack_aniamtion_finished()
+		attack_manager._on_attack_animation_finished()

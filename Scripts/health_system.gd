@@ -2,7 +2,9 @@ extends Node
 
 signal died(body)
 
-@export var sprite: Sprite2D
+@export var sprite: Node2D
+
+
 @export var max_HP: float = 20
 var HP: float
 
@@ -18,7 +20,7 @@ func take_damage(damage):
 		get_parent().die()
 		
 	HP -= damage
-	sprite.self_modulate = Color(1, HP/max_HP, HP/max_HP, 1)
+	sprite.modulate = Color(1, HP/max_HP, HP/max_HP, 1)
 	
 
 func heal(value):

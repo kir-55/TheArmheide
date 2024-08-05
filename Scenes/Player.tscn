@@ -1,8 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://gs87w8kxkxqk"]
+[gd_scene load_steps=35 format=3 uid="uid://gs87w8kxkxqk"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_oy3o2"]
 [ext_resource type="Script" path="res://Scripts/attack_manager.gd" id="2_k0q02"]
 [ext_resource type="Texture2D" uid="uid://c73y68sbmaylo" path="res://body_parts/foot.png" id="2_wi2do"]
+[ext_resource type="Script" path="res://Scripts/health_system.gd" id="3_6rbe8"]
 [ext_resource type="Texture2D" uid="uid://da30nt4tjwmb5" path="res://body_parts/calf.png" id="3_polev"]
 [ext_resource type="Texture2D" uid="uid://b8gc2c46aitve" path="res://body_parts/thigh.png" id="4_h2pnv"]
 [ext_resource type="Texture2D" uid="uid://258il20s5jd0" path="res://body_parts/head.png" id="5_tdh2i"]
@@ -1239,6 +1240,7 @@ animation = &"walk_arms"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_4y8lh"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wqobu"]
+graph_offset = Vector2(5.14246, 44.0945)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_ow3b5")
 nodes/Add2/position = Vector2(880, 240)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_n1ro7")
@@ -1271,6 +1273,11 @@ attack_manager = NodePath("AttackManager")
 script = ExtResource("2_k0q02")
 trigger_area = NodePath("../Flippable/Area2D")
 
+[node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("3_6rbe8")
+sprite = NodePath("..")
+max_HP = 500.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 2
 visibility_layer = 2
@@ -1296,119 +1303,149 @@ position = Vector2(6, 23.6903)
 
 [node name="FootBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(115.89, 519.795)
-rotation = -1.15758
-scale = Vector2(0.999965, 0.999965)
+
+position = Vector2(279.5, 889.066)
+rotation = -0.325808
+scale = Vector2(0.999964, 0.999964)
+
 texture = ExtResource("2_wi2do")
 offset = Vector2(-31.9269, 3)
 
 [node name="CalfBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -2
-position = Vector2(6.15051, 511.955)
-rotation = -1.56213
-scale = Vector2(0.999969, 0.999969)
+
+position = Vector2(234.085, 788.858)
+rotation = -0.488176
+scale = Vector2(0.999968, 0.999968)
+
 texture = ExtResource("3_polev")
 offset = Vector2(-1.93497, 48)
 
 [node name="LegBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -2
-position = Vector2(-16.1746, 347.573)
-rotation = -0.0623568
-scale = Vector2(0.99998, 0.99998)
+
+position = Vector2(388.093, 727.201)
+rotation = 1.26262
+scale = Vector2(0.999979, 0.999979)
+
 texture = ExtResource("4_h2pnv")
 offset = Vector2(0, 72)
 
 [node name="FootFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 1
-position = Vector2(-57.7835, 603.384)
-rotation = -0.0322912
-scale = Vector2(0.99997, 0.99997)
+
+position = Vector2(535.185, 967.449)
+rotation = -0.425455
+scale = Vector2(0.999969, 0.999969)
+
 texture = ExtResource("2_wi2do")
 offset = Vector2(-32.459, 3)
 
 [node name="CalfFront" type="Sprite2D" parent="Flippable/Parts"]
-position = Vector2(-75.3223, 492.768)
-rotation = -0.205255
-scale = Vector2(0.999973, 0.999973)
+
+position = Vector2(461.389, 883.203)
+rotation = -0.767385
+scale = Vector2(0.999972, 0.999972)
+
 texture = ExtResource("3_polev")
 offset = Vector2(0, 50)
 
 [node name="LegFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(1.78944, 362.482)
-rotation = 0.574834
-scale = Vector2(0.999978, 0.999978)
+
+position = Vector2(405.842, 742.365)
+rotation = -0.335253
+scale = Vector2(0.999977, 0.999977)
+
 texture = ExtResource("4_h2pnv")
 offset = Vector2(-3, 74)
 
 [node name="Head" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 1
-position = Vector2(-13.2361, 29.8361)
-rotation = -0.189076
-scale = Vector2(0.999984, 0.999984)
+
+position = Vector2(395.569, 409.539)
+rotation = -0.174792
+scale = Vector2(0.999983, 0.999983)
+
 texture = ExtResource("5_tdh2i")
 offset = Vector2(-15, -24)
 
 [node name="Neck" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(-11.818, 86.218)
-rotation = 3.09597
-scale = Vector2(0.999984, 0.999984)
+
+position = Vector2(396.182, 465.936)
+rotation = 3.11026
+scale = Vector2(0.999983, 0.999983)
+
 texture = ExtResource("6_di4k6")
 offset = Vector2(1.67726, 34.3009)
 
 [node name="HandBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -3
-position = Vector2(111.806, -18.6477)
-rotation = -1.72544
-scale = Vector2(0.999982, 0.999982)
+
+position = Vector2(521.291, 362.847)
+rotation = -1.71116
+scale = Vector2(0.999981, 0.999981)
+
 texture = ExtResource("7_j7ejh")
 offset = Vector2(-10, 26)
 
 [node name="LowarmBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(-5.34591, -23.1122)
-rotation = -1.54077
-scale = Vector2(0.999982, 0.999982)
+
+position = Vector2(404.215, 356.709)
+rotation = -1.52649
+scale = Vector2(0.999981, 0.999981)
+
 texture = ExtResource("8_0jtyr")
 offset = Vector2(-6, 56)
 
 [node name="ShoulderBack" type="Sprite2D" parent="Flippable/Parts"]
 z_index = -1
-position = Vector2(-0.424089, 109.025)
-rotation = -3.10101
-scale = Vector2(0.999984, 0.999984)
+
+position = Vector2(407.249, 488.903)
+rotation = -3.08673
+scale = Vector2(0.999983, 0.999983)
+
 texture = ExtResource("9_a4fc2")
 offset = Vector2(2, 57)
 
 [node name="HandFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 2
-position = Vector2(92.7298, -27.9072)
-rotation = -1.69211
-scale = Vector2(0.999982, 0.999982)
+
+position = Vector2(502.349, 353.315)
+rotation = -1.67782
+scale = Vector2(0.999981, 0.999981)
+
 texture = ExtResource("7_j7ejh")
 offset = Vector2(-10, 26)
 
 [node name="LowarmFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 1
-position = Vector2(-20.3519, -39.9125)
-rotation = -1.46623
-scale = Vector2(0.999982, 0.999982)
+
+position = Vector2(389.45, 339.696)
+rotation = -1.45195
+scale = Vector2(0.999981, 0.999981)
+
 texture = ExtResource("8_0jtyr")
 offset = Vector2(-6.87169, 50.9186)
 
 [node name="ShoulderFront" type="Sprite2D" parent="Flippable/Parts"]
 z_index = 2
-position = Vector2(-0.69753, 85.9094)
-rotation = 3.11009
-scale = Vector2(0.999983, 0.999983)
+
+position = Vector2(407.305, 465.786)
+rotation = 3.12437
+scale = Vector2(0.999982, 0.999982)
+
 texture = ExtResource("9_a4fc2")
 offset = Vector2(3, 55)
 
 [node name="Body" type="Sprite2D" parent="Flippable/Parts"]
-position = Vector2(-5.32771, 347.141)
-rotation = -0.049505
-scale = Vector2(0.999984, 0.999984)
+
+position = Vector2(398.944, 726.924)
+rotation = -0.0352206
+scale = Vector2(0.999983, 0.999983)
+
 texture = ExtResource("10_od11n")
 offset = Vector2(-2.76303, -115.71)
 
@@ -1418,7 +1455,7 @@ position = Vector2(0, 4)
 [node name="Base" type="Bone2D" parent="Flippable/Skeleton2D"]
 position = Vector2(-4, 360)
 rotation = -1.6321
-scale = Vector2(0.999984, 0.999984)
+scale = Vector2(0.999983, 0.999983)
 rest = Transform2D(-0.0980598, -0.99518, 0.99518, -0.0980598, -1, 365)
 
 [node name="LegRight" type="Bone2D" parent="Flippable/Skeleton2D/Base"]
@@ -1444,7 +1481,7 @@ remote_path = NodePath("../../../../../Parts/CalfBack")
 [node name="FootRight" type="Bone2D" parent="Flippable/Skeleton2D/Base/LegRight/CalfRight"]
 position = Vector2(-109.901, -5.16322)
 rotation = 0.374808
-scale = Vector2(0.999997, 0.999997)
+scale = Vector2(0.999996, 0.999996)
 rest = Transform2D(0.990824, 0.135154, -0.135154, 0.990824, -109.901, -5.16322)
 auto_calculate_length_and_angle = false
 length = 76.866
@@ -1457,7 +1494,7 @@ remote_path = NodePath("../../../../../../Parts/FootBack")
 [node name="LegLeft" type="Bone2D" parent="Flippable/Skeleton2D/Base"]
 position = Vector2(2.61087, 12.0906)
 rotation = 0.109464
-scale = Vector2(0.999995, 0.999995)
+scale = Vector2(0.999994, 0.999994)
 rest = Transform2D(0.99416, 0.107905, -0.107905, 0.99416, 2.61087, 12.0906)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Flippable/Skeleton2D/Base/LegLeft"]
@@ -1615,8 +1652,10 @@ parameters/walking_legs/blend_amount = 1.0
 [node name="TheArmheideSword" type="Sprite2D" parent="."]
 visible = false
 z_index = -3
-position = Vector2(33.7694, -161.314)
-rotation = 2.13523
+
+position = Vector2(36.6353, 18.6136)
+rotation = 2.14951
+
 scale = Vector2(0.249995, 0.249995)
 texture = ExtResource("11_a4inu")
 offset = Vector2(-0.213623, -130.364)

@@ -1,7 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://b232mspaehrfk"]
 
+
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
 [ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
+
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="3_idhyc"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
@@ -97,4 +99,4 @@ decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktm
 
 [node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(604, 380)
+position = Vector2(305, 260)

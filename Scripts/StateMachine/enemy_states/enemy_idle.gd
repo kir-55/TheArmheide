@@ -30,5 +30,5 @@ func Physics_Update(delta: float):
 	if enemy.current_closest_target:
 		var direction = enemy.current_closest_target.global_position - enemy.global_position
 		
-		if direction.length() < 500:
+		if direction.length() < enemy.follow_distance:
 			RequestTransition.emit(self, "Follow")

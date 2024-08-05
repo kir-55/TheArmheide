@@ -30,7 +30,7 @@ func _process(delta):
 		ready_to_attack = false
 
 
-func _on_body_entered(body):	
+func _on_body_entered(body):
 	print(body.get_groups())
 	if body and body.is_in_group(enemy_group):
 		enemies_near.append(body)
@@ -60,6 +60,6 @@ func _on_attack_finished():
 	last_time_attacked = Time.get_ticks_msec()
 	
 
-func _on_attack_aniamtion_finished():
+func _on_attack_animation_finished():
 	if enemies_near.size() > 0:
 		attack()
