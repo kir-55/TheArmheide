@@ -2,7 +2,7 @@ class_name Sloper
 extends Node
 
 
-# This script sawns objects on the ground line and manages their rotaions
+# This script spawns objects on the ground line and manages their rotaions
 
 var line_start_x: float
 var line_section_length: int

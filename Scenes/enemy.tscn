@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cun8flcxq70m4"]
+[gd_scene load_steps=16 format=3 uid="uid://cun8flcxq70m4"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_d8oih"]
 [ext_resource type="Texture2D" uid="uid://betk5mrjmg11g" path="res://Images/enemy.png" id="1_je23y"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_idle.gd" id="4_xh077"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_follow.gd" id="5_wglmd"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_attack.gd" id="8_4rw25"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_escape.gd" id="9_db7cn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6kqf7"]
 size = Vector2(50.5, 51.5)
@@ -120,6 +121,10 @@ enemy = NodePath("../..")
 
 [node name="Attack" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("8_4rw25")
+enemy = NodePath("../..")
+
+[node name="Escape" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("9_db7cn")
 enemy = NodePath("../..")
 
 [node name="Timer" type="Timer" parent="."]

@@ -11,6 +11,9 @@ func Enter():
 
 func Physics_Update(delta: float):
 	if enemy.is_on_floor() and enemy.current_closest_target:
+		if enemy.get_node("HealthSystem").HP <= 20:
+			RequestTransition.emit(self, "Escape")
+		
 		var distance_x = abs(enemy.current_closest_target.global_position.x - enemy.global_position.x)
 		if distance_x > enemy.attack_distance:
 			RequestTransition.emit(self, "Follow")
