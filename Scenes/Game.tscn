@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=16 format=3 uid="uid://b232mspaehrfk"]
 
-[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
+
+[ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
+[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
+
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="3_idhyc"]
-[ext_resource type="PackedScene" uid="uid://dou4shwlwq4ya" path="res://Scenes/grasss.tscn" id="5_dvx3f"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
 [ext_resource type="Resource" uid="uid://sq3kjagkdci0" path="res://Decorations/grass.tres" id="6_ktmbv"]
 [ext_resource type="Script" path="res://Scripts/random_system.gd" id="7_5clvn"]
@@ -12,18 +14,19 @@
 [ext_resource type="Resource" uid="uid://dnstlibccmmqt" path="res://Decorations/flower.tres" id="8_m48or"]
 [ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
 [ext_resource type="PackedScene" uid="uid://cun8flcxq70m4" path="res://Scenes/enemy.tscn" id="10_t63s6"]
+[ext_resource type="Script" path="res://Scripts/decoration_spawner.gd" id="11_1gig2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
+shader = ExtResource("3_idhyc")
+shader_parameter/XShiftAmplitude = null
+shader_parameter/MinLineThikness = Vector2(0, 2500)
+shader_parameter/MaxThikness = 2500.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_csvj8"]
 shader = ExtResource("3_idhyc")
 shader_parameter/XShiftAmplitude = 20.0
 shader_parameter/MinLineThikness = Vector2(0, 20)
 shader_parameter/MaxThikness = 50.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
-shader = ExtResource("3_idhyc")
-shader_parameter/XShiftAmplitude = null
-shader_parameter/MinLineThikness = Vector2(0, 1500)
-shader_parameter/MaxThikness = 1500.0
 
 [node name="Game" type="Node2D"]
 position = Vector2(1, 1)
@@ -32,6 +35,10 @@ position = Vector2(1, 1)
 script = ExtResource("7_5clvn")
 
 [node name="Player" parent="." instance=ExtResource("2_ak363")]
+position = Vector2(49, 413)
+
+[node name="HeadPoint" type="Node2D" parent="Player"]
+position = Vector2(-4, -155)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 z_index = 12
@@ -40,33 +47,34 @@ process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("3_6coef")
 speed = 2.0
-target = NodePath("../Player")
-max_distance = Vector2(100, 50)
+target = NodePath("../Player/HeadPoint")
+max_distance = Vector2(100, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="Terrain" type="Node2D" parent="." node_paths=PackedStringArray("ground_line", "grass_line", "floor_collider", "rs", "willadge", "player")]
+[node name="Terrain" type="Node2D" parent="." node_paths=PackedStringArray("ground_line", "grass_line", "floor_collider", "rs", "sloper", "villadge", "player")]
 position = Vector2(-663, 552)
 script = ExtResource("7_qwvaq")
 ground_line = NodePath("GroundLine")
 grass_line = NodePath("GrassLine")
 floor_collider = NodePath("GroundLine/StaticBody2D")
 rs = NodePath("../RandomSystem")
-grass_prefab = ExtResource("5_dvx3f")
+sloper = NodePath("Sloper")
+section_y_change_amplitude = 70
 decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or")])
-willadge = NodePath("Willadge")
+villadge = NodePath("Villadge")
 tower_prefab = ExtResource("6_4j0ad")
 main_house_prefab = ExtResource("8_us4v6")
 player = NodePath("../Player")
 village_start = 3
-village_end = 6
+village_end = 5
 
-[node name="Willadge" type="Node2D" parent="Terrain"]
+[node name="Sloper" type="Node" parent="Terrain" node_paths=PackedStringArray("line", "terrain_generator")]
+script = ExtResource("1_8uvoy")
+line = NodePath("../GroundLine")
+terrain_generator = NodePath("..")
 
-[node name="GrassLine" type="Line2D" parent="Terrain"]
-z_index = 12
-material = SubResource("ShaderMaterial_csvj8")
-default_color = Color(0.701961, 0.647059, 0.333333, 1)
+[node name="Villadge" type="Node2D" parent="Terrain"]
 
 [node name="GroundLine" type="Line2D" parent="Terrain"]
 z_index = 11
@@ -74,6 +82,20 @@ material = SubResource("ShaderMaterial_q1l2d")
 default_color = Color(0.572549, 0.454902, 0.254902, 1)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Terrain/GroundLine"]
+
+[node name="GrassLine" type="Line2D" parent="Terrain"]
+z_index = 12
+material = SubResource("ShaderMaterial_csvj8")
+default_color = Color(0.701961, 0.647059, 0.333333, 1)
+
+[node name="DecorationSpawner" type="Node2D" parent="Terrain" node_paths=PackedStringArray("rs", "sloper", "player", "line", "terrain_generator")]
+script = ExtResource("11_1gig2")
+rs = NodePath("../../RandomSystem")
+sloper = NodePath("../Sloper")
+player = NodePath("../../Player")
+line = NodePath("../GroundLine")
+terrain_generator = NodePath("..")
+decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or")])
 
 [node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4

@@ -1,6 +1,10 @@
 extends Node
 
+signal died(body)
+
 @export var sprite: Node2D
+
+
 @export var max_HP: float = 20
 var HP: float
 
@@ -12,6 +16,7 @@ func _ready():
 
 func take_damage(damage):
 	if HP - damage <= 0:
+		died.emit(get_parent())
 		get_parent().die()
 		
 	HP -= damage
