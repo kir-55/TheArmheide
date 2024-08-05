@@ -11,7 +11,7 @@ var moving: Array[Node2D]
 
 func _ready():
 	for obj in get_tree().get_nodes_in_group("villagers"):
-		#obj.get_node("HealthSystem").died.connect()
+		obj.get_node("HealthSystem").died.connect(unfollow_body)
 		moving.append(obj)
 	for obj in get_tree().get_nodes_in_group("enemies"):
 		obj.get_node("HealthSystem").died.connect(unfollow_body)

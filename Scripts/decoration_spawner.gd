@@ -7,7 +7,7 @@ var line_section_length: int
 @export var max_radius := 15
 
 @export var rs: RandomSystem
-@export var sloper:Sloper
+@export var sloper: Sloper
 
 @export var player: Node2D
 

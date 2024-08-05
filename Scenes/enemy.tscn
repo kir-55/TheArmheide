@@ -13,9 +13,23 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6kqf7"]
 size = Vector2(50.5, 51.5)
 
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ds084"]
 size = Vector2(43.5, 87.5)
+
+[sub_resource type="Animation" id="Animation_2460a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_je23y")]
+}
 
 [sub_resource type="Animation" id="Animation_bt8tn"]
 resource_name = "attack"
@@ -46,21 +60,6 @@ tracks/1/keys = {
 "values": [ExtResource("4_reumh"), ExtResource("1_je23y")]
 }
 
-[sub_resource type="Animation" id="Animation_2460a"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_je23y")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_865v8"]
 _data = {
 "RESET": SubResource("Animation_2460a"),
@@ -68,7 +67,6 @@ _data = {
 }
 
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("attack_manager") groups=["enemies", "to_be_alined"]]
-
 z_index = -3
 position = Vector2(559, 123)
 collision_layer = 4
