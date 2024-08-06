@@ -19,9 +19,10 @@ func _ready():
 func _physics_process(delta):
 	for sloper_target in get_tree().get_nodes_in_group("to_be_alined"):
 		var closest_point = calc_closest_point(sloper_target)
-		var p1 = line.get_point_position(int(closest_point)) + line.global_position
-		var p2 = line.get_point_position(int(closest_point) + 1) + line.global_position
-		sloper_target.rotation = lerp_angle(sloper_target.rotation, (p2 - p1).angle(), 0.1)
+		if closest_point > 0:
+			var p1 = line.get_point_position(int(closest_point)) + line.global_position
+			var p2 = line.get_point_position(int(closest_point) + 1) + line.global_position
+			sloper_target.rotation = lerp_angle(sloper_target.rotation, (p2 - p1).angle(), 0.1)
 
 
 func calc_closest_point(entity) -> int:

@@ -25,6 +25,7 @@ var closest_point: int
 @onready var animation_tree = $AnimationTree
 
 
+
 func _ready():
 	destination_x = position.x
 
@@ -93,7 +94,8 @@ func stop():
 	run = false
 	destination_x = position.x
 
-
+func die():
+	pass
 
 func _on_animation_tree_animation_finished(anim_name):
 	print("finished: " + str(anim_name))

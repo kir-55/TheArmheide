@@ -15,7 +15,7 @@
 size = Vector2(50.5, 51.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ds084"]
-size = Vector2(43.5, 87.5)
+size = Vector2(89.7499, 87.5)
 
 [sub_resource type="Animation" id="Animation_2460a"]
 length = 0.001
@@ -73,6 +73,10 @@ position = Vector2(559, 123)
 collision_layer = 4
 script = ExtResource("1_d8oih")
 attack_manager = NodePath("AttackManager")
+attack_distance = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6kqf7")
 
 [node name="AttackManager" type="Node" parent="." node_paths=PackedStringArray("trigger_area")]
 script = ExtResource("2_fwhmp")
@@ -84,9 +88,6 @@ chill_out_delay = 0
 script = ExtResource("2_okkjr")
 sprite = NodePath("../Flippable/Sprite2D")
 max_HP = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_6kqf7")
 
 [node name="Flippable" type="Node2D" parent="."]
 position = Vector2(9.15527e-05, 0)
@@ -104,7 +105,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Area2D"]
-position = Vector2(-71, 53)
+position = Vector2(-47.875, 53)
 shape = SubResource("RectangleShape2D_ds084")
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]

@@ -9,10 +9,12 @@ extends Node
 
 var enemies_near : Array[Node2D]
 
-var ready_to_attack = false
+
+var ready_to_attack := false
 var last_time_attacked := 0 # In miliseconds
+var is_attacking := false
 
-
+@export var should_prepare_for_attack := false
 
 @export var enemy_group := "enemies"
 
@@ -28,30 +30,34 @@ func _ready():
 func _process(delta):
 	if ready_to_attack and  Time.get_ticks_msec() - last_time_attacked > chill_out_delay:
 		ready_to_attack = false
-
-
+		
+	if enemies_near.size() > 0 and !is_attacking:
+		if ready_to_attack:
+			attack()
+		else:
+			prepare_for_attack()
+		
 func _on_body_entered(body):
-	print(body.get_groups())
 	if body and body.is_in_group(enemy_group):
 		enemies_near.append(body)
 	if enemies_near.size() > 0 and !ready_to_attack:
 		prepare_for_attack()
-
+	print("enemies near:" + str(enemies_near.size()))	
 
 func _on_body_exited(body):
 	if body and body.is_in_group(enemy_group):
 		enemies_near.erase(body)
+	print("enemies near:" + str(enemies_near.size()))	
 
 
 func prepare_for_attack():
-	ready_to_attack = true
 	last_time_attacked = Time.get_ticks_msec()
 	attack()
 
 
 func attack():
 	get_parent().run_attack_animation()
-	
+	is_attacking = true
 
 func _on_attack_finished():
 	for enemy in enemies_near:
@@ -61,5 +67,5 @@ func _on_attack_finished():
 	
 
 func _on_attack_animation_finished():
-	if enemies_near.size() > 0:
-		attack()
+	print("attack finished, enemies near: " + str(enemies_near.size()))
+	is_attacking = false
