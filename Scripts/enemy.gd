@@ -50,6 +50,7 @@ func die():
 	queue_free()
 
 
+	
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "attack":
+	if anim_name == "attack" and is_instance_valid(attack_manager):
 		attack_manager._on_attack_animation_finished()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
 [ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
-[ext_resource type="Script" path="res://Scripts/camera.gd" id="3_6coef"]
+[ext_resource type="Script" path="res://Scripts/сamera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="3_idhyc"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
 [ext_resource type="Resource" uid="uid://sq3kjagkdci0" path="res://Decorations/grass.tres" id="6_ktmbv"]
@@ -33,7 +33,7 @@ position = Vector2(1, 1)
 script = ExtResource("7_5clvn")
 
 [node name="Player" parent="." instance=ExtResource("2_ak363")]
-position = Vector2(49, 413)
+position = Vector2(274, 381)
 
 [node name="HeadPoint" type="Node2D" parent="Player"]
 position = Vector2(-4, -155)
@@ -97,4 +97,54 @@ decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktm
 
 [node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(305, 260)
+position = Vector2(-348, 515)
+
+[node name="Enemy2" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(-938, 422)
+attack_manager = NodePath("../Enemy/AttackManager")
+
+[node name="Enemy3" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(5103, 194)
+attack_manager = NodePath("../Enemy/AttackManager")
+
+[node name="Enemy4" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(2040, 203)
+attack_manager = NodePath("../Enemy/AttackManager")
+
+[node name="Enemy5" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(2652, 128)
+attack_manager = NodePath("../Enemy/AttackManager")
+
+[node name="Enemy6" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(539, -123)
+attack_manager = NodePath("../Enemy/AttackManager")
+
+[node name="Enemy7" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(3140, -105)
+attack_manager = NodePath("../Enemy/AttackManager")
+
+[node name="Enemy8" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(2214, -45)
+attack_manager = NodePath("../Enemy/AttackManager")
+
+[node name="Enemy9" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(-117, 83)
+attack_manager = NodePath("../Enemy/AttackManager")
+
+[node name="Enemy10" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(1633, 110)
+attack_manager = NodePath("../Enemy/AttackManager")
+
+[node name="Enemy11" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(1070, 241)
+attack_manager = NodePath("../Enemy/AttackManager")

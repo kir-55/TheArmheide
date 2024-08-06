@@ -31,4 +31,7 @@ func Physics_Update(delta: float):
 		var direction = enemy.current_closest_target.global_position - enemy.global_position
 		
 		if direction.length() < enemy.follow_distance:
-			RequestTransition.emit(self, "Follow")
+			if enemy.get_node("HealthSystem").is_at_low_health:
+				RequestTransition.emit(self, "Escape")
+			else:
+				RequestTransition.emit(self, "Follow")

@@ -6,7 +6,10 @@ signal died(body)
 
 
 @export var max_HP: float = 20
+@export var low_health := 20
+
 var HP: float
+var is_at_low_health := false
 
 
 func _ready():
@@ -20,6 +23,10 @@ func take_damage(damage):
 		get_parent().die()
 		
 	HP -= damage
+	if HP <= low_health:
+		is_at_low_health = true
+	else:
+		is_at_low_health = false
 	sprite.modulate = Color(1, HP/max_HP, HP/max_HP, 1)
 	
 
@@ -32,3 +39,6 @@ func heal(value):
 		HP = max_HP
 	else:
 		HP += value
+	
+	if HP > low_health:
+		is_at_low_health = true
