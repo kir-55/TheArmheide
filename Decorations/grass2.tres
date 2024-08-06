@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Decoration" load_steps=3 format=3 uid="uid://cg2l61ar6xsrf"]
+
+[ext_resource type="PackedScene" uid="uid://dvic1wiwcsied" path="res://Scenes/grass2.tscn" id="1_6obgw"]
+[ext_resource type="Script" path="res://Scripts/decoration.gd" id="2_cfdqc"]
+
+[resource]
+script = ExtResource("2_cfdqc")
+prefab = ExtResource("1_6obgw")
+initial_chance = 100
+chance_to_spawn = 20.0
+chance_multiplyer = 5
+min_scale = 0.14
+max_scale = 0.2

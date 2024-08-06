@@ -54,6 +54,9 @@ func _physics_process(delta):
 	motion = velocity
 
 func _process(delta):
+	if ready_to_attack and Time.get_ticks_msec() - attack_manager.last_time_attacked > chill_out_delay:
+		ready_to_attack = false
+	
 	if preparation_requested:
 		animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))		
 		

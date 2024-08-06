@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=17 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
-[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
+[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/сamera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="3_idhyc"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
 [ext_resource type="PackedScene" uid="uid://cun8flcxq70m4" path="res://Scenes/enemy.tscn" id="10_t63s6"]
 [ext_resource type="Script" path="res://Scripts/decoration_spawner.gd" id="11_1gig2"]
+[ext_resource type="Resource" uid="uid://cg2l61ar6xsrf" path="res://Decorations/grass2.tres" id="13_ti8dc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
 shader = ExtResource("3_idhyc")
@@ -36,6 +37,13 @@ script = ExtResource("7_5clvn")
 position = Vector2(274, 381)
 
 [node name="HeadPoint" type="Node2D" parent="Player"]
+position = Vector2(-4, -155)
+
+[node name="Player" parent="Player" node_paths=PackedStringArray("attack_manager") instance=ExtResource("2_ak363")]
+position = Vector2(274, 381)
+attack_manager = NodePath("../AttackManager")
+
+[node name="HeadPoint" type="Node2D" parent="Player/Player"]
 position = Vector2(-4, -155)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
@@ -93,7 +101,7 @@ sloper = NodePath("../Sloper")
 player = NodePath("../../Player")
 line = NodePath("../GroundLine")
 terrain_generator = NodePath("..")
-decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or")])
+decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or"), ExtResource("13_ti8dc")])
 
 [node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
