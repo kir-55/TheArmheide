@@ -88,6 +88,7 @@ chill_out_delay = 0
 script = ExtResource("2_okkjr")
 sprite = NodePath("../Flippable/Sprite2D")
 max_HP = 100.0
+low_health = 60
 
 [node name="Flippable" type="Node2D" parent="."]
 position = Vector2(9.15527e-05, 0)
