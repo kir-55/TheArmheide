@@ -17,9 +17,12 @@ var destination_x: float = 0.0
 var floor_normal = Vector2.UP
 var closest_point: int
 
+var ready_to_attack := false
+var preparation_requested := false
 
 
 @export var attack_manager: AttackManager
+@export var chill_out_delay := 4000 # In miliseconds
 
 @export var animation_transitions_speed := 0.3 # In range 0-1
 @onready var animation_tree = $AnimationTree
@@ -51,17 +54,26 @@ func _physics_process(delta):
 	motion = velocity
 
 func _process(delta):
-	if attack_manager.ready_to_attack:
-		animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))
+	if preparation_requested:
+		animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))		
 		
+		if animation_tree.get("parameters/arms_state/blend_amount") < -0.99:
+			animation_tree.set("parameters/arms_state/blend_amount", -1)
+	
+	if !ready_to_attack and animation_tree.get("parameters/arms_state/blend_amount") <= -1.0:
+		ready_to_attack = true
+		preparation_requested = false
+	else:
+		print("player is not ready to attack: " + str(animation_tree.get("parameters/arms_state/blend_amount")))
+	
 	if direction == 0:
 		# Setting idle animation
-		if !attack_manager.ready_to_attack:
+		if !ready_to_attack and !preparation_requested:
 			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.0, animation_transitions_speed))
 		animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.0, animation_transitions_speed))
 	else:
 		# Setting walk animation
-		if !attack_manager.ready_to_attack:
+		if !ready_to_attack and !preparation_requested:
 			if run:
 				animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 1.0, animation_transitions_speed))
 			else:

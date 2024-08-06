@@ -82,7 +82,6 @@ shape = SubResource("RectangleShape2D_6kqf7")
 script = ExtResource("2_fwhmp")
 enemy_group = "villagers"
 trigger_area = NodePath("../Flippable/Area2D")
-chill_out_delay = 0
 
 [node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("2_okkjr")
