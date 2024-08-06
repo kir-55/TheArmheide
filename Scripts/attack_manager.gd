@@ -47,10 +47,6 @@ func _on_body_exited(body):
 	print("enemies near:" + str(enemies_near.size()))	
 
 
-func prepare_for_attack():
-	last_time_attacked = Time.get_ticks_msec()
-	get_parent().run_prepare_animation()
-
 func attack():
 	get_parent().run_attack_animation()
 	is_attacking = true
@@ -63,5 +59,4 @@ func _on_attack_finished():
 	
 
 func _on_attack_animation_finished():
-	print("attack finished, enemies near: " + str(enemies_near.size()))
 	is_attacking = false

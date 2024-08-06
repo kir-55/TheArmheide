@@ -54,20 +54,18 @@ func _physics_process(delta):
 	motion = velocity
 
 func _process(delta):
-	if ready_to_attack and Time.get_ticks_msec() - attack_manager.last_time_attacked > chill_out_delay:
-		ready_to_attack = false
-	
-	if preparation_requested:
-		animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))		
+	if !attack_manager.is_attacking:
+		if preparation_requested:
+			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))		
+			
+			if animation_tree.get("parameters/arms_state/blend_amount") < -0.99:
+				animation_tree.set("parameters/arms_state/blend_amount", -1.0)
 		
-		if animation_tree.get("parameters/arms_state/blend_amount") < -0.99:
-			animation_tree.set("parameters/arms_state/blend_amount", -1)
-	
-	if !ready_to_attack and animation_tree.get("parameters/arms_state/blend_amount") <= -1.0:
-		ready_to_attack = true
-		preparation_requested = false
-	else:
-		print("player is not ready to attack: " + str(animation_tree.get("parameters/arms_state/blend_amount")))
+		if ready_to_attack and Time.get_ticks_msec() - attack_manager.last_time_attacked > chill_out_delay:
+			ready_to_attack = false
+		elif !ready_to_attack and animation_tree.get("parameters/arms_state/blend_amount") == -1.0:
+			ready_to_attack = true
+			preparation_requested = false
 	
 	if direction == 0:
 		# Setting idle animation
