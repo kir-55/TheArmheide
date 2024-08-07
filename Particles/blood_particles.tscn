@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgrroxetp1rph"]
+
+[ext_resource type="Texture2D" uid="uid://cmqv6g21t2ndh" path="res://Images/BloodParticle.png" id="1_srlu3"]
+
+[sub_resource type="Curve" id="Curve_mpnib"]
+_data = [Vector2(0.051948, 0), 0.0, 0.0, 0, 0, Vector2(0.493506, 1), 0.0, 0.0, 0, 0, Vector2(0.995671, 0.021978), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="BloodParticles" type="CPUParticles2D"]
+emitting = false
+amount = 10
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+randomness = 0.34
+texture = ExtResource("1_srlu3")
+emission_shape = 1
+emission_sphere_radius = 29.67
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 100.0
+scale_amount_min = 0.2
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_mpnib")
+
+[node name="Destructor" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Destructor" to="." method="queue_free"]

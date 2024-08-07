@@ -17,6 +17,8 @@ extends Node
 
 @export var villadge: Node
 
+@export var big_rock: PackedScene
+
 @export var tower_prefab: PackedScene
 @export var main_house_prefab: PackedScene
 
@@ -50,6 +52,9 @@ func _ready():
 		segment.a = points[i] - Vector2(0, line_offset)
 		segment.b = points[i + 1] - Vector2(0, line_offset)
 		new_shape.shape = segment
+		
+	sloper.spawn_at_point(big_rock, self, 3, rs.get_rnd_float(0, 1))
+	sloper.spawn_at_point(big_rock, self, points_amount - 3, rs.get_rnd_float(0, 1))
 	
 	sloper.spawn_at_point(tower_prefab, villadge, village_start, rs.get_rnd_float(0, 1))
 	sloper.spawn_at_point(tower_prefab, villadge, village_end, rs.get_rnd_float(0, 1))

@@ -21,6 +21,8 @@ func _physics_process(delta):
 		direction = 1
 	elif velocity.x < 0:
 		direction = -1
+	else:
+		direction = 0
 		
 	if direction != 0:
 		get_node("Flippable").scale.x = direction * -0.25
@@ -54,3 +56,4 @@ func die():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "attack" and is_instance_valid(attack_manager):
 		attack_manager._on_attack_animation_finished()
+		print("enemy attack finished: " + str(attack_manager.enemies_near.size()) )

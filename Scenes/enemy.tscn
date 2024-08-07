@@ -1,12 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://cun8flcxq70m4"]
+[gd_scene load_steps=18 format=3 uid="uid://cun8flcxq70m4"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_d8oih"]
 [ext_resource type="Texture2D" uid="uid://betk5mrjmg11g" path="res://Images/enemy.png" id="1_je23y"]
 [ext_resource type="Script" path="res://Scripts/attack_manager.gd" id="2_fwhmp"]
 [ext_resource type="Script" path="res://Scripts/health_system.gd" id="2_okkjr"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="3_wdkkv"]
+[ext_resource type="PackedScene" uid="uid://dgrroxetp1rph" path="res://Particles/blood_particles.tscn" id="4_4dm2a"]
 [ext_resource type="Texture2D" uid="uid://bo52dlpphbvnr" path="res://Images/enemy_attack.png" id="4_reumh"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_idle.gd" id="4_xh077"]
+[ext_resource type="PackedScene" uid="uid://bqdyct6emvief" path="res://Particles/walk_particles.tscn" id="5_1ejby"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_follow.gd" id="5_wglmd"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_attack.gd" id="8_4rw25"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_states/enemy_escape.gd" id="9_db7cn"]
@@ -15,7 +17,7 @@
 size = Vector2(50.5, 51.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ds084"]
-size = Vector2(89.7499, 87.5)
+size = Vector2(105, 87.5)
 
 [sub_resource type="Animation" id="Animation_2460a"]
 length = 0.001
@@ -41,7 +43,7 @@ tracks/0/path = NodePath("AttackManager")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.7),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -73,10 +75,7 @@ position = Vector2(559, 123)
 collision_layer = 4
 script = ExtResource("1_d8oih")
 attack_manager = NodePath("AttackManager")
-attack_distance = 100
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_6kqf7")
+attack_distance = 70
 
 [node name="AttackManager" type="Node" parent="." node_paths=PackedStringArray("trigger_area")]
 script = ExtResource("2_fwhmp")
@@ -86,8 +85,15 @@ trigger_area = NodePath("../Flippable/Area2D")
 [node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("2_okkjr")
 sprite = NodePath("../Flippable/Sprite2D")
+blood_particles = ExtResource("4_4dm2a")
 max_HP = 100.0
 low_health = 60
+
+[node name="WalkParticles" parent="." instance=ExtResource("5_1ejby")]
+position = Vector2(21, 25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6kqf7")
 
 [node name="Flippable" type="Node2D" parent="."]
 position = Vector2(9.15527e-05, 0)
@@ -105,7 +111,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Area2D"]
-position = Vector2(-47.875, 53)
+position = Vector2(-55.5001, 53)
 shape = SubResource("RectangleShape2D_ds084")
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]

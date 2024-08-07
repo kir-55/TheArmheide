@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=18 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
-[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
+[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/сamera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="3_idhyc"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/TerrainGeneration/terrain_generator.gd" id="7_qwvaq"]
 [ext_resource type="Resource" uid="uid://dnstlibccmmqt" path="res://Decorations/flower.tres" id="8_m48or"]
 [ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
+[ext_resource type="PackedScene" uid="uid://caneye84hasg" path="res://Scenes/big_rock.tscn" id="8_wl2fn"]
 [ext_resource type="PackedScene" uid="uid://cun8flcxq70m4" path="res://Scenes/enemy.tscn" id="10_t63s6"]
 [ext_resource type="Script" path="res://Scripts/decoration_spawner.gd" id="11_1gig2"]
 [ext_resource type="Resource" uid="uid://cg2l61ar6xsrf" path="res://Decorations/grass2.tres" id="13_ti8dc"]
@@ -39,16 +40,9 @@ position = Vector2(274, 381)
 [node name="HeadPoint" type="Node2D" parent="Player"]
 position = Vector2(-4, -155)
 
-[node name="Player" parent="Player" node_paths=PackedStringArray("attack_manager") instance=ExtResource("2_ak363")]
-position = Vector2(274, 381)
-attack_manager = NodePath("../AttackManager")
-
-[node name="HeadPoint" type="Node2D" parent="Player/Player"]
-position = Vector2(-4, -155)
-
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 z_index = 12
-position = Vector2(2, 259)
+position = Vector2(280, 246)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("3_6coef")
@@ -59,7 +53,7 @@ max_distance = Vector2(100, 0)
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="Terrain" type="Node2D" parent="." node_paths=PackedStringArray("ground_line", "grass_line", "floor_collider", "rs", "sloper", "villadge", "player")]
-position = Vector2(-663, 552)
+position = Vector2(-5960, 680)
 script = ExtResource("7_qwvaq")
 ground_line = NodePath("GroundLine")
 grass_line = NodePath("GrassLine")
@@ -69,11 +63,12 @@ sloper = NodePath("Sloper")
 section_y_change_amplitude = 70
 decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or")])
 villadge = NodePath("Villadge")
+big_rock = ExtResource("8_wl2fn")
 tower_prefab = ExtResource("6_4j0ad")
 main_house_prefab = ExtResource("8_us4v6")
 player = NodePath("../Player")
-village_start = 3
-village_end = 5
+village_start = 15
+village_end = 25
 
 [node name="Sloper" type="Node" parent="Terrain" node_paths=PackedStringArray("line", "terrain_generator")]
 script = ExtResource("1_8uvoy")
@@ -103,56 +98,26 @@ line = NodePath("../GroundLine")
 terrain_generator = NodePath("..")
 decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or"), ExtResource("13_ti8dc")])
 
-[node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
+[node name="Enemy2" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(-348, 515)
+position = Vector2(608, 503)
 
-[node name="Enemy2" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+[node name="Enemy3" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(-938, 422)
-attack_manager = NodePath("../Enemy/AttackManager")
+position = Vector2(-138, 486)
 
-[node name="Enemy3" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+[node name="Enemy4" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(5103, 194)
-attack_manager = NodePath("../Enemy/AttackManager")
+position = Vector2(1152, 405)
 
-[node name="Enemy4" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+[node name="Enemy5" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(2040, 203)
-attack_manager = NodePath("../Enemy/AttackManager")
+position = Vector2(1710, 66)
 
-[node name="Enemy5" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+[node name="Enemy6" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(2652, 128)
-attack_manager = NodePath("../Enemy/AttackManager")
+position = Vector2(2164, -3)
 
-[node name="Enemy6" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
+[node name="Enemy7" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(539, -123)
-attack_manager = NodePath("../Enemy/AttackManager")
-
-[node name="Enemy7" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(3140, -105)
-attack_manager = NodePath("../Enemy/AttackManager")
-
-[node name="Enemy8" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(2214, -45)
-attack_manager = NodePath("../Enemy/AttackManager")
-
-[node name="Enemy9" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(-117, 83)
-attack_manager = NodePath("../Enemy/AttackManager")
-
-[node name="Enemy10" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(1633, 110)
-attack_manager = NodePath("../Enemy/AttackManager")
-
-[node name="Enemy11" parent="." node_paths=PackedStringArray("attack_manager") instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(1070, 241)
-attack_manager = NodePath("../Enemy/AttackManager")
+position = Vector2(907, -259)

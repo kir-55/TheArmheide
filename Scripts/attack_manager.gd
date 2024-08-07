@@ -27,9 +27,6 @@ func _ready():
 
 
 func _process(delta):
-	#if ready_to_attack and  Time.get_ticks_msec() - last_time_attacked > chill_out_delay:
-		#ready_to_attack = false
-		
 	if enemies_near.size() > 0 and !is_attacking:
 		if !should_prepare_for_attack or (should_prepare_for_attack and get_parent().ready_to_attack):
 			attack()

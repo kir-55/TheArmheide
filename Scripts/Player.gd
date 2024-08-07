@@ -20,6 +20,7 @@ var closest_point: int
 var ready_to_attack := false
 var preparation_requested := false
 
+var cutscene := false
 
 @export var attack_manager: AttackManager
 @export var chill_out_delay := 4000 # In miliseconds
@@ -34,57 +35,64 @@ func _ready():
 
 
 func _physics_process(delta):
-	if direction != 0:
-		get_node("Flippable").scale.x = direction * -0.25
-	if !run:
-		speed = WALK_SPEED
-		if destination_x - global_position.x > 5:
-			direction = 1
-		elif destination_x - global_position.x < -5:
-			direction = -1
+	
+	if !cutscene:
+		if direction != 0:
+			get_node("Flippable").scale.x = direction * -0.25
+		if !run:
+			speed = WALK_SPEED
+			if destination_x - global_position.x > 5:
+				direction = 1
+			elif destination_x - global_position.x < -5:
+				direction = -1
+			else:
+				direction = 0
 		else:
-			direction = 0
-	else:
-		speed = RUN_SPEED
+			speed = RUN_SPEED
 
 	motion.y += delta * GRAVITY
 	motion.x = speed * direction
 	set_velocity(motion)
 	move_and_slide()
 	motion = velocity
+	
+	if is_on_wall():
+		print("touches the wall")
+		stop()
 
 func _process(delta):
-	if !attack_manager.is_attacking:
-		if preparation_requested:
-			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))		
+	if !cutscene:
+		if !attack_manager.is_attacking:
+			if preparation_requested:
+				animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), -1.0, animation_transitions_speed))		
+				
+				if animation_tree.get("parameters/arms_state/blend_amount") < -0.99:
+					animation_tree.set("parameters/arms_state/blend_amount", -1.0)
 			
-			if animation_tree.get("parameters/arms_state/blend_amount") < -0.99:
-				animation_tree.set("parameters/arms_state/blend_amount", -1.0)
+			if ready_to_attack and Time.get_ticks_msec() - attack_manager.last_time_attacked > chill_out_delay:
+				ready_to_attack = false
+			elif !ready_to_attack and animation_tree.get("parameters/arms_state/blend_amount") == -1.0:
+				ready_to_attack = true
+				preparation_requested = false
 		
-		if ready_to_attack and Time.get_ticks_msec() - attack_manager.last_time_attacked > chill_out_delay:
-			ready_to_attack = false
-		elif !ready_to_attack and animation_tree.get("parameters/arms_state/blend_amount") == -1.0:
-			ready_to_attack = true
-			preparation_requested = false
-	
-	if direction == 0:
-		# Setting idle animation
-		if !ready_to_attack and !preparation_requested:
-			animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.0, animation_transitions_speed))
-		animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.0, animation_transitions_speed))
-	else:
-		# Setting walk animation
-		if !ready_to_attack and !preparation_requested:
+		if direction == 0:
+			# Setting idle animation
+			if !ready_to_attack and !preparation_requested:
+				animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.0, animation_transitions_speed))
+			animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.0, animation_transitions_speed))
+		else:
+			# Setting walk animation
+			if !ready_to_attack and !preparation_requested:
+				if run:
+					animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 1.0, animation_transitions_speed))
+				else:
+					animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.5, animation_transitions_speed))
+			
 			if run:
-				animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 1.0, animation_transitions_speed))
-			else:
-				animation_tree.set("parameters/arms_state/blend_amount", lerp(animation_tree.get("parameters/arms_state/blend_amount"), 0.5, animation_transitions_speed))
-		
-		if run:
-			animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 1.0, animation_transitions_speed))
-		else: 
-			animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.7, animation_transitions_speed))
-			
+				animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 1.0, animation_transitions_speed))
+			else: 
+				animation_tree.set("parameters/walking_legs/blend_amount", lerp(animation_tree.get("parameters/walking_legs/blend_amount"), 0.7, animation_transitions_speed))
+				
 
 
 
@@ -108,7 +116,8 @@ func stop():
 	destination_x = position.x
 
 func die():
-	pass
+	cutscene = true
+	animation_tree.set("parameters/injured/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func _on_animation_tree_animation_finished(anim_name):
 	print("finished: " + str(anim_name))

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbc347pjwws36"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1gxf0"]
+line_spacing = 20.0
+font_size = 30
+font_color = Color(0.823529, 0.788235, 0.647059, 1)
+
+[node name="Panel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 274.0
+offset_right = 1064.0
+offset_bottom = 316.0
+text = "You were seriously injured, and there was no one to heal you..."
+label_settings = SubResource("LabelSettings_1gxf0")

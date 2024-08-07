@@ -24,24 +24,31 @@ offset_top = 53.0
 offset_right = 367.0
 offset_bottom = 510.0
 grow_horizontal = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
 tab_alignment = 1
 
 [node name="Citizens" type="TabBar" parent="TabContainer"]
 layout_mode = 2
+mouse_force_pass_scroll_events = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Citizens"]
 layout_mode = 0
 offset_right = 733.0
 offset_bottom = 426.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Citizens/ScrollContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(733, 426)
 layout_mode = 2
+mouse_force_pass_scroll_events = false
 
 [node name="ItemList" type="ItemList" parent="TabContainer/Citizens/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 auto_height = true
 item_count = 6
 icon_scale = 1.4
@@ -61,11 +68,16 @@ item_5/icon = ExtResource("1_lyur8")
 [node name="Buildings" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+mouse_force_pass_scroll_events = false
+select_with_rmb = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Buildings"]
 layout_mode = 0
 offset_right = 733.0
 offset_bottom = 426.0
+mouse_force_pass_scroll_events = false
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Buildings/ScrollContainer"]
 clip_contents = true
@@ -75,6 +87,7 @@ layout_mode = 2
 [node name="ItemList" type="ItemList" parent="TabContainer/Buildings/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+mouse_filter = 1
 auto_height = true
 item_count = 6
 icon_scale = 1.4
