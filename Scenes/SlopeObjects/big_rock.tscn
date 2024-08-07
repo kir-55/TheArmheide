@@ -6,7 +6,7 @@
 size = Vector2(180.36, 168.768)
 
 [node name="Stone" type="Sprite2D"]
-z_index = -4
+z_index = -10
 position = Vector2(542, 142)
 scale = Vector2(2.03482, 2.07386)
 texture = ExtResource("1_vgoso")
@@ -15,9 +15,7 @@ offset = Vector2(0.159712, -75.5717)
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = -1
 position = Vector2(0.491486, -68.4714)
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0.245636, -1.44658)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_h4wrr")

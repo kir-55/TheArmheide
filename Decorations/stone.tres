@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Decoration" load_steps=3 format=3 uid="uid://dhntp5vdpphls"]
 
 [ext_resource type="Script" path="res://Scripts/decoration.gd" id="1_7q463"]
-[ext_resource type="PackedScene" uid="uid://0qrksmssibnb" path="res://Scenes/stone.tscn" id="1_c6ylt"]
+[ext_resource type="PackedScene" uid="uid://0qrksmssibnb" path="res://Scenes/SlopeObjects/stone.tscn" id="1_8k6at"]
 
 [resource]
 script = ExtResource("1_7q463")
-prefab = ExtResource("1_c6ylt")
+prefab = ExtResource("1_8k6at")
 initial_chance = 100
 chance_to_spawn = 20.0
 chance_multiplyer = 1

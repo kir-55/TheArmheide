@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgrroxetp1rph"]
 
-[ext_resource type="Texture2D" uid="uid://cmqv6g21t2ndh" path="res://Images/BloodParticle.png" id="1_srlu3"]
+[ext_resource type="Texture2D" uid="uid://cmqv6g21t2ndh" path="res://Images/BloodParticle.png" id="1_y1ce7"]
 
 [sub_resource type="Curve" id="Curve_mpnib"]
 _data = [Vector2(0.051948, 0), 0.0, 0.0, 0, 0, Vector2(0.493506, 1), 0.0, 0.0, 0, 0, Vector2(0.995671, 0.021978), 0.0, 0.0, 0, 0]
@@ -13,7 +13,7 @@ one_shot = true
 speed_scale = 3.0
 explosiveness = 1.0
 randomness = 0.34
-texture = ExtResource("1_srlu3")
+texture = ExtResource("1_y1ce7")
 emission_shape = 1
 emission_sphere_radius = 29.67
 spread = 180.0

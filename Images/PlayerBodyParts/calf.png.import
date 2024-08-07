@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy0x2nbmcmq0b"
-path="res://.godot/imported/lowarm.png-8bed0e077badb0b0a2f798b490f286ec.ctex"
+uid="uid://da30nt4tjwmb5"
+path="res://.godot/imported/calf.png-5c4246b711de9acf0e35a0a21b8bc4d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://body_parts/lowarm.png"
-dest_files=["res://.godot/imported/lowarm.png-8bed0e077badb0b0a2f798b490f286ec.ctex"]
+source_file="res://Images/PlayerBodyParts/calf.png"
+dest_files=["res://.godot/imported/calf.png-5c4246b711de9acf0e35a0a21b8bc4d9.ctex"]
 
 [params]
 

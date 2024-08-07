@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by0ilsqqxjoxu"
-path="res://.godot/imported/hand.png-3c2fd8e1015cc0a3ec2b15b547333eca.ctex"
+uid="uid://quwo3capsgev"
+path="res://.godot/imported/the_armheide_sword.png-722c8a120c97f311008fefc5447ecd1d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://body_parts/hand.png"
-dest_files=["res://.godot/imported/hand.png-3c2fd8e1015cc0a3ec2b15b547333eca.ctex"]
+source_file="res://Images/PlayerBodyParts/the_armheide_sword.png"
+dest_files=["res://.godot/imported/the_armheide_sword.png-722c8a120c97f311008fefc5447ecd1d.ctex"]
 
 [params]
 

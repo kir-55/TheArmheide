@@ -1,26 +1,39 @@
-[gd_scene load_steps=18 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=22 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
 [ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/сamera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="3_idhyc"]
-[ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/tower.tscn" id="6_4j0ad"]
+[ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/SlopeObjects/tower.tscn" id="6_4j0ad"]
 [ext_resource type="Resource" uid="uid://sq3kjagkdci0" path="res://Decorations/grass.tres" id="6_ktmbv"]
 [ext_resource type="Script" path="res://Scripts/random_system.gd" id="7_5clvn"]
 [ext_resource type="Resource" uid="uid://dhntp5vdpphls" path="res://Decorations/stone.tres" id="7_hbsh7"]
 [ext_resource type="Script" path="res://Scripts/TerrainGeneration/terrain_generator.gd" id="7_qwvaq"]
 [ext_resource type="Resource" uid="uid://dnstlibccmmqt" path="res://Decorations/flower.tres" id="8_m48or"]
-[ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/main_house.tscn" id="8_us4v6"]
-[ext_resource type="PackedScene" uid="uid://caneye84hasg" path="res://Scenes/big_rock.tscn" id="8_wl2fn"]
+[ext_resource type="PackedScene" uid="uid://dmf8sf2rn0k64" path="res://Scenes/SlopeObjects/main_house.tscn" id="8_us4v6"]
+[ext_resource type="PackedScene" uid="uid://caneye84hasg" path="res://Scenes/SlopeObjects/big_rock.tscn" id="8_wl2fn"]
 [ext_resource type="PackedScene" uid="uid://cun8flcxq70m4" path="res://Scenes/enemy.tscn" id="10_t63s6"]
 [ext_resource type="Script" path="res://Scripts/decoration_spawner.gd" id="11_1gig2"]
 [ext_resource type="Resource" uid="uid://cg2l61ar6xsrf" path="res://Decorations/grass2.tres" id="13_ti8dc"]
+[ext_resource type="Resource" uid="uid://bo7ktmbjwo6ci" path="res://Decorations/lantern.tres" id="15_fvwbj"]
+[ext_resource type="Texture2D" uid="uid://bjt32tioloh8v" path="res://Images/none.png" id="17_4cl6a"]
+
+[sub_resource type="Environment" id="Environment_7t5er"]
+background_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.11
+glow_bloom = 0.16
+glow_blend_mode = 4
+fog_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
 shader = ExtResource("3_idhyc")
 shader_parameter/XShiftAmplitude = null
 shader_parameter/MinLineThikness = Vector2(0, 2500)
 shader_parameter/MaxThikness = 2500.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_se0a6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_csvj8"]
 shader = ExtResource("3_idhyc")
@@ -31,11 +44,19 @@ shader_parameter/MaxThikness = 50.0
 [node name="Game" type="Node2D"]
 position = Vector2(1, 1)
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(385, 67)
+color = Color(0.122252, 0.122252, 0.122252, 1)
+blend_mode = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7t5er")
+
 [node name="RandomSystem" type="Node" parent="."]
 script = ExtResource("7_5clvn")
 
 [node name="Player" parent="." instance=ExtResource("2_ak363")]
-position = Vector2(274, 381)
+position = Vector2(305, 98)
 
 [node name="HeadPoint" type="Node2D" parent="Player"]
 position = Vector2(-4, -155)
@@ -50,11 +71,19 @@ speed = 2.0
 target = NodePath("../Player/HeadPoint")
 max_distance = Vector2(100, 0)
 
+[node name="None" type="Sprite2D" parent="Camera2D"]
+self_modulate = Color(0.54902, 0.670588, 0.631373, 1)
+z_index = -20
+position = Vector2(15, 11.9999)
+scale = Vector2(21.4244, 12.07)
+texture = ExtResource("17_4cl6a")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="Terrain" type="Node2D" parent="." node_paths=PackedStringArray("ground_line", "grass_line", "floor_collider", "rs", "sloper", "villadge", "player")]
-position = Vector2(-5960, 680)
+[node name="Terrain" type="Node2D" parent="." node_paths=PackedStringArray("light_occuluder", "ground_line", "grass_line", "floor_collider", "rs", "sloper", "villadge", "player")]
+position = Vector2(-5496, 998)
 script = ExtResource("7_qwvaq")
+light_occuluder = NodePath("GroundLine/LightOccluder2D")
 ground_line = NodePath("GroundLine")
 grass_line = NodePath("GrassLine")
 floor_collider = NodePath("GroundLine/StaticBody2D")
@@ -84,6 +113,9 @@ default_color = Color(0.572549, 0.454902, 0.254902, 1)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Terrain/GroundLine"]
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Terrain/GroundLine"]
+occluder = SubResource("OccluderPolygon2D_se0a6")
+
 [node name="GrassLine" type="Line2D" parent="Terrain"]
 z_index = 12
 material = SubResource("ShaderMaterial_csvj8")
@@ -96,7 +128,7 @@ sloper = NodePath("../Sloper")
 player = NodePath("../../Player")
 line = NodePath("../GroundLine")
 terrain_generator = NodePath("..")
-decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or"), ExtResource("13_ti8dc")])
+decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or"), ExtResource("13_ti8dc"), ExtResource("15_fvwbj")])
 
 [node name="Enemy2" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
@@ -104,7 +136,7 @@ position = Vector2(608, 503)
 
 [node name="Enemy3" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(-138, 486)
+position = Vector2(-354, 382)
 
 [node name="Enemy4" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4

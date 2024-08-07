@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnlkbop1qlycb"
-path="res://.godot/imported/shoulder.png-105d902273ff004ab8bcd8becb96fce0.ctex"
+uid="uid://c73y68sbmaylo"
+path="res://.godot/imported/foot.png-b5f1350ec2c807b25a1bf3fc668de9cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://body_parts/shoulder.png"
-dest_files=["res://.godot/imported/shoulder.png-105d902273ff004ab8bcd8becb96fce0.ctex"]
+source_file="res://Images/PlayerBodyParts/foot.png"
+dest_files=["res://.godot/imported/foot.png-b5f1350ec2c807b25a1bf3fc668de9cd.ctex"]
 
 [params]
 

@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://byp232o2md5sr"]
+
+[ext_resource type="Texture2D" uid="uid://chnu0bknpe2ft" path="res://Images/latern.png" id="1_e54u4"]
+
+[sub_resource type="Gradient" id="Gradient_hdqyx"]
+offsets = PackedFloat32Array(0, 0.618919, 1)
+colors = PackedColorArray(0.823529, 0.788235, 0.647059, 1, 0.780392, 0.482353, 0.345098, 1, 0.682353, 0.364706, 0.25098, 1)
+
+[sub_resource type="Gradient" id="Gradient_q6jdu"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yv20g"]
+gradient = SubResource("Gradient_q6jdu")
+fill = 1
+fill_from = Vector2(0.508547, 0.512821)
+fill_to = Vector2(0.858974, 0.876068)
+
+[node name="Lantern" type="Sprite2D"]
+z_index = -5
+position = Vector2(709, 209)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_e54u4")
+offset = Vector2(-3.33345, -163.333)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-20, -283.333)
+amount = 30
+explosiveness = 0.1
+emission_shape = 1
+emission_sphere_radius = 64.88
+gravity = Vector2(0, -100)
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_hdqyx")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+z_index = 5
+position = Vector2(-33.3334, -313.333)
+scale = Vector2(17.4724, 16.7055)
+color = Color(0.819608, 0.694118, 0.529412, 1)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_yv20g")

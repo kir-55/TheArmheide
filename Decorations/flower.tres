@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="Decoration" load_steps=3 format=3 uid="uid://dnstlibccmmqt"]
 
-[ext_resource type="PackedScene" uid="uid://b2ikhuvkg0t4j" path="res://Scenes/flower.tscn" id="1_hps41"]
+[ext_resource type="PackedScene" uid="uid://b2ikhuvkg0t4j" path="res://Scenes/SlopeObjects/flower.tscn" id="1_hps41"]
 [ext_resource type="Script" path="res://Scripts/decoration.gd" id="2_xnag4"]
+
 
 [resource]
 script = ExtResource("2_xnag4")

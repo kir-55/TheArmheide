@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Decoration" load_steps=3 format=3 uid="uid://bo7ktmbjwo6ci"]
+
+[ext_resource type="PackedScene" uid="uid://byp232o2md5sr" path="res://Scenes/SlopeObjects/lantern.tscn" id="1_oboxs"]
+[ext_resource type="Script" path="res://Scripts/decoration.gd" id="2_gt14d"]
+
+[resource]
+script = ExtResource("2_gt14d")
+prefab = ExtResource("1_oboxs")
+initial_chance = 15
+chance_to_spawn = 100.0
+chance_multiplyer = 1
+min_scale = 0.4
+max_scale = 0.5

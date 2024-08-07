@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8gc2c46aitve"
-path="res://.godot/imported/thigh.png-a02cd320271968be3f8e8612ee2ec1ee.ctex"
+uid="uid://dy0x2nbmcmq0b"
+path="res://.godot/imported/lowarm.png-1f6037d2b6bfb4e3f10c24e8899519e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://body_parts/thigh.png"
-dest_files=["res://.godot/imported/thigh.png-a02cd320271968be3f8e8612ee2ec1ee.ctex"]
+source_file="res://Images/PlayerBodyParts/lowarm.png"
+dest_files=["res://.godot/imported/lowarm.png-1f6037d2b6bfb4e3f10c24e8899519e2.ctex"]
 
 [params]
 

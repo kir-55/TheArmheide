@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c73y68sbmaylo"
-path="res://.godot/imported/foot.png-776a42309049e7cf8f449ec926a13155.ctex"
+uid="uid://chnu0bknpe2ft"
+path="res://.godot/imported/latern.png-e8d0bc7570f6690184689ac1f5384426.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://body_parts/foot.png"
-dest_files=["res://.godot/imported/foot.png-776a42309049e7cf8f449ec926a13155.ctex"]
+source_file="res://Images/latern.png"
+dest_files=["res://.godot/imported/latern.png-e8d0bc7570f6690184689ac1f5384426.ctex"]
 
 [params]
 

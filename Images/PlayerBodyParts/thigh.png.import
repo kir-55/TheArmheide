@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfuoc0xmk8icw"
-path="res://.godot/imported/neck.png-a638fcd3bdb7eba46191de1197a5c584.ctex"
+uid="uid://b8gc2c46aitve"
+path="res://.godot/imported/thigh.png-277ced68a249ddf454c618769c4f8e91.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://body_parts/neck.png"
-dest_files=["res://.godot/imported/neck.png-a638fcd3bdb7eba46191de1197a5c584.ctex"]
+source_file="res://Images/PlayerBodyParts/thigh.png"
+dest_files=["res://.godot/imported/thigh.png-277ced68a249ddf454c618769c4f8e91.ctex"]
 
 [params]
 

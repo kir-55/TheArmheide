@@ -1,5 +1,7 @@
 extends Node
 
+
+@export var light_occuluder: LightOccluder2D
 @export var ground_line: Line2D
 @export var grass_line: Line2D
 @export var floor_collider: StaticBody2D
@@ -44,8 +46,13 @@ func _ready():
 		else:
 			create_next_point(ground_line.get_point_position(i) + Vector2(line_section_length, 0))
 	
+	
+	
 	var points = ground_line.points
 	for i in points.size() - 1:
+		light_occuluder.occluder.polygon.append(points[i])
+		#light_occuluder.occluder.polygon.append(points[i] - Vector2(0, line_offset))
+		
 		var new_shape = CollisionShape2D.new()
 		floor_collider.add_child(new_shape)
 		var segment = SegmentShape2D.new()
@@ -53,6 +60,13 @@ func _ready():
 		segment.b = points[i + 1] - Vector2(0, line_offset)
 		new_shape.shape = segment
 		
+	var poligon_points = points
+	poligon_points.append(points[points.size()-1] - Vector2(0, line_offset - 300))
+	poligon_points.append(points[0] - Vector2(0, line_offset - 300))
+	
+	light_occuluder.occluder.polygon = poligon_points
+	
+	print("occluder: " + str(light_occuluder.occluder.polygon[1]))
 	sloper.spawn_at_point(big_rock, self, 3, rs.get_rnd_float(0, 1))
 	sloper.spawn_at_point(big_rock, self, points_amount - 3, rs.get_rnd_float(0, 1))
 	
