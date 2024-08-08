@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Decoration" load_steps=3 format=3 uid="uid://c4erp2nlfko2y"]
+
+[ext_resource type="PackedScene" uid="uid://474n041yrprw" path="res://Scenes/SlopeObjects/moss.tscn" id="1_07ynj"]
+[ext_resource type="Script" path="res://Scripts/decoration.gd" id="2_pmvdn"]
+
+[resource]
+script = ExtResource("2_pmvdn")
+prefab = ExtResource("1_07ynj")
+initial_chance = 100
+chance_to_spawn = 20.0
+chance_multiplyer = 2
+min_scale = 1.0
+max_scale = 2.0

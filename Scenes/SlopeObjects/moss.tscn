@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://474n041yrprw"]
+
+[ext_resource type="Texture2D" uid="uid://0qnfxgo5xfeh" path="res://Images/moss.png" id="1_hvnld"]
+
+[node name="Moss" type="Sprite2D"]
+z_index = -6
+position = Vector2(710, 171)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_hvnld")
+offset = Vector2(-6.6667, -36.6666)
