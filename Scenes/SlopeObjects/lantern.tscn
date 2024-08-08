@@ -1,19 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://byp232o2md5sr"]
+[gd_scene load_steps=6 format=3 uid="uid://byp232o2md5sr"]
 
 [ext_resource type="Texture2D" uid="uid://chnu0bknpe2ft" path="res://Images/latern.png" id="1_e54u4"]
+[ext_resource type="Script" path="res://Scripts/TerrainGeneration/campfire_effect.gd" id="2_mpkqw"]
 
 [sub_resource type="Gradient" id="Gradient_hdqyx"]
 offsets = PackedFloat32Array(0, 0.618919, 1)
 colors = PackedColorArray(0.823529, 0.788235, 0.647059, 1, 0.780392, 0.482353, 0.345098, 1, 0.682353, 0.364706, 0.25098, 1)
 
 [sub_resource type="Gradient" id="Gradient_q6jdu"]
+interpolation_mode = 2
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yv20g"]
 gradient = SubResource("Gradient_q6jdu")
+use_hdr = true
 fill = 1
 fill_from = Vector2(0.508547, 0.512821)
-fill_to = Vector2(0.858974, 0.876068)
+fill_to = Vector2(0.92735, 0.512821)
 
 [node name="Lantern" type="Sprite2D"]
 z_index = -5
@@ -35,9 +38,15 @@ color_ramp = SubResource("Gradient_hdqyx")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 z_index = 5
-position = Vector2(-33.3334, -313.333)
-scale = Vector2(17.4724, 16.7055)
+position = Vector2(-23.3333, -306.667)
+scale = Vector2(28.1112, 26.8423)
 color = Color(0.819608, 0.694118, 0.529412, 1)
 blend_mode = 2
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_yv20g")
+script = ExtResource("2_mpkqw")
+min_energy = 0.8
+max_energy = 1.0
+color1 = Color(0.798065, 0.421935, 0.275492, 1)
+color2 = Color(0.508709, 0.471283, 0.323682, 1)
+blink_jump = 0.05

@@ -20,12 +20,17 @@
 
 [sub_resource type="Environment" id="Environment_7t5er"]
 background_mode = 3
+tonemap_mode = 3
 glow_enabled = true
 glow_normalized = true
 glow_intensity = 1.11
+glow_mix = 0.09
 glow_bloom = 0.16
 glow_blend_mode = 4
 fog_enabled = true
+fog_light_color = Color(0.798898, 0.669661, 0.477208, 1)
+fog_sun_scatter = 0.31
+fog_density = 0.1627
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1l2d"]
 shader = ExtResource("3_idhyc")
@@ -56,14 +61,14 @@ environment = SubResource("Environment_7t5er")
 script = ExtResource("7_5clvn")
 
 [node name="Player" parent="." instance=ExtResource("2_ak363")]
-position = Vector2(305, 98)
+position = Vector2(372, 864)
 
 [node name="HeadPoint" type="Node2D" parent="Player"]
 position = Vector2(-4, -155)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 z_index = 12
-position = Vector2(280, 246)
+position = Vector2(334, 740)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("3_6coef")
@@ -72,7 +77,7 @@ target = NodePath("../Player/HeadPoint")
 max_distance = Vector2(100, 0)
 
 [node name="None" type="Sprite2D" parent="Camera2D"]
-self_modulate = Color(0.54902, 0.670588, 0.631373, 1)
+self_modulate = Color(0.341176, 0.282353, 0.321569, 1)
 z_index = -20
 position = Vector2(15, 11.9999)
 scale = Vector2(21.4244, 12.07)

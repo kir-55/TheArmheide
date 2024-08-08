@@ -6,7 +6,7 @@
 size = Vector2(180.36, 168.768)
 
 [node name="Stone" type="Sprite2D"]
-z_index = -10
+z_index = -7
 position = Vector2(542, 142)
 scale = Vector2(2.03482, 2.07386)
 texture = ExtResource("1_vgoso")
