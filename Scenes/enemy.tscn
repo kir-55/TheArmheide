@@ -149,14 +149,9 @@ script = ExtResource("9_db7cn")
 enemy = NodePath("../..")
 move_speed = 230.0
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_865v8")
 }
 
-[connection signal="timeout" from="Timer" to="." method="_find_closest_target"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=23 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
 [ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://cg2l61ar6xsrf" path="res://Decorations/grass2.tres" id="13_ti8dc"]
 [ext_resource type="Resource" uid="uid://bo7ktmbjwo6ci" path="res://Decorations/lantern.tres" id="15_fvwbj"]
 [ext_resource type="Texture2D" uid="uid://bjt32tioloh8v" path="res://Images/none.png" id="17_4cl6a"]
+[ext_resource type="PackedScene" uid="uid://beqf1hr5yri0g" path="res://Scenes/Villager.tscn" id="18_liq3w"]
 
 [sub_resource type="Environment" id="Environment_7t5er"]
 background_mode = 3
@@ -139,3 +140,5 @@ decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktm
 [node name="Enemy2" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
 position = Vector2(608, 503)
+
+[node name="Villager" parent="." instance=ExtResource("18_liq3w")]
