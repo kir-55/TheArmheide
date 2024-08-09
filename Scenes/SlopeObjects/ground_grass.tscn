@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://x06woh2c6o3o"]
+
+[ext_resource type="Texture2D" uid="uid://drks4fg8dh3ej" path="res://Images/ground_grass.png" id="1_arrif"]
+
+[node name="GroundGrass" type="Sprite2D"]
+self_modulate = Color(0.701961, 0.647059, 0.333333, 1)
+z_index = 20
+position = Vector2(707, 149)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_arrif")
+offset = Vector2(3.33354, 36.6667)

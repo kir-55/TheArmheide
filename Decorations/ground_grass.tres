@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Decoration" load_steps=3 format=3 uid="uid://bf0lx5iuesadl"]
+
+[ext_resource type="PackedScene" uid="uid://x06woh2c6o3o" path="res://Scenes/SlopeObjects/ground_grass.tscn" id="1_3uw1e"]
+[ext_resource type="Script" path="res://Scripts/decoration.gd" id="2_3lww1"]
+
+[resource]
+script = ExtResource("2_3lww1")
+prefab = ExtResource("1_3uw1e")
+spawn_on_center = true
+initial_chance = 100
+chance_to_spawn = 100.0
+chance_multiplyer = 1
+min_scale = 1.3
+max_scale = 1.4

@@ -55,9 +55,12 @@ func spawn_decoration(point):
 			var rnd_i = rs.get_rnd_int_at(0, 100, rs.main_seed + "mult" + str(i)+str(point))
 			if decoration.initial_chance > rnd_i:
 				for _i in range(decoration.chance_multiplyer):
+					
 					var rnd = rs.get_rnd_int_at(0, 100, rs.main_seed + "init" + str(_i) + str(i) + str(point))
 					if decoration.chance_to_spawn > rnd:
-						var segment_part = rs.get_rnd_float_at(0, 1, rs.main_seed + "x" + str(_i) + str(i) + str(point))
+						var segment_part := 0.5
+						if !decoration.spawn_on_center:
+							segment_part = rs.get_rnd_float_at(0, 1, rs.main_seed + "x" + str(_i) + str(i) + str(point))
 						var scale = rs.get_rnd_float(decoration.min_scale, decoration.max_scale)
 						sloper.spawn_at_point(decoration.prefab, self, point, segment_part, Vector2(scale, scale))
 			i += 1
