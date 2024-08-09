@@ -9,14 +9,13 @@ func Enter():
 
 
 func Physics_Update(delta: float):
-	if enemy.is_on_floor() and enemy.current_closest_target:
-		var distance_x = abs(enemy.current_closest_target.global_position.x - enemy.global_position.x)
-		var direction = (enemy.current_closest_target.global_position - enemy.global_position).normalized().x
+	if enemy.is_on_floor() and enemy.raycast_follow.is_colliding():
+		var distance_x = abs(enemy.raycast_follow.get_collider().global_position.x - enemy.global_position.x)
+		var direction = (enemy.raycast_follow.get_collider().global_position - enemy.global_position).normalized().x
 		
-		if distance_x < enemy.follow_distance:
-			if distance_x < enemy.attack_distance:
-				RequestTransition.emit(self, "Attack")
-			else:
-				enemy.velocity.x = move_speed * direction
+		if distance_x < enemy.attack_distance:
+			RequestTransition.emit(self, "Attack")
 		else:
-			RequestTransition.emit(self, "Idle")
+			enemy.velocity.x = move_speed * direction
+	else:
+		RequestTransition.emit(self, "Idle")
