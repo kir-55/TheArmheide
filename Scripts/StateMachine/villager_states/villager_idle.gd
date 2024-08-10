@@ -25,12 +25,17 @@ func Update(delta: float):
 		wander_time -= delta
 	else:
 		randomize_wander()
-		
 
 func Physics_Update(delta: float):
 	if villager and villager.is_on_floor():
+		if villager.is_on_wall():
+			print("villager's touching the wall")
+			move_direction *= -1
+			villager.velocity.x = move_direction * move_speed
+			return
+		
 		villager.velocity.x = move_direction * move_speed
-	
+		
 	if villager.raycast_follow.is_colliding() or villager.raycast_back.is_colliding():
 		if villager.get_node("HealthSystem").is_at_low_health:
 			RequestTransition.emit(self, "Escape")

@@ -17,10 +17,10 @@ func Physics_Update(delta: float):
 			RequestTransition.emit(self, "Escape")
 			return
 		
-		if enemy.raycast_follow.is_colliding():
-			body = enemy.raycast_follow.get_collider()
-		else:
+		if enemy.raycast_back.is_colliding():
 			body = enemy.raycast_back.get_collider()
+		else:
+			body = enemy.raycast_follow.get_collider()
 		
 		var distance_x = abs(body.global_position.x - enemy.global_position.x)
 		if distance_x > enemy.attack_distance:

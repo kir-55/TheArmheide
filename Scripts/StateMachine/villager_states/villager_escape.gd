@@ -13,6 +13,12 @@ func Enter():
 	print(self.name, villager.name)
 
 func Physics_Update(delta: float):
+	if villager.is_on_wall():
+			print("enemy's touching the wall")
+			move_direction *= -1
+			villager.velocity.x = move_direction * move_speed
+			return
+	
 	if !villager.raycast_follow.is_colliding() and !villager.raycast_back.is_colliding() and last_time_villager_detected == 0:
 		last_time_villager_detected = Time.get_ticks_msec()
 	elif villager.raycast_follow.is_colliding() or villager.raycast_back.is_colliding():

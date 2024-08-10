@@ -110,7 +110,7 @@ texture = ExtResource("1_je23y")
 position = Vector2(0, -284)
 scale = Vector2(4, 4)
 collision_layer = 4
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Area2D"]
 position = Vector2(-55.5001, 53)
@@ -120,13 +120,13 @@ shape = SubResource("RectangleShape2D_ds084")
 position = Vector2(-0.000244141, 0)
 scale = Vector2(4, 4)
 target_position = Vector2(-500, 0)
-collision_mask = 2
+collision_mask = 10
 
 [node name="RayCastBack" type="RayCast2D" parent="Flippable"]
 position = Vector2(-0.000244141, 0)
 scale = Vector2(4, 4)
 target_position = Vector2(108, 0)
-collision_mask = 2
+collision_mask = 10
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_wdkkv")

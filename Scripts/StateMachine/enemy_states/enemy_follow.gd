@@ -9,7 +9,7 @@ func Enter():
 
 
 func Physics_Update(delta: float):
-	if enemy.is_on_floor() and enemy.raycast_follow.is_colliding():
+	if enemy and enemy.is_on_floor() and enemy.raycast_follow and enemy.raycast_follow.is_colliding():
 		var distance_x = abs(enemy.raycast_follow.get_collider().global_position.x - enemy.global_position.x)
 		var direction = (enemy.raycast_follow.get_collider().global_position - enemy.global_position).normalized().x
 		

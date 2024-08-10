@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
-[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
+[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/сamera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="3_idhyc"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/SlopeObjects/tower.tscn" id="6_4j0ad"]
@@ -17,7 +17,7 @@
 [ext_resource type="Resource" uid="uid://cg2l61ar6xsrf" path="res://Decorations/grass2.tres" id="13_ti8dc"]
 [ext_resource type="Resource" uid="uid://bo7ktmbjwo6ci" path="res://Decorations/lantern.tres" id="15_fvwbj"]
 [ext_resource type="Texture2D" uid="uid://bjt32tioloh8v" path="res://Images/none.png" id="17_4cl6a"]
-[ext_resource type="PackedScene" uid="uid://beqf1hr5yri0g" path="res://Scenes/villager.tscn" id="18_liq3w"]
+[ext_resource type="PackedScene" uid="uid://beqf1hr5yri0g" path="res://Scenes/Villager.tscn" id="18_liq3w"]
 
 [sub_resource type="Environment" id="Environment_7t5er"]
 background_mode = 3
@@ -139,48 +139,19 @@ decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktm
 
 [node name="Enemy2" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
-position = Vector2(608, 503)
+position = Vector2(-1629, 321)
+
+[node name="Enemy3" parent="." node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") instance=ExtResource("10_t63s6")]
+z_index = -4
+position = Vector2(1745, 388)
+attack_manager = NodePath("../Enemy2/AttackManager")
+raycast_follow = NodePath("../Enemy2/Flippable/RayCastFollow")
+raycast_back = NodePath("../Enemy2/Flippable/RayCastBack")
 
 [node name="Villager" parent="." instance=ExtResource("18_liq3w")]
 
 [node name="Villager2" parent="." node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") instance=ExtResource("18_liq3w")]
-position = Vector2(-311, 416)
-attack_manager = NodePath("../Villager/AttackManager")
-raycast_follow = NodePath("../Villager/Flippable/RayCastFollow")
-raycast_back = NodePath("../Villager/Flippable/RayCastBack")
-
-[node name="Villager3" parent="." node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") instance=ExtResource("18_liq3w")]
-position = Vector2(1115, 362)
-attack_manager = NodePath("../Villager/AttackManager")
-raycast_follow = NodePath("../Villager/Flippable/RayCastFollow")
-raycast_back = NodePath("../Villager/Flippable/RayCastBack")
-
-[node name="Villager4" parent="." node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") instance=ExtResource("18_liq3w")]
-position = Vector2(36, 140)
-attack_manager = NodePath("../Villager/AttackManager")
-raycast_follow = NodePath("../Villager/Flippable/RayCastFollow")
-raycast_back = NodePath("../Villager/Flippable/RayCastBack")
-
-[node name="Villager5" parent="." node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") instance=ExtResource("18_liq3w")]
-position = Vector2(674, 143)
-attack_manager = NodePath("../Villager/AttackManager")
-raycast_follow = NodePath("../Villager/Flippable/RayCastFollow")
-raycast_back = NodePath("../Villager/Flippable/RayCastBack")
-
-[node name="Villager6" parent="." node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") instance=ExtResource("18_liq3w")]
-position = Vector2(260, 293)
-attack_manager = NodePath("../Villager/AttackManager")
-raycast_follow = NodePath("../Villager/Flippable/RayCastFollow")
-raycast_back = NodePath("../Villager/Flippable/RayCastBack")
-
-[node name="Villager7" parent="." node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") instance=ExtResource("18_liq3w")]
-position = Vector2(665, 278)
-attack_manager = NodePath("../Villager/AttackManager")
-raycast_follow = NodePath("../Villager/Flippable/RayCastFollow")
-raycast_back = NodePath("../Villager/Flippable/RayCastBack")
-
-[node name="Villager8" parent="." node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") instance=ExtResource("18_liq3w")]
-position = Vector2(380, 224)
+position = Vector2(-3263, 322)
 attack_manager = NodePath("../Villager/AttackManager")
 raycast_follow = NodePath("../Villager/Flippable/RayCastFollow")
 raycast_back = NodePath("../Villager/Flippable/RayCastBack")

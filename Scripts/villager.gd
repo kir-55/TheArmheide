@@ -8,6 +8,7 @@ var direction = 0
 @export var attack_manager: AttackManager
 @export var raycast_follow : RayCast2D
 @export var raycast_back : RayCast2D
+@export var default_speed := 250
 
 @export_category("Distances")
 @export var attack_distance := 50
@@ -26,6 +27,7 @@ func _physics_process(delta):
 		get_node("Flippable").scale.x = direction * -0.25
 	
 	velocity.y += GRAVITY * delta
+	
 	move_and_slide()
 
 func run_attack_animation():

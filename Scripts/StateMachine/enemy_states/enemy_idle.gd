@@ -28,6 +28,12 @@ func Update(delta: float):
 
 func Physics_Update(delta: float):
 	if enemy and enemy.is_on_floor():
+		if enemy.is_on_wall():
+			print("enemy's touching the wall")
+			move_direction *= -1
+			enemy.velocity.x = move_direction * move_speed
+			return
+		
 		enemy.velocity.x = move_direction * move_speed
 	
 	if enemy.raycast_follow.is_colliding() or enemy.raycast_back.is_colliding():
