@@ -14,7 +14,7 @@ config/name="The Armheide"
 run/main_scene="res://Scenes/game.tscn"
 config/features=PackedStringArray("4.2")
 boot_splash/bg_color=Color(0.0474108, 0.032039, 0.00847746, 1)
-config/icon="res://icon.png"
+config/icon="res://Images/icon.png"
 
 [gui]
 
