@@ -54,7 +54,6 @@ position = Vector2(1, 1)
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(385, 67)
 color = Color(0.122252, 0.122252, 0.122252, 1)
-energy = 0.0
 blend_mode = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -81,11 +80,9 @@ max_distance = Vector2(100, 0)
 
 [node name="None" type="Sprite2D" parent="Camera2D"]
 self_modulate = Color(0.341176, 0.282353, 0.321569, 1)
-
 z_index = -10
 z_as_relative = false
 position = Vector2(15, 11.9999)
-
 scale = Vector2(21.4244, 12.07)
 texture = ExtResource("17_4cl6a")
 
