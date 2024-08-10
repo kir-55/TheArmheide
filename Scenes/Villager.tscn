@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://beqf1hr5yri0g"]
+[gd_scene load_steps=17 format=3 uid="uid://beqf1hr5yri0g"]
 
 [ext_resource type="Script" path="res://Scripts/attack_manager.gd" id="1_1g850"]
 [ext_resource type="Script" path="res://Scripts/health_system.gd" id="1_4y2ae"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dgrroxetp1rph" path="res://Scenes/Particles/blood_particles.tscn" id="2_ckyrx"]
 [ext_resource type="Texture2D" uid="uid://cijh0ehgqwswr" path="res://Images/villager.png" id="5_666bs"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="5_r4aae"]
+[ext_resource type="PackedScene" uid="uid://bqdyct6emvief" path="res://Scenes/Particles/walk_particles.tscn" id="5_ulx3c"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_idle.gd" id="6_amhhn"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_follow.gd" id="7_6h8d5"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_attack.gd" id="8_50fui"]
@@ -17,49 +18,49 @@ size = Vector2(38, 80.25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s4d2"]
 size = Vector2(54, 64.75)
 
-[sub_resource type="Animation" id="Animation_hfs2i"]
-resource_name = "attack"
-length = 2.0
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackManager")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_on_attack_animation_finished"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Flippable/Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [null, ExtResource("5_666bs")]
-}
-
 [sub_resource type="Animation" id="Animation_ik1ob"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Flippable/Sprite2D:texture")
+tracks/0/path = NodePath("Flippable/Sprite2D:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_666bs")]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hfs2i"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flippable/Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_finished"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_08c0e"]
@@ -69,8 +70,9 @@ _data = {
 }
 
 [node name="Villager" type="CharacterBody2D" node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") groups=["to_be_alined", "villagers"]]
+z_index = -4
 position = Vector2(366, 26)
-collision_layer = 2
+collision_layer = 8
 script = ExtResource("1_fu82s")
 attack_manager = NodePath("AttackManager")
 raycast_follow = NodePath("Flippable/RayCastFollow")
@@ -78,6 +80,7 @@ raycast_back = NodePath("Flippable/RayCastBack")
 
 [node name="AttackManager" type="Node" parent="." node_paths=PackedStringArray("trigger_area")]
 script = ExtResource("1_1g850")
+damage = 40.0
 trigger_area = NodePath("../Flippable/Area2D")
 
 [node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("sprite")]
@@ -86,6 +89,9 @@ sprite = NodePath("..")
 blood_particles = ExtResource("2_ckyrx")
 max_HP = 350.0
 low_health = 60
+
+[node name="WalkParticles" parent="." instance=ExtResource("5_ulx3c")]
+position = Vector2(1, 52)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
