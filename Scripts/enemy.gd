@@ -7,14 +7,13 @@ var direction = 0
 var current_closest_target: Node2D
 
 @export var attack_manager: AttackManager
+@export var raycast_follow : RayCast2D
+@export var raycast_back : RayCast2D
 
 @export_category("Distances")
-@export var follow_distance := 500
 @export var attack_distance := 50
 
 @onready var animation_player = $AnimationPlayer
-
-
 
 func _physics_process(delta):
 	if velocity.x > 0:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
-[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
+[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/сamera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://line.tres" id="3_idhyc"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/SlopeObjects/tower.tscn" id="6_4j0ad"]
@@ -54,6 +54,7 @@ position = Vector2(1, 1)
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(385, 67)
 color = Color(0.122252, 0.122252, 0.122252, 1)
+energy = 0.0
 blend_mode = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -80,9 +81,11 @@ max_distance = Vector2(100, 0)
 
 [node name="None" type="Sprite2D" parent="Camera2D"]
 self_modulate = Color(0.341176, 0.282353, 0.321569, 1)
+
 z_index = -10
 z_as_relative = false
 position = Vector2(15, 11.9999)
+
 scale = Vector2(21.4244, 12.07)
 texture = ExtResource("17_4cl6a")
 
@@ -141,23 +144,3 @@ decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktm
 [node name="Enemy2" parent="." instance=ExtResource("10_t63s6")]
 z_index = -4
 position = Vector2(608, 503)
-
-[node name="Enemy3" parent="." instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(-354, 382)
-
-[node name="Enemy4" parent="." instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(1152, 405)
-
-[node name="Enemy5" parent="." instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(1710, 66)
-
-[node name="Enemy6" parent="." instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(2164, -3)
-
-[node name="Enemy7" parent="." instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(907, -259)

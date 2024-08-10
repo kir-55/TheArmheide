@@ -69,12 +69,14 @@ _data = {
 "attack": SubResource("Animation_bt8tn")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("attack_manager") groups=["enemies", "to_be_alined"]]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") groups=["enemies", "to_be_alined"]]
 z_index = -3
 position = Vector2(559, 123)
 collision_layer = 4
 script = ExtResource("1_d8oih")
 attack_manager = NodePath("AttackManager")
+raycast_follow = NodePath("Flippable/RayCastFollow")
+raycast_back = NodePath("Flippable/RayCastBack")
 attack_distance = 70
 
 [node name="AttackManager" type="Node" parent="." node_paths=PackedStringArray("trigger_area")]
@@ -114,6 +116,18 @@ collision_mask = 2
 position = Vector2(-55.5001, 53)
 shape = SubResource("RectangleShape2D_ds084")
 
+[node name="RayCastFollow" type="RayCast2D" parent="Flippable"]
+position = Vector2(-0.000244141, 0)
+scale = Vector2(4, 4)
+target_position = Vector2(-500, 0)
+collision_mask = 2
+
+[node name="RayCastBack" type="RayCast2D" parent="Flippable"]
+position = Vector2(-0.000244141, 0)
+scale = Vector2(4, 4)
+target_position = Vector2(108, 0)
+collision_mask = 2
+
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_wdkkv")
 initial_state = NodePath("Idle")
@@ -133,6 +147,7 @@ enemy = NodePath("../..")
 [node name="Escape" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("9_db7cn")
 enemy = NodePath("../..")
+move_speed = 230.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
