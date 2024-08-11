@@ -13,6 +13,8 @@ var enemies_near : Array[Node2D]
 var last_time_attacked := 0 # In miliseconds
 var is_attacking := false
 
+@export var damage := 20.0
+
 @export var should_prepare_for_attack := false
 
 @export var enemy_group := "enemies"
@@ -50,7 +52,7 @@ func attack():
 
 func _on_attack_finished():
 	for enemy in enemies_near:
-		enemy.get_node("HealthSystem").take_damage(20)
+		enemy.get_node("HealthSystem").take_damage(damage)
 		
 	last_time_attacked = Time.get_ticks_msec()
 	

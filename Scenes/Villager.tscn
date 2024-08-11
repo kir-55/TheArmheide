@@ -1,0 +1,156 @@
+[gd_scene load_steps=17 format=3 uid="uid://beqf1hr5yri0g"]
+
+[ext_resource type="Script" path="res://Scripts/attack_manager.gd" id="1_1g850"]
+[ext_resource type="Script" path="res://Scripts/health_system.gd" id="1_4y2ae"]
+[ext_resource type="Script" path="res://Scripts/villager.gd" id="1_fu82s"]
+[ext_resource type="PackedScene" uid="uid://dgrroxetp1rph" path="res://Scenes/Particles/blood_particles.tscn" id="2_ckyrx"]
+[ext_resource type="Texture2D" uid="uid://cijh0ehgqwswr" path="res://Images/villager.png" id="5_666bs"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="5_r4aae"]
+[ext_resource type="PackedScene" uid="uid://bqdyct6emvief" path="res://Scenes/Particles/walk_particles.tscn" id="5_ulx3c"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_idle.gd" id="6_amhhn"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_follow.gd" id="7_6h8d5"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_attack.gd" id="8_50fui"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_escape.gd" id="9_vwpuk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rib0i"]
+size = Vector2(38, 80.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8s4d2"]
+size = Vector2(54, 64.75)
+
+[sub_resource type="Animation" id="Animation_ik1ob"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flippable/Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hfs2i"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flippable/Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_finished"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_08c0e"]
+_data = {
+"RESET": SubResource("Animation_ik1ob"),
+"attack": SubResource("Animation_hfs2i")
+}
+
+[node name="Villager" type="CharacterBody2D" node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") groups=["to_be_alined", "villagers"]]
+z_index = -4
+position = Vector2(366, 26)
+collision_layer = 8
+script = ExtResource("1_fu82s")
+attack_manager = NodePath("AttackManager")
+raycast_follow = NodePath("Flippable/RayCastFollow")
+raycast_back = NodePath("Flippable/RayCastBack")
+
+[node name="AttackManager" type="Node" parent="." node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("1_1g850")
+damage = 10.0
+trigger_area = NodePath("../Flippable/Area2D")
+
+[node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_4y2ae")
+sprite = NodePath("..")
+blood_particles = ExtResource("2_ckyrx")
+max_HP = 100.0
+low_health = 60
+
+[node name="WalkParticles" parent="." instance=ExtResource("5_ulx3c")]
+position = Vector2(1, 52)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+scale = Vector2(1.41667, 1.33333)
+shape = SubResource("RectangleShape2D_rib0i")
+
+[node name="Flippable" type="Node2D" parent="."]
+scale = Vector2(0.25, 0.25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Flippable"]
+position = Vector2(-4.05312e-06, 7.62939e-06)
+scale = Vector2(1.59375, 1.64356)
+texture = ExtResource("5_666bs")
+
+[node name="Area2D" type="Area2D" parent="Flippable"]
+position = Vector2(-4, -356)
+scale = Vector2(4, 4)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/Area2D"]
+position = Vector2(-61, 110)
+shape = SubResource("RectangleShape2D_8s4d2")
+
+[node name="RayCastFollow" type="RayCast2D" parent="Flippable"]
+position = Vector2(0, 84)
+scale = Vector2(4, 4)
+target_position = Vector2(-500, 0)
+collision_mask = 4
+
+[node name="RayCastBack" type="RayCast2D" parent="Flippable"]
+position = Vector2(0, 82.5)
+scale = Vector2(4, 4)
+target_position = Vector2(108, 0)
+collision_mask = 4
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_r4aae")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("villager")]
+script = ExtResource("6_amhhn")
+villager = NodePath("../..")
+follow_state_transition_chance = 1.0
+
+[node name="Follow" type="Node" parent="State Machine" node_paths=PackedStringArray("villager")]
+script = ExtResource("7_6h8d5")
+villager = NodePath("../..")
+
+[node name="Attack" type="Node" parent="State Machine" node_paths=PackedStringArray("villager")]
+script = ExtResource("8_50fui")
+villager = NodePath("../..")
+
+[node name="Escape" type="Node" parent="State Machine" node_paths=PackedStringArray("villager")]
+script = ExtResource("9_vwpuk")
+villager = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_08c0e")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
