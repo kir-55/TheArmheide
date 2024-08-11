@@ -35,7 +35,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_hfs2i"]
 resource_name = "attack"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -43,7 +42,7 @@ tracks/0/path = NodePath("Flippable/Sprite2D:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
+"times": PackedFloat32Array(0, 0.3, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
@@ -80,14 +79,14 @@ raycast_back = NodePath("Flippable/RayCastBack")
 
 [node name="AttackManager" type="Node" parent="." node_paths=PackedStringArray("trigger_area")]
 script = ExtResource("1_1g850")
-damage = 40.0
+damage = 10.0
 trigger_area = NodePath("../Flippable/Area2D")
 
 [node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_4y2ae")
 sprite = NodePath("..")
 blood_particles = ExtResource("2_ckyrx")
-max_HP = 350.0
+max_HP = 100.0
 low_health = 60
 
 [node name="WalkParticles" parent="." instance=ExtResource("5_ulx3c")]
