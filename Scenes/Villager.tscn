@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/attack_manager.gd" id="1_1g850"]
 [ext_resource type="Script" path="res://Scripts/health_system.gd" id="1_4y2ae"]
-[ext_resource type="Script" path="res://Scripts/villager.gd" id="1_fu82s"]
+[ext_resource type="Script" path="res://Scripts/AI/villager_ai.gd" id="1_fu82s"]
 [ext_resource type="PackedScene" uid="uid://dgrroxetp1rph" path="res://Scenes/Particles/blood_particles.tscn" id="2_ckyrx"]
 [ext_resource type="Texture2D" uid="uid://cijh0ehgqwswr" path="res://Images/villager.png" id="5_666bs"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="5_r4aae"]

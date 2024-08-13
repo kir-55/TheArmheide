@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://cun8flcxq70m4"]
 
-[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_d8oih"]
+[ext_resource type="Script" path="res://Scripts/AI/enemy_ai.gd" id="1_d8oih"]
 [ext_resource type="Texture2D" uid="uid://betk5mrjmg11g" path="res://Images/enemy.png" id="1_je23y"]
 [ext_resource type="Script" path="res://Scripts/attack_manager.gd" id="2_fwhmp"]
 [ext_resource type="Script" path="res://Scripts/health_system.gd" id="2_okkjr"]

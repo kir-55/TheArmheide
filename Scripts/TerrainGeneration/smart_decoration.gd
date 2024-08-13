@@ -1,6 +1,5 @@
 extends Sprite2D
 
-
 @export var max_angle := 30.0
 @export var max_distance := 20
 @export var rotation_speed := 0.1

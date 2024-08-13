@@ -1,43 +1,15 @@
-extends CharacterBody2D
+class_name Villager
+extends Node
 
-const GRAVITY = 1000
-
-
-var direction = 0
-
-@export var attack_manager: AttackManager
-@export var raycast_follow : RayCast2D
-@export var raycast_back : RayCast2D
-@export var default_speed := 250
-
-@export_category("Distances")
-@export var attack_distance := 50
-
-@onready var animation_player = $AnimationPlayer
-
-func _physics_process(delta):
-	if velocity.x > 0:
-		direction = 1
-	elif velocity.x < 0:
-		direction = -1
-	else:
-		direction = 0
-		
-	if direction != 0:
-		get_node("Flippable").scale.x = direction * -0.25
-	
-	velocity.y += GRAVITY * delta
-	
-	move_and_slide()
-
-func run_attack_animation():
-	animation_player.play("attack")
-
-func die():
-	queue_free()
+@export var unique_name: String
+var age: int
 
 
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "attack" and is_instance_valid(attack_manager):
-		attack_manager._on_attack_animation_finished()
-		print("villager attack finished: " + str(attack_manager.enemies_near.size()))
+# basic ... speed - means that the speed would be "multiplyed" by age
+@export_category("Personal values")
+@export var basic_walk_speed: float
+@export var basic_follow_speed: float
+@export var basic_escape_speed: float
+@export_range(5, 50) var basic_damage: int
+@export_range(0.0, 1.0) var knowledge: float
+@export_range(0.0, 1.0) var urgency: float
