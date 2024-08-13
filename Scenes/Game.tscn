@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=26 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
 [ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://c4erp2nlfko2y" path="res://Decorations/moss.tres" id="17_malk3"]
 [ext_resource type="Resource" uid="uid://bf0lx5iuesadl" path="res://Decorations/ground_grass.tres" id="18_236rl"]
 [ext_resource type="PackedScene" uid="uid://beqf1hr5yri0g" path="res://Scenes/villager.tscn" id="18_liq3w"]
+[ext_resource type="Script" path="res://Scripts/village_control.gd" id="21_twnnt"]
 
 [sub_resource type="Environment" id="Environment_7t5er"]
 background_mode = 3
@@ -62,6 +63,10 @@ environment = SubResource("Environment_7t5er")
 
 [node name="RandomSystem" type="Node" parent="."]
 script = ExtResource("7_5clvn")
+
+[node name="VillageControl" type="Node" parent="."]
+script = ExtResource("21_twnnt")
+possible_names = Array[String](["Adam", "Grażyna", "Janusz", "Michał", "Muchamad", "Dominik", "Kirill", "Bartek", "Daniel", "Karol", "Monika"])
 
 [node name="Player" parent="." instance=ExtResource("2_ak363")]
 position = Vector2(372, 864)
@@ -139,32 +144,8 @@ line = NodePath("../GroundLine")
 terrain_generator = NodePath("..")
 decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or"), ExtResource("13_ti8dc"), ExtResource("15_fvwbj"), ExtResource("17_malk3"), ExtResource("18_236rl")])
 
-[node name="Enemy2" parent="." instance=ExtResource("10_t63s6")]
-z_index = -4
-position = Vector2(-1629, 321)
-
 [node name="Villager" parent="." instance=ExtResource("18_liq3w")]
+position = Vector2(-74, 802)
 
-[node name="Villager2" parent="." node_paths=PackedStringArray("attack_manager", "raycast_follow", "raycast_back") instance=ExtResource("18_liq3w")]
-position = Vector2(-3263, 322)
-attack_manager = NodePath("../Villager/AttackManager")
-raycast_follow = NodePath("../Villager/Flippable/RayCastFollow")
-raycast_back = NodePath("../Villager/Flippable/RayCastBack")
-
-[node name="CharacterBody2D" parent="." instance=ExtResource("10_t63s6")]
-position = Vector2(1175, -57)
-
-[node name="CharacterBody2D2" parent="." instance=ExtResource("10_t63s6")]
-position = Vector2(2033, 607)
-
-[node name="CharacterBody2D3" parent="." instance=ExtResource("10_t63s6")]
-position = Vector2(1192, 483)
-
-[node name="CharacterBody2D4" parent="." instance=ExtResource("10_t63s6")]
-position = Vector2(1687, 737)
-
-[node name="CharacterBody2D5" parent="." instance=ExtResource("10_t63s6")]
-position = Vector2(1786, 309)
-
-[node name="CharacterBody2D6" parent="." instance=ExtResource("10_t63s6")]
-position = Vector2(1033, 236)
+[node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
+position = Vector2(707, 815)

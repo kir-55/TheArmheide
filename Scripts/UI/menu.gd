@@ -1,3 +1,4 @@
+class_name Menu
 extends Node
 
 var interactive_building : Node2D

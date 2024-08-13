@@ -1,10 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dto7gf217r7fk"]
 
-[ext_resource type="Script" path="res://Scripts/UI/menu.gd" id="1_32elb"]
 [ext_resource type="Texture2D" uid="uid://b5mon5nuxgdtw" path="res://Images/icon.png" id="1_lyur8"]
+[ext_resource type="Script" path="res://Scripts/UI/main_house_menu.gd" id="1_yibcc"]
 
-
-[node name="Main House Menu" type="Control"]
+[node name="Main House Menu" type="Control" node_paths=PackedStringArray("villager_list")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +12,8 @@ offset_top = -328.0
 offset_bottom = -328.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_32elb")
+script = ExtResource("1_yibcc")
+villager_list = NodePath("TabContainer/Citizens/ScrollContainer/VBoxContainer/ItemList")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -51,20 +51,9 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
 auto_height = true
-item_count = 6
+item_count = 1
 icon_scale = 1.4
-item_0/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
-item_0/icon = ExtResource("1_lyur8")
-item_1/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
-item_1/icon = ExtResource("1_lyur8")
-item_2/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
-item_2/icon = ExtResource("1_lyur8")
-item_3/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
-item_3/icon = ExtResource("1_lyur8")
-item_4/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
-item_4/icon = ExtResource("1_lyur8")
-item_5/text = "Icon should be replaced with the citizen's sprite. And the part where this text is should be replaced with some info"
-item_5/icon = ExtResource("1_lyur8")
+item_0/text = ""
 
 [node name="Buildings" type="TabBar" parent="TabContainer"]
 visible = false
@@ -122,3 +111,5 @@ layout_mode = 2
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 617.0
+
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
