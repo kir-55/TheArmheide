@@ -18,3 +18,5 @@
 1.	Kid – weak, very uneffective
 2.	Middle age – very strong, effective
 3.	Elder – weak, effective
+
+xD
