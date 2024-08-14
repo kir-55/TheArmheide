@@ -13,6 +13,7 @@ var direction = 0
 @export var attack_distance := 50
 
 @onready var animation_player = $AnimationPlayer
+@onready var flippable = get_node("Flippable")
 
 func _physics_process(delta):
 	if velocity.x > 0:
@@ -23,7 +24,7 @@ func _physics_process(delta):
 		direction = 0
 		
 	if direction != 0:
-		get_node("Flippable").scale.x = direction * -0.25
+		flippable.scale.x = direction * -0.25
 	
 	velocity.y += GRAVITY * delta
 	move_and_slide()

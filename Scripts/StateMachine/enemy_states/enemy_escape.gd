@@ -19,13 +19,17 @@ func Physics_Update(delta: float):
 			enemy.velocity.x = move_direction * move_speed
 			return
 	
-	if !enemy.raycast_follow.is_colliding() and !enemy.raycast_back.is_colliding() and last_time_villager_detected == 0:
+	if enemy and !enemy.raycast_follow.is_colliding() and !enemy.raycast_back.is_colliding() and last_time_villager_detected == 0:
 		last_time_villager_detected = Time.get_ticks_msec()
 	elif enemy.raycast_follow.is_colliding() or enemy.raycast_back.is_colliding():
 		last_time_villager_detected = Time.get_ticks_msec()
 		if (Time.get_ticks_msec() - last_time_villager_detected) < chillout_delay:
 			if enemy.raycast_follow.is_colliding():
-				move_direction = 1 if move_direction == 0 else move_direction * -1
+				if move_direction == 0:
+					if enemy.flippable.scale.x > 0:
+						move_direction = -1
+					else:
+						move_direction = 1
 			else:
 				if move_direction == 0:
 					move_direction = -1
