@@ -89,6 +89,7 @@ script = ExtResource("2_okkjr")
 sprite = NodePath("../Flippable/Sprite2D")
 blood_particles = ExtResource("4_4dm2a")
 max_HP = 100.0
+low_health = 60
 
 [node name="WalkParticles" parent="." instance=ExtResource("5_1ejby")]
 position = Vector2(21, 25)
