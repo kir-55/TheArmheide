@@ -19,7 +19,7 @@ func Physics_Update(delta: float):
 			villager.velocity.x = move_direction * move_speed
 			return
 	
-	if villager.is_queued_for_deletion() and !villager.raycast_follow.is_colliding() and !villager.raycast_back.is_colliding() and last_time_enemy_detected == 0:
+	if !villager.is_queued_for_deletion() and !villager.raycast_follow.is_colliding() and !villager.raycast_back.is_colliding() and last_time_enemy_detected == 0:
 		last_time_enemy_detected = Time.get_ticks_msec()
 	elif villager.raycast_follow.is_colliding() or villager.raycast_back.is_colliding():
 		last_time_enemy_detected = Time.get_ticks_msec()

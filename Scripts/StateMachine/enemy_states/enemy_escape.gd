@@ -19,7 +19,7 @@ func Physics_Update(delta: float):
 			enemy.velocity.x = move_direction * move_speed
 			return
 	
-	if enemy.is_queued_for_deletion() and !enemy.raycast_follow.is_colliding() and !enemy.raycast_back.is_colliding() and last_time_villager_detected == 0:
+	if !enemy.is_queued_for_deletion() and !enemy.raycast_follow.is_colliding() and !enemy.raycast_back.is_colliding() and last_time_villager_detected == 0:
 		last_time_villager_detected = Time.get_ticks_msec()
 	elif enemy.raycast_follow.is_colliding() or enemy.raycast_back.is_colliding():
 		last_time_villager_detected = Time.get_ticks_msec()
