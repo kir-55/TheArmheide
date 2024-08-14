@@ -3,28 +3,32 @@
 [ext_resource type="Texture2D" uid="uid://b5mon5nuxgdtw" path="res://Images/icon.png" id="1_lyur8"]
 [ext_resource type="Script" path="res://Scripts/UI/main_house_menu.gd" id="1_yibcc"]
 
-[node name="Main House Menu" type="Control" node_paths=PackedStringArray("villager_list")]
+[node name="Main House Menu" type="Control" node_paths=PackedStringArray("villager_list", "villager_info_text", "job_option_panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -328.0
-offset_bottom = -328.0
+offset_left = -593.0
+offset_top = -7.0
+offset_right = -593.0
+offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yibcc")
 villager_list = NodePath("TabContainer/Citizens/ScrollContainer/VBoxContainer/ItemList")
+villager_info_text = NodePath("TabContainer/Citizens/VillagerInfo/RichTextLabel")
+job_option_panel = NodePath("TabContainer/Citizens/VillagerInfo/JobChosing")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -366.0
-offset_top = 53.0
-offset_right = 367.0
-offset_bottom = 510.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 348.0
+offset_top = -246.0
+offset_right = 819.0
+offset_bottom = 211.0
+grow_vertical = 2
 mouse_filter = 0
 mouse_force_pass_scroll_events = false
 tab_alignment = 1
@@ -33,17 +37,67 @@ tab_alignment = 1
 layout_mode = 2
 mouse_force_pass_scroll_events = false
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Citizens"]
+[node name="VillagerInfo" type="Panel" parent="TabContainer/Citizens"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 205.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Citizens/VillagerInfo"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 120.0
+grow_horizontal = 2
+
+[node name="JobChosing" type="OptionButton" parent="TabContainer/Citizens/VillagerInfo"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.5
+offset_top = 149.0
+offset_right = 82.5
+offset_bottom = 180.0
+grow_horizontal = 2
+
+[node name="Button" type="Button" parent="TabContainer/Citizens/VillagerInfo/JobChosing"]
 layout_mode = 0
-offset_right = 733.0
-offset_bottom = 426.0
+offset_top = 37.0
+offset_right = 172.0
+offset_bottom = 71.0
+text = "Apply"
+
+[node name="Label" type="Label" parent="TabContainer/Citizens/VillagerInfo/JobChosing"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -29.0
+offset_right = 173.0
+offset_bottom = -4.0
+text = "Change job:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Citizens"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Citizens/ScrollContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(733, 426)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_force_pass_scroll_events = false
 
 [node name="ItemList" type="ItemList" parent="TabContainer/Citizens/ScrollContainer/VBoxContainer"]
@@ -51,9 +105,7 @@ layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
 auto_height = true
-item_count = 1
 icon_scale = 1.4
-item_0/text = ""
 
 [node name="Buildings" type="TabBar" parent="TabContainer"]
 visible = false
@@ -113,3 +165,5 @@ offset_right = 1152.0
 offset_bottom = 617.0
 
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="pressed" from="TabContainer/Citizens/VillagerInfo/JobChosing/Button" to="." method="_on_button_pressed"]
+[connection signal="item_selected" from="TabContainer/Citizens/ScrollContainer/VBoxContainer/ItemList" to="." method="_on_item_list_item_selected"]

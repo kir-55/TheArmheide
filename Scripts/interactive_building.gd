@@ -3,6 +3,8 @@ extends Area2D
 @export var popup_prefab: PackedScene
 @export var menu_prefab: PackedScene
 
+
+
 @onready var camera_2d = get_node("/root/Game/Camera2D")
 
 var popup_instance : Control

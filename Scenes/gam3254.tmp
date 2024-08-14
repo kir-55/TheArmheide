@@ -1,6 +1,5 @@
-[gd_scene load_steps=27 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=26 format=3 uid="uid://b232mspaehrfk"]
 
-[ext_resource type="Script" path="res://Scripts/villager.gd" id="1_5wqvn"]
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
 [ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/сamera.gd" id="3_6coef"]
@@ -53,9 +52,6 @@ shader_parameter/MaxThikness = 50.0
 
 [node name="Game" type="Node2D"]
 position = Vector2(1, 1)
-
-[node name="MetaVillager" type="Node" parent="."]
-script = ExtResource("1_5wqvn")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(385, 67)
