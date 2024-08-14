@@ -6,7 +6,8 @@
 [resource]
 script = ExtResource("2_gt14d")
 prefab = ExtResource("1_oboxs")
-initial_chance = 15
+spawn_on_center = false
+initial_chance = 30
 chance_to_spawn = 100.0
 chance_multiplyer = 1
 min_scale = 0.4

@@ -3,7 +3,7 @@ extends Node
 
 @export var unique_name: String
 var age: int
-
+@export var job: Jobs.Job = Jobs.Job.Jobless
 
 # basic ... speed - means that the speed would be "multiplyed" by age
 @export_category("Personal values")
