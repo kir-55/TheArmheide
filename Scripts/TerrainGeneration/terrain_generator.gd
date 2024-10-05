@@ -1,6 +1,5 @@
 extends Node
 
-
 @export var light_occuluder: LightOccluder2D
 @export var ground_line: Line2D
 @export var grass_line: Line2D
@@ -17,7 +16,7 @@ extends Node
 
 @export var decorations: Array[Decoration]
 
-@export var villadge: Node
+
 
 @export var big_rock: PackedScene
 
@@ -28,9 +27,14 @@ extends Node
 
 @onready var line_offset = ground_line.width / 2 - 1
 
+
+
 # Measured with LINE POINTS!
+@export_category("Village")
+@export var village: Node2D
 @export var village_start = 20
 @export var village_end = 50
+@export var normal_house_prefab: PackedScene
 @onready var main_house_pos: int = village_start + (village_end - village_start)/2
 
 func _ready():
@@ -70,11 +74,19 @@ func _ready():
 	sloper.spawn_at_point(big_rock, self, 3, rs.get_rnd_float(0, 1))
 	sloper.spawn_at_point(big_rock, self, points_amount - 3, rs.get_rnd_float(0, 1))
 	
-	sloper.spawn_at_point(tower_prefab, villadge, village_start, rs.get_rnd_float(0, 1))
-	sloper.spawn_at_point(tower_prefab, villadge, village_end, rs.get_rnd_float(0, 1))
-	sloper.spawn_at_point(main_house_prefab, villadge, main_house_pos, rs.get_rnd_float(0, 1))
+	sloper.spawn_at_point(tower_prefab, village, village_start, rs.get_rnd_float(0, 1))
+	sloper.spawn_at_point(tower_prefab, village, village_end, rs.get_rnd_float(0, 1))
+	sloper.spawn_at_point(main_house_prefab, village, main_house_pos, rs.get_rnd_float(0, 1))
 
-	
+func generate_houses(amount: int, start_family := 0):
+	var houses = []
+	for i in range(amount):
+		var house_instance = sloper.spawn_at_point(normal_house_prefab, village, rs.get_rnd_int(village_start, village_end), rs.get_rnd_float(0, 1))
+		house_instance.family = start_family + i
+		houses.append(house_instance)
+	return houses
+		
+
 func create_next_point(position: Vector2):
 	ground_line.add_point(position)
 	grass_line.add_point(position)

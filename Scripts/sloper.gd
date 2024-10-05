@@ -46,3 +46,4 @@ func spawn_at_point(object: PackedScene, parent: Node, point: int, part_of_segme
 		instance.scale = scale
 	
 	parent.add_child(instance)
+	return instance

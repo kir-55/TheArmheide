@@ -13,7 +13,7 @@ var village_control: Node
 func _ready():
 	village_control = get_node("/root/Game/VillageControl")
 	load_villager_data()
-	for job_name in Jobs.Job.keys():
+	for job_name in Enums.Job.keys():
 		job_option_panel.add_item(job_name)
 
 
@@ -30,7 +30,7 @@ func _on_item_list_item_selected(index):
 	villager_info_text.clear()
 	villager_info_text.append_text("[center][b][color=EFFFC8]" + current_villager.name + "[/color][/b][/center]\n\n")
 	villager_info_text.append_text("Age: " + str(current_villager.age) + "\n")
-	villager_info_text.append_text("Job: " + Jobs.Job.keys()[current_villager.job] + "\n")
+	villager_info_text.append_text("Job: " + Enums.Job.keys()[current_villager.job] + "\n")
 	job_option_panel.visible = true
 	job_option_panel.selected = current_villager.job
 

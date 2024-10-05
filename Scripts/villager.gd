@@ -1,9 +1,14 @@
 class_name Villager
 extends Node
 
+
+
 @export var unique_name: String
 var age: int
-@export var job: Jobs.Job = Jobs.Job.Jobless
+@export var family: int
+@export var job: Enums.Job = Enums.Job.Jobless
+@export var gender: Enums.Gender = Enums.Gender.Male
+@export var house: Node2D
 
 # basic ... speed - means that the speed would be "multiplyed" by age
 @export_category("Personal values")

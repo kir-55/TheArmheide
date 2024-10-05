@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=28 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/villager.gd" id="1_5wqvn"]
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://Scripts/decoration_spawner.gd" id="11_1gig2"]
 [ext_resource type="Resource" uid="uid://cg2l61ar6xsrf" path="res://Decorations/grass2.tres" id="13_ti8dc"]
 [ext_resource type="Resource" uid="uid://bo7ktmbjwo6ci" path="res://Decorations/lantern.tres" id="15_fvwbj"]
-[ext_resource type="PackedScene" uid="uid://ck3y4w6052w5e" path="res://Scenes/SlopeObjects/normal_house.tscn" id="15_r1ya6"]
 [ext_resource type="Texture2D" uid="uid://bjt32tioloh8v" path="res://Images/none.png" id="17_4cl6a"]
 [ext_resource type="Resource" uid="uid://c4erp2nlfko2y" path="res://Decorations/moss.tres" id="17_malk3"]
 [ext_resource type="Resource" uid="uid://bf0lx5iuesadl" path="res://Decorations/ground_grass.tres" id="18_236rl"]
@@ -58,6 +57,14 @@ position = Vector2(1, 1)
 
 [node name="MetaVillager" type="Node" parent="."]
 script = ExtResource("1_5wqvn")
+unique_name = null
+job = null
+basic_walk_speed = null
+basic_follow_speed = null
+basic_escape_speed = null
+basic_damage = null
+knowledge = null
+urgency = null
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(385, 67)
@@ -70,6 +77,10 @@ environment = SubResource("Environment_7t5er")
 
 [node name="RandomSystem" type="Node" parent="."]
 script = ExtResource("7_5clvn")
+
+[node name="VillageControl" type="Node" parent="."]
+script = ExtResource("21_twnnt")
+possible_names = Array[String](["Adam", "Grażyna", "Janusz", "Michał", "Muchamad", "Dominik", "Kirill", "Bartek", "Daniel", "Karol", "Monika"])
 
 [node name="Player" parent="." instance=ExtResource("2_ak363")]
 position = Vector2(372, 864)
@@ -97,7 +108,7 @@ texture = ExtResource("17_4cl6a")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="Terrain" type="Node2D" parent="." node_paths=PackedStringArray("light_occuluder", "ground_line", "grass_line", "floor_collider", "rs", "sloper", "player", "village")]
+[node name="Terrain" type="Node2D" parent="." node_paths=PackedStringArray("light_occuluder", "ground_line", "grass_line", "floor_collider", "rs", "sloper", "villadge", "player")]
 position = Vector2(-5496, 998)
 script = ExtResource("7_qwvaq")
 light_occuluder = NodePath("GroundLine/LightOccluder2D")
@@ -108,14 +119,13 @@ rs = NodePath("../RandomSystem")
 sloper = NodePath("Sloper")
 section_y_change_amplitude = 70
 decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or")])
+villadge = NodePath("Villadge")
 big_rock = ExtResource("8_wl2fn")
 tower_prefab = ExtResource("6_4j0ad")
 main_house_prefab = ExtResource("8_us4v6")
 player = NodePath("../Player")
-village = NodePath("Villadge")
 village_start = 15
 village_end = 25
-normal_house_prefab = ExtResource("15_r1ya6")
 
 [node name="Sloper" type="Node" parent="Terrain" node_paths=PackedStringArray("line", "terrain_generator")]
 script = ExtResource("1_8uvoy")
@@ -148,14 +158,11 @@ line = NodePath("../GroundLine")
 terrain_generator = NodePath("..")
 decorations = Array[Resource("res://Scripts/decoration.gd")]([ExtResource("6_ktmbv"), ExtResource("7_hbsh7"), ExtResource("8_m48or"), ExtResource("13_ti8dc"), ExtResource("15_fvwbj"), ExtResource("17_malk3"), ExtResource("18_236rl")])
 
+[node name="Villager" parent="." instance=ExtResource("18_liq3w")]
+position = Vector2(757, 791)
+
 [node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
 position = Vector2(-171, 832)
-
-[node name="VillageControl" type="Node" parent="." node_paths=PackedStringArray("terrain")]
-script = ExtResource("21_twnnt")
-terrain = NodePath("../Terrain")
-villager_prefab = ExtResource("18_liq3w")
-possible_names = Array[String](["Adam", "Grażyna", "Janusz", "Michał", "Muchamad", "Dominik", "Kirill", "Bartek", "Daniel", "Karol", "Monika"])
 
 [node name="DayNightCycle" type="Node" parent="." node_paths=PackedStringArray("light", "background")]
 script = ExtResource("23_0tvep")

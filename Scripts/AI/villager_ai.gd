@@ -3,6 +3,8 @@ extends CharacterBody2D
 const GRAVITY = 1000
 var direction = 0
 
+@export var villager_data: Villager
+
 @export var attack_manager: AttackManager
 @export var raycast_follow : RayCast2D
 @export var raycast_back : RayCast2D
