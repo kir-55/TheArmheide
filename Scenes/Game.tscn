@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=28 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/villager.gd" id="1_5wqvn"]
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
@@ -22,6 +22,7 @@
 [ext_resource type="Resource" uid="uid://bf0lx5iuesadl" path="res://Decorations/ground_grass.tres" id="18_236rl"]
 [ext_resource type="PackedScene" uid="uid://beqf1hr5yri0g" path="res://Scenes/Villager.tscn" id="18_liq3w"]
 [ext_resource type="Script" path="res://Scripts/village_control.gd" id="21_twnnt"]
+[ext_resource type="Script" path="res://Scenes/day-night_cycle.gd" id="23_0tvep"]
 
 [sub_resource type="Environment" id="Environment_7t5er"]
 background_mode = 3
@@ -59,7 +60,8 @@ script = ExtResource("1_5wqvn")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 position = Vector2(385, 67)
-color = Color(0.122252, 0.122252, 0.122252, 1)
+color = Color(0.147672, 0.147672, 0.147672, 1)
+energy = 0.0
 blend_mode = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -153,3 +155,16 @@ position = Vector2(757, 791)
 
 [node name="Enemy" parent="." instance=ExtResource("10_t63s6")]
 position = Vector2(-171, 832)
+
+[node name="DayNightCycle" type="Node" parent="." node_paths=PackedStringArray("light", "background")]
+script = ExtResource("23_0tvep")
+light = NodePath("../DirectionalLight2D")
+background = NodePath("../Camera2D/None")
+night_color = Color(0.341176, 0.282353, 0.321569, 1)
+day_color = Color(0.246498, 0.460441, 0.54194, 1)
+time_per_second = 20.0
+
+[node name="Timer" type="Timer" parent="DayNightCycle"]
+autostart = true
+
+[connection signal="timeout" from="DayNightCycle/Timer" to="DayNightCycle" method="_on_timer_timeout"]
