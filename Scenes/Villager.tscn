@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://beqf1hr5yri0g"]
+[gd_scene load_steps=18 format=3 uid="uid://beqf1hr5yri0g"]
 
 [ext_resource type="Script" path="res://Scripts/attack_manager.gd" id="1_1g850"]
 [ext_resource type="Script" path="res://Scripts/health_system.gd" id="1_4y2ae"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_follow.gd" id="7_6h8d5"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_attack.gd" id="8_50fui"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_escape.gd" id="9_vwpuk"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_return.gd" id="12_noval"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rib0i"]
 size = Vector2(38, 80.25)
@@ -146,6 +147,10 @@ villager = NodePath("../..")
 
 [node name="Escape" type="Node" parent="State Machine" node_paths=PackedStringArray("villager")]
 script = ExtResource("9_vwpuk")
+villager = NodePath("../..")
+
+[node name="Return" type="Node" parent="State Machine" node_paths=PackedStringArray("villager")]
+script = ExtResource("12_noval")
 villager = NodePath("../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

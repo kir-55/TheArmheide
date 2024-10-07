@@ -163,6 +163,7 @@ light = NodePath("../DirectionalLight2D")
 background = NodePath("../Camera2D/None")
 night_color = Color(0.341176, 0.282353, 0.321569, 1)
 day_color = Color(0.246498, 0.460441, 0.54194, 1)
+start_time = 17.565
 time_per_second = 20.0
 
 [node name="Timer" type="Timer" parent="DayNightCycle"]

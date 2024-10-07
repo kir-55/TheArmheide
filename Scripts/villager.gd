@@ -10,7 +10,7 @@ var age: int
 @export var gender: Enums.Gender = Enums.Gender.Male
 @export var house: Node2D
 
-# basic ... speed - means that the speed would be "multiplyed" by age
+# basic ... speed - means that the speed would be "multiplied" by age
 @export_category("Personal values")
 @export var basic_walk_speed: float
 @export var basic_follow_speed: float

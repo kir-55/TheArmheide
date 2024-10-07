@@ -6,7 +6,6 @@ extends State
 @export var move_speed := 170.0
 @export var follow_state_transition_chance := 0.65
 
-
 var move_direction : int
 var wander_time : float
 
@@ -27,6 +26,10 @@ func Update(delta: float):
 		randomize_wander()
 
 func Physics_Update(delta: float):
+	var is_day : bool = get_node("/root/Game/DayNightCycle").is_day
+	if !is_day:
+		RequestTransition.emit(self, "Return")
+	
 	if villager and villager.is_on_floor():
 		if villager.is_on_wall():
 			print("villager's touching the wall")
