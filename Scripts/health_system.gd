@@ -2,11 +2,17 @@ extends Node
 
 signal died(body)
 
+@onready var day_night_cycle = get_node("/root/Game/DayNightCycle")
+
 @export var sprite: Node2D
 @export var blood_particles: PackedScene
 
 @export var max_HP: float = 20
 @export var low_health := 20
+
+@export_range(0, 100) var dayly_regen_percent:= 20
+
+var have_regened = true
 
 var HP: float
 var is_at_low_health := false
@@ -14,7 +20,8 @@ var is_at_low_health := false
 
 func _ready():
 	HP = max_HP
-	pass
+	day_night_cycle.connect("day_started", heal,dayly_regen_percent/100 * max_HP)
+	
 
 
 func take_damage(damage):
@@ -41,7 +48,7 @@ func heal(value):
 	if HP == max_HP:
 		return
 	
-	sprite.self_modulate = Color(1, HP/max_HP, HP/max_HP, 1)
+	
 	if HP + value > max_HP:
 		HP = max_HP
 	else:
@@ -49,3 +56,6 @@ func heal(value):
 	
 	if HP > low_health:
 		is_at_low_health = true
+		
+	sprite.self_modulate = Color(1, HP/max_HP, HP/max_HP, 1)
+	print("healed")

@@ -1,4 +1,7 @@
+class_name VillagerAI
 extends CharacterBody2D
+
+
 
 const GRAVITY = 1000
 var direction = 0

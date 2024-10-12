@@ -18,3 +18,7 @@ var age: int
 @export_range(5, 50) var basic_damage: int
 @export_range(0.0, 1.0) var knowledge: float
 @export_range(0.0, 1.0) var urgency: float
+
+
+@export_category("variables")
+@export var exhaustion:= 0

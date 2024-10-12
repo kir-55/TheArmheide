@@ -1,5 +1,9 @@
 extends Node
 
+
+signal day_started
+signal night_started
+
 @export var light: DirectionalLight2D
 @export var background: Sprite2D
 
@@ -50,8 +54,10 @@ func _on_timer_timeout():
 		
 	if time >= 9 and time <= 21 and !is_day: 
 		is_day = true
+		emit_signal("day_started")
 	elif (time < 9 or time > 21) and is_day:
 		is_day = false
+		emit_signal("night_started")
 
 	print("time: " + str(time) + " is day?: " + str(is_day))
 	print("energy: " + str(light.energy))

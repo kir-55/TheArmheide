@@ -6,8 +6,13 @@ extends State
 @export var move_speed := 170.0
 @export var follow_state_transition_chance := 0.65
 
+@onready var day_night_cycle = get_node("/root/Game/DayNightCycle")
+
 var move_direction : int
 var wander_time : float
+
+func _ready():
+	day_night_cycle.connect("night_started", go_to_sleep)
 
 func randomize_wander():
 	move_direction = randi_range(-1, 1)
@@ -18,6 +23,10 @@ func randomize_wander():
 func Enter():
 	print(self.name, villager.name)
 	randomize_wander()
+	
+
+func go_to_sleep():
+	RequestTransition.emit(self, "Return")
 
 func Update(delta: float):
 	if wander_time > 0:
@@ -25,11 +34,8 @@ func Update(delta: float):
 	else:
 		randomize_wander()
 
+
 func Physics_Update(delta: float):
-	var is_day : bool = get_node("/root/Game/DayNightCycle").is_day
-	if !is_day:
-		RequestTransition.emit(self, "Return")
-	
 	if villager and villager.is_on_floor():
 		if villager.is_on_wall():
 			print("villager's touching the wall")
