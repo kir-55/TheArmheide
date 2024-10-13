@@ -1,14 +1,22 @@
 class_name VillagerAttack
 extends State
 
+@export var villager_ai: VillagerAI
+
+
 @export var villager : CharacterBody2D
 @export var move_speed := 200.0
+
+@export var exhoustion_level: float = 2
+#means how much energy does this state take per hour
 
 var body
 
 func Enter():
-	print(self.name, villager.name)
 	villager.velocity.x = 0
+	
+func Update(delta: float):
+	villager_ai.villager_data.exhaustion += delta*villager_ai.day_night_cycle.time_per_second/60*exhoustion_level
 
 
 func Physics_Update(delta: float):

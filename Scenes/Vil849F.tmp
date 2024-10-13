@@ -154,11 +154,12 @@ script = ExtResource("9_vwpuk")
 villager_ai = NodePath("../..")
 villager = NodePath("../..")
 
-[node name="Return" type="Node" parent="State Machine" node_paths=PackedStringArray("villager_ai", "villager", "timer")]
+[node name="Return" type="Node" parent="State Machine" node_paths=PackedStringArray("villager_ai", "villager")]
 script = ExtResource("12_noval")
 villager_ai = NodePath("../..")
 villager = NodePath("../..")
-timer = NodePath("../../Timer")
+move_speed = null
+regeneration_level = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

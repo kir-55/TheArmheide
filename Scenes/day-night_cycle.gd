@@ -11,7 +11,7 @@ signal night_started
 @export_color_no_alpha var day_color: Color
 
 @export_category("given in hours") 
-@export_range(0, 24) var start_time: float = 12
+@export_range(0, 24) var start_time: float = 6
 
 var time: float
 var day: int = 0
@@ -19,7 +19,7 @@ var day: int = 0
 var is_day: bool
 
 @export_category("given in minutes") 
-@export var time_per_second: float = false
+@export var time_per_second: float = 20
 
 
 # Called when the node enters the scene tree for the first time.
@@ -43,7 +43,8 @@ func _process(delta):
 										 lerpf(background.self_modulate.b,night_color.b, 0.01))
 
 
-
+# day is 6 - 22  (16h)
+# night is 22 - 6 (8h)
 
 func _on_timer_timeout():
 	if time + time_per_second/60 > 24:
@@ -52,12 +53,9 @@ func _on_timer_timeout():
 	else:
 		time += time_per_second/60 
 		
-	if time >= 9 and time <= 21 and !is_day: 
+	if time >= 6 and time < 22 and !is_day: 
 		is_day = true
 		emit_signal("day_started")
-	elif (time < 9 or time > 21) and is_day:
+	elif (time < 6 or time >= 22) and is_day:
 		is_day = false
 		emit_signal("night_started")
-
-	print("time: " + str(time) + " is day?: " + str(is_day))
-	print("energy: " + str(light.energy))

@@ -20,9 +20,10 @@ var is_at_low_health := false
 
 func _ready():
 	HP = max_HP
-	day_night_cycle.connect("day_started", heal,dayly_regen_percent/100 * max_HP)
+	day_night_cycle.connect("day_started", regen_after_sleep)
 	
-
+func regen_after_sleep():
+	heal(dayly_regen_percent/100 * max_HP)
 
 func take_damage(damage):
 	if HP > 0:

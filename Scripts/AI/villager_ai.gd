@@ -6,7 +6,11 @@ extends CharacterBody2D
 const GRAVITY = 1000
 var direction = 0
 
+
+
 @export var villager_data: Villager
+
+
 
 @export var attack_manager: AttackManager
 @export var raycast_follow : RayCast2D
@@ -15,6 +19,8 @@ var direction = 0
 
 @export_category("Distances")
 @export var attack_distance := 50
+
+@onready var day_night_cycle = get_node("/root/Game/DayNightCycle")
 
 @onready var animation_player = $AnimationPlayer
 @onready var flippable = get_node("Flippable")
@@ -44,4 +50,3 @@ func die():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "attack" and is_instance_valid(attack_manager):
 		attack_manager._on_attack_animation_finished()
-		print("villager attack finished: " + str(attack_manager.enemies_near.size()))

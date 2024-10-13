@@ -21,4 +21,4 @@ var age: int
 
 
 @export_category("variables")
-@export var exhaustion:= 0
+@export var exhaustion: float = 0

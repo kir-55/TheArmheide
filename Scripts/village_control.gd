@@ -32,4 +32,5 @@ func generate_villager(family: int, gender: Enums.Gender):
 	
 	var villager_instance = villager_prefab.instantiate()
 	villager_instance.villager_data = villager
+	villager_instance.global_position = houses[family].global_position + Vector2(0, -30)
 	add_child(villager_instance)

@@ -1,6 +1,8 @@
 class_name VillagerEscape
 extends State
 
+@export var villager_ai: VillagerAI
+
 @export var villager : CharacterBody2D
 @export var move_speed := 280.0
 @export var chillout_delay := 3500
@@ -9,12 +11,14 @@ var move_direction := 0
 
 var last_time_enemy_detected := 0
 
-func Enter():
-	print(self.name, villager.name)
+@export var exhoustion_level: float = 2
+
+	
+func Update(delta:float):
+	villager_ai.villager_data.exhaustion +=delta*villager_ai.day_night_cycle.time_per_second/60*exhoustion_level
 
 func Physics_Update(delta: float):
 	if villager.is_on_wall():
-			print("enemy's touching the wall")
 			move_direction *= -1
 			villager.velocity.x = move_direction * move_speed
 			return
