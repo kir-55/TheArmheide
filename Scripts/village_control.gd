@@ -2,6 +2,7 @@ extends Node
 
 @export var terrain: Node2D
 var houses
+var towers
 
 @export var villagers_amount = 5
 
@@ -15,6 +16,7 @@ var houses
 
 func _ready():
 	houses = terrain.generate_houses(villagers_amount/2 + villagers_amount%2)
+	towers = terrain.generate_towers()
 	
 	for i in range(villagers_amount / 2):
 		generate_villager(i, Enums.Gender.Male)

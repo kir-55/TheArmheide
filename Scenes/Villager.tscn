@@ -136,7 +136,6 @@ initial_state = NodePath("Idle")
 script = ExtResource("6_amhhn")
 villager_ai = NodePath("../..")
 villager = NodePath("../..")
-follow_state_transition_chance = 1.0
 
 [node name="Follow" type="Node" parent="State Machine" node_paths=PackedStringArray("villager_ai", "villager")]
 script = ExtResource("7_6h8d5")

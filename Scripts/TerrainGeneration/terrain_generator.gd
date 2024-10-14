@@ -74,8 +74,6 @@ func _ready():
 	sloper.spawn_at_point(big_rock, self, 3, rs.get_rnd_float(0, 1))
 	sloper.spawn_at_point(big_rock, self, points_amount - 3, rs.get_rnd_float(0, 1))
 	
-	sloper.spawn_at_point(tower_prefab, village, village_start, rs.get_rnd_float(0, 1))
-	sloper.spawn_at_point(tower_prefab, village, village_end, rs.get_rnd_float(0, 1))
 	sloper.spawn_at_point(main_house_prefab, village, main_house_pos, rs.get_rnd_float(0, 1))
 
 func generate_houses(amount: int, start_family := 0):
@@ -85,7 +83,14 @@ func generate_houses(amount: int, start_family := 0):
 		house_instance.family = start_family + i
 		houses.append(house_instance)
 	return houses
-		
+
+
+func generate_towers():
+	var towers = []
+	towers.append([sloper.spawn_at_point(tower_prefab, village, village_start, rs.get_rnd_float(0, 1)), 0])
+	towers.append([sloper.spawn_at_point(tower_prefab, village, village_end, rs.get_rnd_float(0, 1)), 0])
+	
+	return towers
 
 func create_next_point(position: Vector2):
 	ground_line.add_point(position)
