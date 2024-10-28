@@ -1,7 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://b232mspaehrfk"]
+[gd_scene load_steps=28 format=3 uid="uid://b232mspaehrfk"]
 
 [ext_resource type="Script" path="res://Scripts/sloper.gd" id="1_8uvoy"]
-[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/player.tscn" id="2_ak363"]
+[ext_resource type="PackedScene" uid="uid://gs87w8kxkxqk" path="res://Scenes/Player.tscn" id="2_ak363"]
 [ext_resource type="Script" path="res://Scripts/сamera.gd" id="3_6coef"]
 [ext_resource type="Shader" uid="uid://bdq6jcim2vtvq" path="res://Shaders/line.tres" id="3_idhyc"]
 [ext_resource type="PackedScene" uid="uid://ba3si7esec1ox" path="res://Scenes/SlopeObjects/tower.tscn" id="6_4j0ad"]
@@ -20,12 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://bjt32tioloh8v" path="res://Images/none.png" id="17_4cl6a"]
 [ext_resource type="Resource" uid="uid://c4erp2nlfko2y" path="res://Decorations/moss.tres" id="17_malk3"]
 [ext_resource type="Resource" uid="uid://bf0lx5iuesadl" path="res://Decorations/ground_grass.tres" id="18_236rl"]
-[ext_resource type="PackedScene" uid="uid://beqf1hr5yri0g" path="res://Scenes/villager.tscn" id="18_liq3w"]
+[ext_resource type="PackedScene" uid="uid://beqf1hr5yri0g" path="res://Scenes/Villager.tscn" id="18_liq3w"]
 [ext_resource type="Script" path="res://Scripts/village_control.gd" id="21_twnnt"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/job_states/villager_jobless.gd" id="22_aq27t"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/job_states/villager_guard_job.gd" id="22_ssqm0"]
 [ext_resource type="Script" path="res://Scenes/day-night_cycle.gd" id="23_0tvep"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/job_states/job_type.gd" id="23_gtamp"]
 
 [sub_resource type="Environment" id="Environment_7t5er"]
 background_mode = 3
@@ -54,16 +51,6 @@ shader = ExtResource("3_idhyc")
 shader_parameter/XShiftAmplitude = 20.0
 shader_parameter/MinLineThikness = Vector2(0, 20)
 shader_parameter/MaxThikness = 50.0
-
-[sub_resource type="Resource" id="Resource_6aad6"]
-script = ExtResource("23_gtamp")
-type = 0
-job = ExtResource("22_aq27t")
-
-[sub_resource type="Resource" id="Resource_ypf62"]
-script = ExtResource("23_gtamp")
-type = 4
-job = ExtResource("22_ssqm0")
 
 [node name="Game" type="Node2D"]
 position = Vector2(1, 1)
@@ -122,8 +109,8 @@ tower_prefab = ExtResource("6_4j0ad")
 main_house_prefab = ExtResource("8_us4v6")
 player = NodePath("../Player")
 village = NodePath("Villadge")
-village_start = 19
-village_end = 23
+village_start = 15
+village_end = 25
 normal_house_prefab = ExtResource("15_r1ya6")
 
 [node name="Sloper" type="Node" parent="Terrain" node_paths=PackedStringArray("line", "terrain_generator")]
@@ -163,8 +150,7 @@ position = Vector2(-171, 832)
 [node name="VillageControl" type="Node" parent="." node_paths=PackedStringArray("terrain")]
 script = ExtResource("21_twnnt")
 terrain = NodePath("../Terrain")
-villagers_amount = 3
-jobs = Array[ExtResource("23_gtamp")]([SubResource("Resource_6aad6"), SubResource("Resource_ypf62")])
+villagers_amount = 50
 villager_prefab = ExtResource("18_liq3w")
 possible_names = Array[String](["Adam", "Grażyna", "Janusz", "Michał", "Muchamad", "Dominik", "Kirill", "Bartek", "Daniel", "Karol", "Monika"])
 

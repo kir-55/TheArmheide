@@ -122,8 +122,8 @@ tower_prefab = ExtResource("6_4j0ad")
 main_house_prefab = ExtResource("8_us4v6")
 player = NodePath("../Player")
 village = NodePath("Villadge")
-village_start = 19
-village_end = 23
+village_start = 15
+village_end = 25
 normal_house_prefab = ExtResource("15_r1ya6")
 
 [node name="Sloper" type="Node" parent="Terrain" node_paths=PackedStringArray("line", "terrain_generator")]

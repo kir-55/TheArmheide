@@ -55,7 +55,6 @@ func spawn_decoration(point):
 			var rnd_i = rs.get_rnd_int_at(0, 99, rs.main_seed + "mult" + str(i)+str(point))
 			if decoration.initial_chance > rnd_i:
 				for _i in range(decoration.chance_multiplyer):
-					
 					var rnd = rs.get_rnd_int_at(0, 99, rs.main_seed + "init" + str(_i) + str(i) + str(point))
 					if decoration.chance_to_spawn > rnd:
 						var segment_part := 0.5

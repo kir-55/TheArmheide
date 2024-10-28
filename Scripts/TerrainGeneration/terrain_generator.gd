@@ -77,7 +77,7 @@ func _ready():
 	sloper.spawn_at_point(main_house_prefab, village, main_house_pos, rs.get_rnd_float(0, 1))
 
 func generate_houses(amount: int, start_family := 0):
-	var houses = []
+	var houses: Array[Node2D] = []
 	for i in range(amount):
 		var house_instance = sloper.spawn_at_point(normal_house_prefab, village, rs.get_rnd_int(village_start, village_end), rs.get_rnd_float(0, 1))
 		house_instance.family = start_family + i
@@ -86,10 +86,9 @@ func generate_houses(amount: int, start_family := 0):
 
 
 func generate_towers():
-	var towers = []
-	towers.append([sloper.spawn_at_point(tower_prefab, village, village_start, rs.get_rnd_float(0, 1)), 0])
-	towers.append([sloper.spawn_at_point(tower_prefab, village, village_end, rs.get_rnd_float(0, 1)), 0])
-	
+	var towers: Array[Node2D] = []
+	towers.append(sloper.spawn_at_point(tower_prefab, village, village_start, rs.get_rnd_float(0, 1)))
+	towers.append(sloper.spawn_at_point(tower_prefab, village, village_end, rs.get_rnd_float(0, 1)))
 	return towers
 
 func create_next_point(position: Vector2):

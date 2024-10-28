@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_follow.gd" id="7_6h8d5"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_attack.gd" id="8_50fui"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_escape.gd" id="9_vwpuk"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_return.gd" id="12_noval"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/villager_states/villager_go_sleep.gd" id="12_s8gjg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rib0i"]
 size = Vector2(38, 80.25)
@@ -91,7 +91,9 @@ max_HP = 100.0
 low_health = 60
 
 [node name="WalkParticles" parent="." instance=ExtResource("5_ulx3c")]
-position = Vector2(1, 52)
+position = Vector2(1, 54)
+gravity = Vector2(0, -10)
+scale_amount_max = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -102,7 +104,7 @@ shape = SubResource("RectangleShape2D_rib0i")
 scale = Vector2(0.25, 0.25)
 
 [node name="Sprite2D" type="Sprite2D" parent="Flippable"]
-position = Vector2(-4.05312e-06, 7.62939e-06)
+position = Vector2(8, 4)
 scale = Vector2(1.59375, 1.64356)
 texture = ExtResource("5_666bs")
 
@@ -128,33 +130,33 @@ scale = Vector2(4, 4)
 target_position = Vector2(108, 0)
 collision_mask = 4
 
-[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_r4aae")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("villager_ai", "villager")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("villager_ai", "villager")]
 script = ExtResource("6_amhhn")
 villager_ai = NodePath("../..")
 villager = NodePath("../..")
 
-[node name="Follow" type="Node" parent="State Machine" node_paths=PackedStringArray("villager_ai", "villager")]
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("villager_ai", "villager")]
 script = ExtResource("7_6h8d5")
 villager_ai = NodePath("../..")
 villager = NodePath("../..")
 exhoustion_level = 1.5
 
-[node name="Attack" type="Node" parent="State Machine" node_paths=PackedStringArray("villager_ai", "villager")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("villager_ai", "villager")]
 script = ExtResource("8_50fui")
 villager_ai = NodePath("../..")
 villager = NodePath("../..")
 
-[node name="Escape" type="Node" parent="State Machine" node_paths=PackedStringArray("villager_ai", "villager")]
+[node name="Escape" type="Node" parent="StateMachine" node_paths=PackedStringArray("villager_ai", "villager")]
 script = ExtResource("9_vwpuk")
 villager_ai = NodePath("../..")
 villager = NodePath("../..")
 
-[node name="Return" type="Node" parent="State Machine" node_paths=PackedStringArray("villager_ai", "villager", "timer")]
-script = ExtResource("12_noval")
+[node name="GoSleep" type="Node" parent="StateMachine" node_paths=PackedStringArray("villager_ai", "villager", "timer")]
+script = ExtResource("12_s8gjg")
 villager_ai = NodePath("../..")
 villager = NodePath("../..")
 timer = NodePath("../../Timer")

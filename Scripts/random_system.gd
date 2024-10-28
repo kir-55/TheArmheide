@@ -4,13 +4,15 @@ extends Node
 
 # Use this script when generating terain, objects positions, man stats and other static stuff
 # For dynamic stuff like man wounder direction don't use this script
-@export var main_seed = "kirill"
+var main_seed = "Dominik1"
 var rng = RandomNumberGenerator.new()
+var state
 
 
 func _ready():
 	rng.seed = hash(main_seed)
-	rng.state = 1
+	#rng.state = 1
+	pass
 
 func get_rnd_int(min: int, max: int) -> int:
 	return rng.randi_range(min, max)# randi_range

@@ -1,5 +1,5 @@
-class_name VillagerIdle
-extends State
+class_name VillagerJobless
+extends Job
 
 @export var villager_ai: VillagerAI
 
@@ -61,5 +61,3 @@ func Physics_Update(delta: float):
 			RequestTransition.emit(self, "Follow")
 		else:
 			RequestTransition.emit(self, "Escape")
-	else:
-		RequestTransition.emit(self, "Job")

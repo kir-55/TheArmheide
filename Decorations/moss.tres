@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_pmvdn")
 prefab = ExtResource("1_07ynj")
+spawn_on_center = true
 initial_chance = 100
 chance_to_spawn = 20.0
 chance_multiplyer = 2

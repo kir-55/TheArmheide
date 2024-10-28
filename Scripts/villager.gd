@@ -1,7 +1,7 @@
 class_name Villager
 extends Node
 
-
+@export var body: CharacterBody2D
 
 @export var unique_name: String
 var age: int

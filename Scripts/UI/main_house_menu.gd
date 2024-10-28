@@ -36,4 +36,9 @@ func _on_item_list_item_selected(index):
 
 
 func _on_button_pressed():
-	current_villager.job = job_option_panel.selected
+	if village_control.set_villager_job(current_villager, job_option_panel.selected) != false:
+		villager_list.clear()
+		load_villager_data()
+	else:
+		villager_info_text.append_text("[b][color=FF0000]Failed to set job![/color][/b]\n")
+	

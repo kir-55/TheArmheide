@@ -57,8 +57,8 @@ func _physics_process(delta):
 	motion = velocity
 	
 	if is_on_wall():
-		print("touches the wall")
 		stop()
+
 
 func _process(delta):
 	if !cutscene:
@@ -120,7 +120,5 @@ func die():
 	animation_tree.set("parameters/injured/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func _on_animation_tree_animation_finished(anim_name):
-	print("finished: " + str(anim_name))
-	
 	if anim_name == "attack":
 		attack_manager._on_attack_animation_finished()
